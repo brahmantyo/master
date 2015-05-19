@@ -12,22 +12,25 @@
 */
 
 Route::get('/', 'WelcomeController@index');
+/*Route::get('/', function() {
+    $pdf = PDF::make();
+    $pdf->addPage('<html><head></head><body><b>Hello World</b></body></html>');
+    $pdf->send();
+});*/
 
 Route::get('home', 'HomeController@index');
 
 Route::resource('user', 'UserController');
 
-Route::resource('po', 'POController');
-
-Route::get('penjualan', 'PenjualanController@index');
-
-Route::get('pembelian', 'PembelianController@index');
-
-Route::get('cashflow', 'CashflowController@index');
-
-Route::get('rugilaba', 'RugiLabaController@index');
+Route::get('mutasi', 'LaporanController@mutasi');
+Route::get('penagihan', 'LaporanController@penagihan');
+Route::get('pendapatan', 'LaporanController@pendapatan');
+Route::get('resipengiriman', 'LaporanController@resipengiriman');
+Route::get('sjt', 'LaporanController@sjt');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('print', 'HomeController@cetak');

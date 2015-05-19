@@ -39,8 +39,18 @@
                 </a>
             </li>
             @endif
-
-
+            <li class="treeview">
+                <a href="/penjualan">
+                    <i class="fa fa-user"></i><span>Laporan</span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/mutasi">Mutasi</a></li>
+                    <li><a href="/pendapatan">Pendapatan</a></li>
+                    <li><a href="/penagihan">Penagihan</a></li>
+                    <li><a href="/resipengiriman">Resi Pengiriman</a></li>
+                    <li><a href="/sjt">Surat Jalan Truck</a></li>
+                </ul>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

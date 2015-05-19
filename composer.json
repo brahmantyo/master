@@ -7,7 +7,10 @@
 	"require": {
 		"laravel/framework": "5.0.*",
 		"laravelcollective/html": "~5.0",
-		"barryvdh/laravel-dompdf": "0.5.*"
+        "h4cc/wkhtmltopdf-i386": "*",
+		"h4cc/wkhtmltopdf-amd64": "*",	
+		"lucasromanojf/laravel5-pdf": "1.0.*"
+
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

@@ -54,13 +54,12 @@ class AuthController extends Controller {
 
 	    $credentials = $request->only('name', 'password');
 
-	    session()->regenerate();
-	    
-	    $user = User::where('name','=',$request->only('name'))->firstOrFail();
-	    Session::put('user',$user);
 
 	    if ($this->auth->attempt($credentials, $request->has('remember')))
 	    {
+		    session()->regenerate();
+		    $user = User::where('name','=',$request->only('name'))->firstOrFail();
+		    Session::put('user',$user);
 	        return redirect()->intended($this->redirectPath());
 	    }
 

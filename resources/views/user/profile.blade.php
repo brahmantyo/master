@@ -31,7 +31,6 @@ User Manager
             </table>
             <a href="#" onclick="history.back();" class="btn btn-warning pull-left" style="margin-right: 3px;">Back</a>
             <a href="/user/{{$user->id}}/edit" class="btn btn-default btn-flat">Edit</a>
-
         </div>
     </div>
 
