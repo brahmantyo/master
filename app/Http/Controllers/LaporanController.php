@@ -1,15 +1,22 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller {
+	public $user;
+
+	public function __construct()
+	{
+		$this->middleware('auth');
+		$this->user = Auth::user();
+	}
 
 	public function mutasi()
 	{
-		return view('laporan.mutasi');
+		return view('laporan.mutasi')->with('user',$this->user);
 	}
 
 	public function penagihan()

@@ -1,9 +1,3 @@
-<?php
- use App\User;
-
- $credential = Session::get('user');
- $user = User::where('name','=',$credential->name)->first();
-?>
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -21,7 +15,7 @@
         <!-- search form -->
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                <input type="text" id="q" name="q" class="form-control" placeholder="Search..."/>
                 <span class="input-group-btn">
                 <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
                 </span>
@@ -34,7 +28,7 @@
 
             @if (($user->level == 'SUPER')&&!(Auth::guest()))
             <li class="treeview">
-                <a href="/user">
+                <a href="/user" id="user-manager">
                     <i class="fa fa-user"></i><span>User Manager</span>
                 </a>
             </li>
@@ -44,11 +38,11 @@
                     <i class="fa fa-user"></i><span>Laporan</span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/mutasi">Mutasi</a></li>
-                    <li><a href="/pendapatan">Pendapatan</a></li>
-                    <li><a href="/penagihan">Penagihan</a></li>
-                    <li><a href="/resipengiriman">Resi Pengiriman</a></li>
-                    <li><a href="/sjt">Surat Jalan Truck</a></li>
+                    <li><a href="/mutasi" id="menu-mutasi">Mutasi</a></li>
+                    <li><a href="/pendapatan" id="menu-pendapatan">Pendapatan</a></li>
+                    <li><a href="/penagihan" id="menu-penagihan">Penagihan</a></li>
+                    <li><a href="/resipengiriman" id="menu-resi">Resi Pengiriman</a></li>
+                    <li><a href="/sjt" id="menu-stj">Surat Jalan Truck</a></li>
                 </ul>
             </li>
         </ul>
