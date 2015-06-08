@@ -58,4 +58,7 @@
 		</div>
 	</div>
 </div>
+	<script type="text/javascript">
+		$("[name='name']").focus();	
+	</script>
 @endsection

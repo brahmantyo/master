@@ -16,7 +16,7 @@ class LaporanController extends Controller {
 
 	public function mutasi()
 	{
-		return view('laporan.mutasi')->with('user',$this->user);
+		return view('laporan.mutasi');
 	}
 
 	public function penagihan()
