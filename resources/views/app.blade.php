@@ -82,8 +82,8 @@
 <body class="skin-red fixed"><!-- sidebar-collapse -->
     <div class="wrapper">
         <?php $user = Auth::user(); ?>
-        @include('includes.header')->with('user',$user)
-        @include('includes.sidebar')->with('user',$user)
+        @include('includes.header')
+        @include('includes.sidebar')
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->

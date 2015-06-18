@@ -77,6 +77,8 @@ class UserController extends Controller {
 	 */
 	public function edit($id)
 	{
+		$this->middleware('auth');
+
 		$user = User::find($id);
 		return view('user.edit')->with('user',$user);
 	}

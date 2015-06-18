@@ -29,7 +29,7 @@
                             </p>
                         </li>
                         <!-- Menu Body -->
-                        <li class="user-body">
+<!--                         <li class="user-body">
                             <div class="col-xs-4 text-center">
                                 <a href="#">Followers</a>
                             </div>
@@ -39,12 +39,12 @@
                             <div class="col-xs-4 text-center">
                                 <a href="#">Friends</a>
                             </div>
-                        </li>
+                        </li> -->
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <div class="pull-left">
+<!--                             <div class="pull-left">
                                 <a href="/user/{{$user->id}}" class="btn btn-default btn-flat">Profile</a>
-                            </div>
+                            </div> -->
                             <div class="pull-right">
                                 <a href="auth/logout" class="btn btn-default btn-flat">Sign out</a>
                             </div>

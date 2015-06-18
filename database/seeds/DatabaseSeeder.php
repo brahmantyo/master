@@ -51,6 +51,15 @@ class UserTableSeeder extends Seeder {
 			'photo'=>'dist/img/nico.jpg'
 		]);
 		User::create([
+			'first_name'=>'Super',
+			'last_name'=>'Super',
+			'name'=>'super',
+			'email'=>'super@lanogansumatraexpress.com',
+			'level'=>'MANAGER',
+			'password'=>Hash::make('123456'),
+			'photo'=>'dist/img/avatar5.png'			
+		]);
+		User::create([
 			'first_name'=>'staf',
 			'last_name'=>'1',
 			'name'=>'staf1',

@@ -136,7 +136,6 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
     	'Collective\Html\HtmlServiceProvider',
-        'Ignited\Pdf\PdfServiceProvider',    	
 
 		/*
 		 * Application Service Providers...
@@ -196,7 +195,5 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Form'		=> 'Collective\Html\FormFacade',
 		'Html'		=> 'Collective\Html\HtmlFacade',
-        'PDF'       => 'Ignited\Pdf\Facades\Pdf',
 	],
-
 ];
