@@ -22,9 +22,19 @@ Route::get('home', 'HomeController@index');
 
 Route::resource('user', 'UserController');
 
+///////////////////////////////////////////
+
+Route::get('konsumen', 'MasterController@konsumen');
+Route::get('pegawai/delete/{id}','MasterController@pegawaiDelete');
+Route::get('pegawai', 'MasterController@pegawai');
+Route::get('armada', 'MasterController@armada');
+Route::get('kota', 'MasterController@kota');
+
+/////////////////////////////////////////
+
 Route::get('mutasi', 'LaporanController@mutasi');
 
-Route::get('penagihan', function(){
+/*Route::get('penagihan', function(){
 	return view('errors/maintenance');
 });
 Route::get('pendapatan', function(){
@@ -36,13 +46,13 @@ Route::get('resipengiriman', function(){
 Route::get('sjt', function(){
 	return view('errors/maintenance');
 });
+*/
 
-/*
 Route::get('penagihan', 'LaporanController@penagihan');
 Route::get('pendapatan', 'LaporanController@pendapatan');
 Route::get('resipengiriman', 'LaporanController@resipengiriman');
 Route::get('sjt', 'LaporanController@sjt');
-*/
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

@@ -3,16 +3,16 @@
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\User;
-use Illuminate\Http\Request;
-use Input;
 use Hash;
+use Request;
+use Input;
 use Redirect;
 
 class UserController extends Controller {
 
 	public function __construct()
 	{
-		$this->beforeFilter('auth');
+		$this->middleware('auth');
 	}
 
 	/**
@@ -22,8 +22,12 @@ class UserController extends Controller {
 	 */
 	public function index()
 	{
-		$users = User::all();
-		return view('user.index')->with('users',$users);
+		$page='user.index';
+		//Paginator::setCurrentPage($page);
+		//Paginator::setBaseUrl($baseUrl);
+		//Paginator::setPageName('page');
+		$users = User::paginate(2);
+		return view($page)->with('users',$users);
 	}
 
 	/**

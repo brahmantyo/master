@@ -10,13 +10,13 @@
 @section('content-header')
 <ol class="breadcrumb">
     <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
-    <li class="active">Laporan Mutasi</li>
+    <li class="active">Daftar Surat Jalan Trucking</li>
 </ol>
 @endsection
 
 @section('content')
 <style>
-	#mutasi {
+	 #sjt {
 		display:none;
 	}
 </style>
@@ -27,13 +27,13 @@
 	});
 </script>
 <div class="box">
-	<a href="#mutasi" id="bCari" class="modalbox"><u>C</u>ari</a>
+	<a href="#sjt" id="bCari" class="modalbox"><u>C</u>ari</a>
 	<div class="box-header">
-    	<span><h1><i class="fa fa-calculator"></i>Laporan Mutasi Kas</h1></span>
+    	<span><h1><i class="fa fa-file-text-o"></i>Daftar Surat Jalan Trucking</h1></span>
 	</div>
 	<div class="box-body">
-		<div id="mutasi" class="col-lg-12">
-			<form action="mutasi" method="post" role="form" class="form">
+		<div id="sjt" class="col-lg-12">
+			<form action= "sjt" method="post" role="form" class="form">
 				<div class="form-group">
 				<label>Cabang</label>
 				<select class="form-control">
@@ -65,7 +65,7 @@
 @endsection
 
 @section('help')
-<p><b>Shortcut For Mutasi</b></p>
+<p><b>Shortcut For Surat Jalan Trucking</b></p>
 <hr>
-<p>Tekan tombol C untuk melakukan pencarian laporan mutasi</p>
+<p>Tekan tombol C untuk melakukan pencarian daftar surat jalan trucking</p>
 @endsection

@@ -29,20 +29,31 @@
             @if (($user->level == 'SUPER')&&!(Auth::guest()))
             <li class="treeview">
                 <a href="/user" id="user-manager">
-                    <i class="fa fa-user"></i><span>User Manager</span>
+                    <i class="fa fa-user-secret"></i><span>User Manager</span>
                 </a>
             </li>
             @endif
+            
+            @if ((($user->level == 'SUPER')||($user->level == 'MANAGER'))&&!(Auth::guest()))
             <li class="treeview">
-                <a href="/penjualan">
-                    <i class="fa fa-user"></i><span>Laporan</span>
-                </a>
+                <a><i class="fa fa-plus-square-o"></i><span>Master</span></a>
                 <ul class="treeview-menu">
-                    <li><a href="/mutasi" id="menu-mutasi">Mutasi</a></li>
-                    <li><a href="/pendapatan" id="menu-pendapatan">Pendapatan</a></li>
-                    <li><a href="/penagihan" id="menu-penagihan">Penagihan</a></li>
-                    <li><a href="/resipengiriman" id="menu-resi">Resi Pengiriman</a></li>
-                    <li><a href="/sjt" id="menu-stj">Surat Jalan Truck</a></li>
+                    <li><a href="/konsumen"><i class="fa fa-users"></i>Konsumen</a></li>
+                    <li><a href="/pegawai"><i class="fa fa-user"></i>Pegawai</a></li>
+                    <li><a href="/armada"><i class="fa fa-truck"></i>Armada</a></li>
+                    <li><a href="/armada"><i class="fa fa-map-marker"></i>Kota</a></li>
+                </ul>
+            </li>
+            @endif
+
+            <li class="treeview">
+                <a><i class="fa fa-plus-square-o"></i><span>Laporan</span></a>
+                <ul class="treeview-menu">
+                    <li><a href="/mutasi" id="menu-mutasi"><i class="fa fa-calculator"></i>Mutasi</a></li>
+                    <li><a href="/pendapatan" id="menu-pendapatan"><i class="fa fa-money"></i>Pendapatan</a></li>
+                    <li><a href="/penagihan" id="menu-penagihan"><i class="fa fa-credit-card"></i>Penagihan</a></li>
+                    <li><a href="/resipengiriman" id="menu-resi"><i class="fa fa-print"></i>Resi Pengiriman</a></li>
+                    <li><a href="/sjt" id="menu-stj"><i class="fa fa-file-text-o"></i>Surat Jalan Truck</a></li>
                 </ul>
             </li>
         </ul>

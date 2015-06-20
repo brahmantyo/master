@@ -1,12 +1,8 @@
 @extends('app')
 @section('content-header')
-<h1>
-User Manager
-<small>Control panel</small>
-</h1>
 <ol class="breadcrumb">
     <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
-    <li class="active">User Manager</li>
+    <li class="active"><i class="fa fa-user-secret"></i>User Manager</li>
 </ol>
 @endsection
  
@@ -15,12 +11,12 @@ User Manager
 	<div class="col-lg-12">
 		<div class="box">
 			<div class="box-header">
-		    	<h1><i class="fa fa-users"></i>User</h1>
+		    	<span><h1><i class="fa fa-user-secret"></i>User Manager</h1></span>
+		    	<hr>
+		    	<span class="pull-right"><a href="/user/create" class="btn btn-success">Add User</a></span>
 		 	</div>
 		 	<div class="box-body table-responsive">
-			    <a href="/user/create" class="btn btn-success">Add User</a>
 		        <table class="table table-condensed table-striped table-bordered table-hover no-margin">
-		 
 		            <thead>
 		                <tr>
 		                    <th>Name</th>
@@ -53,7 +49,7 @@ User Manager
 		                @endforeach
 		            </tbody>
 		        </table>
-			    <a href="/user/create" class="btn btn-success">Add User</a>
+   			    <div class="pull-right">{!! $users->render() !!}</div>
 		    </div>
 	 	</div>
 	</div>

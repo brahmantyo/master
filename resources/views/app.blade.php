@@ -86,20 +86,18 @@
         @include('includes.sidebar')
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                @yield('content-header')
-            </section>
-            <!-- Main content -->
             <section class="content">
+            <!-- Content Header (Page header) -->
+                @yield('content-header')
+            <!-- Main content -->
                 @yield('content')
             </section><!-- /.content -->
         </div><!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b>Version</b> 1.0
+                Press F1 for help
             </div>
-            <strong>Copyright &copy; 2014-2015 <a href="#">Nic Logic</a>.</strong> All rights reserved.
+            <b>Version</b> 1.0 || <strong>Copyright &copy; 2014-2015 <a href="#">Nic Logic</a>.</strong> All rights reserved.
         </footer>
     </div><!-- ./wrapper -->
 
@@ -125,7 +123,7 @@
                 "keys"          : "f1",
                 "is_exclusive"  : true,
                 "on_keyup"      : function(event) {
-                    $('#bHelp').click();    
+                    $('#help').click();    
                     return true
                 },
                 "this"          : this
@@ -215,27 +213,23 @@
         var keylist = listener.register_many(frontkeys);
     </script>
     <!-- Hidden area -->
-    <a href="#help" id="bHelp" class="modalbox">?</a>
-    <div id="help">
-    <p>Shortcut For Keyboard</p>
-    <p>---------------------</p>
+    <div id="help" class="modalbox  ">
+    <p><b>Shortcut For Keyboard</b></p>
+    <hr>
     <p>F1 = menampilkan halaman bantuan ini</p>
     <p>Ctrl + P = menampilkan Profile User</p>
-    <p>Ctrl + S = melakukan pencarian</p>
     <p></p>
     <p>Ctrl + M = Laporan Mutasi</p>
     <p>Ctrl + D = Laporan Pendapatan</p>
     <p>Ctrl + T = Laporan Penagihan</p>
     <p>Ctrl + R = Daftar Resi Penagihan</p>
     <p>Ctrl + J = Daftar Surat Jalan Truck</p>
-
-
+    <hr>
     @yield('help')
-
     </div>
 
     <style type="text/css">
-        #bHelp {
+        .modalbox {
             display:none;
         }
     </style>

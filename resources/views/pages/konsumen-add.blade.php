@@ -3,7 +3,7 @@
 @section('content-header')
 <ol class="breadcrumb">
     <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
-    <li><a href="/user"><i class="fa fa-user-secret"></i>User Manager</a></li>
+    <li><a href="/user"><i class="fa fa-users"></i>Master Konsumen</a></li>
     <li class="active">Add</li>
 </ol>
 @endsection
@@ -11,10 +11,9 @@
 @section('content')
 <div class="row">
     <div class="col-xs-12">
-
         <div class="box">
             <div class="box-header">
-                <h1><i class='fa fa-user'></i> Add User</h1>
+                <h1><i class='fa fa-user'></i>Add Konsumen</h1>
                 <hr>
             </div>
             <div class="box-body" width="50%">
@@ -24,7 +23,7 @@
                 @endforeach
             @endif
 
-            {!! Form::open(['role' => 'form', 'url' => '/user']) !!}
+            {!! Form::open(['role' => 'form', 'url' => '/konsumen/create']) !!}
 
                 <div class='form-group'>
                     {!! Form::label('first_name', 'First Name') !!}
@@ -44,21 +43,6 @@
                 <div class='form-group'>
                     {!! Form::label('email', 'Email') !!}
                     {!! Form::email('email', null, ['placeholder' => 'Email', 'class' => 'form-control']) !!}
-                </div>
-
-                <div class="form-group">
-                    {!! Form::label('level', 'Level') !!}
-                    {!! Form::select('level', ['SUPER'=>'SUPER','MANAGER'=>'MANAGER','STAFF'=>'STAFF']) !!}
-                </div>
-
-                <div class='form-group'>
-                    {!! Form::label('password', 'Password') !!}
-                    {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control']) !!}
-                </div>
-
-                <div class='form-group'>
-                    {!! Form::label('password_confirmation', 'Confirm Password') !!}
-                    {!! Form::password('password_confirmation', ['placeholder' => 'Confirm Password', 'class' => 'form-control']) !!}
                 </div>
 
                 <div class='form-group'>
