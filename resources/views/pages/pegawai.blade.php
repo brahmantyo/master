@@ -22,7 +22,7 @@
 							<td>TGL REKRUT</td>
 							<td>JABATAN</td>
 							<td>GAJI POKOK</td>
-							<td></td>
+							<td width="135"></td>
 						</tr>
 					</thead>
 					<tbody>

@@ -10,10 +10,12 @@
 	<div class="col-lg-12">
 		<div class="box">
 			<div class="box-header">
-		    	<div class="pull-left"><h1><i class="fa fa-users"></i>Master Konsumen</h1></div>
-   			 	<div class="pull-right"><a class="btn btn-info" id="tambah" href="/konsumen/create">Tambah</a></div>
+		    	<span><h1><i class="fa fa-users"></i>Master Konsumen</h1></span>
+		    	<hr>
+				<span class="pull-right"><a class="btn btn-success	" id="tambah" href="/konsumen/create">Tambah</a></span>		    	
 		 	</div>
 		 	<div class="box-body table-responsive">
+   			 	
 		        <table class="table table-condensed table-striped table-bordered table-hover no-margin">
 					<thead>
 						<tr style="font-weight: bold">
@@ -22,7 +24,7 @@
 							<td>TELP</td>
 							<td>CONTACT</td>
 							<td>EMAIL</td>
-							<td colspan="2"></td>
+							<td width="135"></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -33,8 +35,10 @@
 							<td>{{ $list->notelp }}</td>
 							<td>{{ $list->contactperson }}</td>
 							<td>{{ $list->email }}</td>
-							<td><a class="btn btn-info" href="/konsumen/edit/{{$list->idkonsumen}}">Edit</a></td>
-							<td><a class="btn btn-warning" href="/konsumen/delete/{{$list->idkonsumen}}">Hapus</a></td>
+							<td>
+								<a class="btn btn-info" href="/konsumen/edit/{{$list->idkonsumen}}">Edit</a>
+								<a class="btn btn-warning" href="/konsumen/delete/{{$list->idkonsumen}}">Hapus</a>
+							</td>
 						</tr>
 						@endforeach
 					</tbody>
