@@ -118,7 +118,7 @@ class MasterController extends Controller {
 			$pegawai->nama = Request::get('nama');
 			$pegawai->alamat = Request::get('alamat');
 			$pegawai->idjabatan = Request::get('jabatan');
-			$pegawai->tglrekrut = date_format(Request::get('tglrekrut'),'yyyy-mm-dd');
+			$pegawai->tglrekrut = date_format(Request::get('tglrekrut'),'Y-m-d');
 			$pegawai->gajipokok = Request::get('gajipokok');
 			$pegawai->save();
 			return Redirect::to('/pegawai');
@@ -129,20 +129,37 @@ class MasterController extends Controller {
 		{
 			$jabatan[$j->idjabatan] = ucfirst($j->nmjabatan);	
 		}
-		return view('pages.pegawai-add')->with('jabatan',$jabatan);
+		return view('pages.pegawai-add');
 	}
 
 	public function pegawaiEdit($id)
 	{
 		$pegawai = pegawai::find($id);
-		/*
-		$pegawai->nama = input::get('nama');
-		$pegawai->alamat = input::get('alamat');
-		$pegawai->idjabatan = input::get('jabatan');
-		$pegawai->gajipokok = input::get('gajipokok');
-		$pegawai->save();
-		*/
-		return $this->pegawai();
+		if(Request::method()=='POST'){
+		    $v = Validator::make(Request::all(),[
+		        'nama' => 'required',
+		        'alamat' => 'required',
+		        'jabatan' => 'required',
+		    ]);
+		    if ($v->fails())
+		    {
+		        return redirect()->back()->withInput()->withErrors($v->errors());
+		    }
+			$pegawai->nama = Request::get('nama');
+			$pegawai->alamat = Request::get('alamat');
+			$pegawai->idjabatan = Request::get('jabatan');
+			$pegawai->tglrekrut = date_format(Request::get('tglrekrut'),'Y-m-d');
+			$pegawai->gajipokok = Request::get('gajipokok');
+			$pegawai->save();
+			return Redirect::to('/pegawai');
+		}
+		$jabatan = array();
+		$tbljabatan = jabatan::all();
+		foreach($tbljabatan as $j)
+		{
+			$jabatan[$j->idjabatan] = ucfirst($j->nmjabatan);	
+		}
+		return view('pages.pegawai-edit')->with('jabatan',$jabatan);
 	}
 
 	//Armada

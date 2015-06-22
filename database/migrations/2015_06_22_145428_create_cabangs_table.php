@@ -16,8 +16,9 @@ class CreateCabangsTable extends Migration {
 		{
 			$table->smallInteger('idcabang')->unique()->unsigned()->autoIncrement();
 			$table->char('nama',30);
-			$table->text('alamat')->null();
-			$table->char('telp',15)->null();
+			$table->text('alamat')->nullable();
+			$table->char('telp',15)->nullable();
+			$table->char('sync',1)->default('0');
 			$table->primary('idcabang');
 		});
 	}
