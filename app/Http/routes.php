@@ -25,6 +25,12 @@ Route::resource('user', 'UserController');
 ///////////////////////////////////////////
 
 Route::get('konsumen', 'MasterController@konsumen');
+Route::get('konsumen/create', 'MasterController@konsumenCreate');
+Route::post('konsumen/create', 'MasterController@konsumenCreate');
+Route::get('konsumen/edit/{id}', 'MasterController@konsumenEdit');
+Route::post('konsumen/edit/{id}', 'MasterController@konsumenEdit');
+Route::get('konsumen/delete/{id}', 'MasterController@konsumenDelete');
+
 Route::get('pegawai/delete/{id}','MasterController@pegawaiDelete');
 Route::get('pegawai', 'MasterController@pegawai');
 Route::get('armada', 'MasterController@armada');

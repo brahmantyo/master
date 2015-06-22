@@ -1,20 +1,22 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use App\konsumen;
 use App\pegawai;
-use Illuminate\Http\Request;
+use Redirect;
+use Request;
+use Validator;
+use Input;
 
 class MasterController extends Controller {
 
-	private $pagination = 2;
+	private $pagination = 5;
 
 	//Konsumen
 
 	public function konsumen()
 	{
-		$konsumen = konsumen::paginate($this->pagination);
+		$konsumen = konsumen::orderBy('idkonsumen', 'desc')->paginate($this->pagination);
 		return view('pages.konsumen')->with('konsumen',$konsumen);
 	}
 
@@ -22,35 +24,60 @@ class MasterController extends Controller {
 	{
 		$konsumen = konsumen::find($id);
 		$konsumen->delete();
-		return $this->konsumen();
+		return Redirect::to('/konsumen');
 	}
 
 	public function konsumenCreate()
 	{
-		$konsumen = new konsumen;
-		/*
-		$konsumen->nama = input::get('nama');
-		$konsumen->alamat = input::get('alamat');
-		$konsumen->telp = input::get('telp');
-		$konsumen->contact = input::get('contact');
-		$konsumen->email = input::get('email');
-		$konsumen->save();
-		*/
-		return $this->konsumen();
+		if(Request::method()=='POST'){
+		    $v = Validator::make(Request::all(),[
+		        'nama' => 'required',
+		        'alamat' => 'required',
+		        'telp' => 'required|numeric',
+		        'email' => 'email',
+		    ]);
+		    if ($v->fails())
+		    {
+		        return redirect()->back()->withInput()->withErrors($v->errors());
+		    }
+			$konsumen = new konsumen;
+			$konsumen->nama = Request::get('nama');
+			$konsumen->alamat = Request::get('alamat');
+			$konsumen->notelp = Request::get('telp');
+			$konsumen->contactperson = Request::get('contact');
+			$konsumen->email = Request::get('email');
+			$konsumen->tgldaftar = date('Y-m-d H:i:s');
+			$konsumen->save();
+			return Redirect::to('/konsumen');
+		}
+		return view('pages.konsumen-add');
 	}
 
 	public function konsumenEdit($id)
 	{
 		$konsumen = konsumen::find($id);
-		/*
-		$konsumen->nama = input::get('nama');
-		$konsumen->alamat = input::get('alamat');
-		$konsumen->telp = input::get('telp');
-		$konsumen->contact = input::get('contact');
-		$konsumen->email = input::get('email');
-		$konsumen->save();
-		*/
-		return $this->konsumen();
+		if(Request::method()=='POST'){
+		    $v = Validator::make(Request::all(),[
+		        'nama' => 'required',
+		        'alamat' => 'required',
+		        'telp' => 'required|numeric',
+		        'email' => 'email',
+		    ]);
+		    if ($v->fails())
+		    {
+		    	$s='';
+		        return redirect()->back()->withErrors($v->errors())->with('konsumen',$s);
+		    }
+			$konsumen->nama = Request::get('nama');
+			$konsumen->alamat = Request::get('alamat');
+			$konsumen->notelp = Request::get('telp');
+			$konsumen->contactperson = Request::get('contact');
+			$konsumen->email = Request::get('email');
+			$konsumen->tgldaftar = date('Y-m-d H:i:s');
+			$konsumen->save();
+			return Redirect::to('/konsumen');
+		}
+		return view('pages.konsumen-edit')->with('konsumen',$konsumen);
 	}
 
 	//Pegawai

@@ -15,13 +15,13 @@
 		 	<div class="box-body table-responsive">
 		        <table class="table table-condensed table-striped table-bordered table-hover no-margin">
 					<thead>
-						<tr>
-							<td width="10" style="">No.Pegawai</td>
-							<td>Nama</td>
-							<td>Alamat</td>
-							<td>Tgl Rekrut</td>
-							<td>Jabatan</td>
-							<td>Gaji Pokok</td>
+						<tr style="font-weight: bold">
+							<td width="10" style="">NO.PEGAWAI</td>
+							<td>NAMA</td>
+							<td>ALAMAT</td>
+							<td>TGL REKRUT</td>
+							<td>JABATAN</td>
+							<td>GAJI POKOK</td>
 							<td></td>
 						</tr>
 					</thead>

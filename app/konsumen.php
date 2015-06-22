@@ -6,5 +6,7 @@ class konsumen extends Model {
 
 	//
 	protected $table='konsumen';
+	protected $primaryKey = 'idkonsumen';
+	public $timestamps = false;
 
 }

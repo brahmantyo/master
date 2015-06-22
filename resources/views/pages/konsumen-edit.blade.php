@@ -4,7 +4,7 @@
 <ol class="breadcrumb">
     <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
     <li><a href="/konsumen"><i class="fa fa-users"></i>Master Konsumen</a></li>
-    <li class="active">Add</li>
+    <li class="active">Edit</li>
 </ol>
 @endsection
 
@@ -13,7 +13,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h1><i class='fa fa-user'></i>Add Konsumen</h1>
+                <h1><i class='fa fa-user'></i>Edit Konsumen</h1>
                 <hr>
             </div>
             <div class="box-body" width="50%">
@@ -23,27 +23,27 @@
                 @endforeach
             @endif
 
-            {!! Form::open(['role' => 'form', 'url' => '/konsumen/create']) !!}
+            {!! Form::open(['role' => 'form', 'url' => '/konsumen/edit/'.$konsumen->idkonsumen]) !!}
 
                 <div class='form-group'>
                     {!! Form::label('nama', 'Nama') !!}
-                    {!! Form::text('nama', old('nama'), ['placeholder' => 'Nama', 'class' => 'form-control']) !!}
+                    {!! Form::text('nama', $konsumen->nama, ['placeholder' => 'Nama', 'class' => 'form-control']) !!}
                 </div>
                 <div class='form-group'>
                     {!! Form::label('alamat', 'Alamat') !!}
-                    {!! Form::text('alamat', old('alamat'), ['placeholder' => 'Alamat', 'class' => 'form-control']) !!}
+                    {!! Form::text('alamat', $konsumen->alamat, ['placeholder' => 'Alamat', 'class' => 'form-control']) !!}
                 </div>
                 <div class='form-group'>
                     {!! Form::label('telp', 'Telp') !!}
-                    {!! Form::text('telp', old('telp'), ['placeholder' => 'Telp', 'class' => 'form-control']) !!}
+                    {!! Form::text('telp', $konsumen->notelp, ['placeholder' => 'Telp', 'class' => 'form-control']) !!}
                 </div>
                 <div class='form-group'>
                     {!! Form::label('email', 'Email') !!}
-                    {!! Form::email('email', old('email'), ['placeholder' => 'Email', 'class' => 'form-control']) !!}
+                    {!! Form::email('email', $konsumen->email, ['placeholder' => 'Email', 'class' => 'form-control']) !!}
                 </div>
                 <div class='form-group'>
                     {!! Form::label('contact', 'Contact') !!}
-                    {!! Form::text('contact', old('contact'), ['placeholder' => 'Contact', 'class' => 'form-control']) !!}
+                    {!! Form::text('contact', $konsumen->contactperson, ['placeholder' => 'Contact', 'class' => 'form-control']) !!}
                 </div>
                 <div class='form-group'>
                     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
