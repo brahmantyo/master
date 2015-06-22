@@ -97,7 +97,7 @@
             <div class="pull-right hidden-xs">
                 Press F1 for help
             </div>
-            <b>Version</b> 1.0 || <strong>Copyright &copy; 2014-2015 <a href="#">Nic Logic</a>.</strong> All rights reserved.
+            <b>Version</b> 1.2 || <strong>Copyright &copy; 2014-2015 <a href="#">Nic Logic</a>.</strong> All rights reserved.
         </footer>
     </div><!-- ./wrapper -->
 
