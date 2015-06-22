@@ -1,16 +1,22 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\cabang;
+use App\jabatan;
 use App\konsumen;
 use App\pegawai;
+use Input;
 use Redirect;
 use Request;
 use Validator;
-use Input;
 
 class MasterController extends Controller {
 
 	private $pagination = 5;
+
+	public function __construct(){
+		$this->middleware('auth');
+	}
 
 	//Konsumen
 
@@ -98,15 +104,32 @@ class MasterController extends Controller {
 
 	public function pegawaiCreate()
 	{
-		$pegawai = new pegawai;
-		/*
-		$pegawai->nama = input::get('nama');
-		$pegawai->alamat = input::get('alamat');
-		$pegawai->idjabatan = input::get('jabatan');
-		$pegawai->gajipokok = input::get('gajipokok');
-		$pegawai->save();
-		*/
-		return $this->pegawai();
+		if(Request::method()=='POST'){
+		    $v = Validator::make(Request::all(),[
+		        'nama' => 'required',
+		        'alamat' => 'required',
+		        'jabatan' => 'required',
+		    ]);
+		    if ($v->fails())
+		    {
+		        return redirect()->back()->withInput()->withErrors($v->errors());
+		    }
+			$pegawai = new pegawai;
+			$pegawai->nama = Request::get('nama');
+			$pegawai->alamat = Request::get('alamat');
+			$pegawai->idjabatan = Request::get('jabatan');
+			$pegawai->tglrekrut = date_format(Request::get('tglrekrut'),'yyyy-mm-dd');
+			$pegawai->gajipokok = Request::get('gajipokok');
+			$pegawai->save();
+			return Redirect::to('/pegawai');
+		}
+		$jabatan = array();
+		$tbljabatan = jabatan::all();
+		foreach($tbljabatan as $j)
+		{
+			$jabatan[$j->idjabatan] = ucfirst($j->nmjabatan);	
+		}
+		return view('pages.pegawai-add')->with('jabatan',$jabatan);
 	}
 
 	public function pegawaiEdit($id)
@@ -134,5 +157,12 @@ class MasterController extends Controller {
 	public function kota()
 	{
 		//
+	}
+
+	//Cabang
+	public function cabang()
+	{
+		$cabang = cabang::pagination($this->pagination);
+		return view('pages.cabang')->with('cabang',$cabang);
 	}
 }

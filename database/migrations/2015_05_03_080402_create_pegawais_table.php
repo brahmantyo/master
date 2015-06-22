@@ -14,12 +14,12 @@ class CreatePegawaisTable extends Migration {
 	{
 		Schema::create('pegawai', function(Blueprint $table)
 		{
-			$table->smallInteger('idpegawai')->unique()->unsigned()->autoIncerement();
+			$table->smallInteger('idpegawai')->unique()->unsigned()->autoIncrement();
 			$table->char('nama',30);
 			$table->text('alamat');
 			$table->smallInteger('idjabatan')->unsigned();
 			$table->date('tglrekrut')->default(date('Y-m-d'));
-			$table->double('gajipokok',16,2);
+			$table->double('gajipokok',16,2)->default(0);
 		});
 	}
 

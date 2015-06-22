@@ -14,7 +14,7 @@ class CreateCabangsTable extends Migration {
 	{
 		Schema::create('cabang', function(Blueprint $table)
 		{
-			$table->smallInteger('idcabang')->unique()->unsigned()->autoIncerement();
+			$table->smallInteger('idcabang')->unique()->unsigned()->autoIncrement();
 			$table->char('nama',30);
 			$table->text('alamat')->null();
 			$table->char('telp',15)->null();

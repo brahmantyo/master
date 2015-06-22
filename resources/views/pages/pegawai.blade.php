@@ -10,7 +10,9 @@
 	<div class="col-lg-12">
 		<div class="box">
 			<div class="box-header">
-		    	<h1><i class="fa fa-users"></i>Master Pegawai</h1>
+		    	<span><h1><i class="fa fa-users"></i>Master Pegawai</h1></span>
+		    	<hr>
+				<span class="pull-right"><a class="btn btn-success	" id="tambah" href="/pegawai/create">Tambah</a></span>		    	
 		 	</div>
 		 	<div class="box-body table-responsive">
 		        <table class="table table-condensed table-striped table-bordered table-hover no-margin">

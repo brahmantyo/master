@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class jabatan extends Model {
 
-	//
+	protected $table = 'jabatan';
+	protected $primaryKey = 'idjabatan';
 
 }
