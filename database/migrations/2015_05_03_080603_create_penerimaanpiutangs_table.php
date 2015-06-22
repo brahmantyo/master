@@ -17,7 +17,7 @@ class CreatePenerimaanpiutangsTable extends Migration {
 			$table->smallInteger('idkonsumen')->unsigned();
 			$table->double('nilaiterima',16,2)->default(0);
 			$table->date('tglterima');
-			$table->char('nokuitansi',15)->default('-');
+			$table->char('nokwitansi',15)->default('-');
 			$table->double('ambildeposit',16,2)->default(0);
 			$table->double('nilaiagihan',16,2)->default(0);
 		});

@@ -14,7 +14,7 @@ class CreateDaftarresisTable extends Migration {
 	{
 		Schema::create('daftarresi', function(Blueprint $table)
 		{
-			$table->smallInteger('noresi')->unique()->autoIncrement()->unsigned();
+			$table->char('noresi',20)->unique();
 			$table->smallInteger('idkonsumen')->unsigned();
 			$table->date('tgltibapool');
 			$table->double('totalbiaya',16,2);
@@ -22,6 +22,8 @@ class CreateDaftarresisTable extends Migration {
 			$table->char('status',50);
 			$table->double('downpayment',16,2);
 			$table->double('sisabayar',16,2);
+
+			$table->primary('noresi');
 		});
 
 	}

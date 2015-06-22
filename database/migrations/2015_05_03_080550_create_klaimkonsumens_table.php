@@ -14,7 +14,7 @@ class CreateKlaimkonsumensTable extends Migration {
 	{
 		Schema::create('klaimkonsumen', function(Blueprint $table)
 		{
-			$table->char('nokuitansi',15)->unique();
+			$table->char('nokwitansi',15)->unique();
 			$table->date('tglklaim');
 			$table->smallInteger('noresi')->unsigned();
 			$table->text('keterangan');

@@ -14,7 +14,7 @@ class CreateGajisTable extends Migration {
 	{
 		Schema::create('gaji', function(Blueprint $table)
 		{
-			$table->char('nokuitansi',15)->unique();
+			$table->char('nokwitansi',15)->unique();
 			$table->double('nilai',16,2)->default(0);
 			$table->date('tanggal');
 			$table->smallInteger('idpegawai')->unsigned();
