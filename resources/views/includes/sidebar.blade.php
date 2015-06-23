@@ -39,6 +39,7 @@
                 <a><i class="fa fa-plus-square-o"></i><span>Master</span></a>
                 <ul class="treeview-menu">
                     <li><a href="/konsumen"><i class="fa fa-users"></i>Konsumen</a></li>
+                    <li><a href="/jabatan"><i class="fa fa-user"></i>Jabatan</a></li>
                     <li><a href="/pegawai"><i class="fa fa-user"></i>Pegawai</a></li>
                     <li><a href="/armada"><i class="fa fa-truck"></i>Armada</a></li>
                     <li><a href="/armada"><i class="fa fa-map-marker"></i>Kota</a></li>

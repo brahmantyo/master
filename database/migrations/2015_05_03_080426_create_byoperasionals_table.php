@@ -18,6 +18,8 @@ class CreateByoperasionalsTable extends Migration {
 			$table->double('nilai',16,2);
 			$table->date('tanggal');
 			$table->text('keterangan');
+
+			$table->primary('idtransaksi');
 		});
 	}
 

@@ -22,8 +22,9 @@ class CreateTableKonsumen extends Migration {
 			$table->char('email',25)->default('@');
 			$table->char('contactperson',30);
 			$table->date('tgldaftar')->default(date('Y-m-d'));
-			$table->double('totalpiutang',16,2)->default(0);
-			$table->double('totaldeposit',16,2)->default(0);
+			// $table->double('totalpiutang',16,2)->default(0);
+			// $table->double('totaldeposit',16,2)->default(0);
+			$table->char('syn',1)->default('0');
 		});
 	}
 

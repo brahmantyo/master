@@ -12,12 +12,12 @@ class CreateSetdepositsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('setdeposit', function(Blueprint $table)
-		{
-			$table->smallInteger('idkonsumen')->unsigned();
-			$table->double('nilai',16,2);
-			$table->date('tglsetoran');
-		});
+		// Schema::create('setdeposit', function(Blueprint $table)
+		// {
+		// 	$table->smallInteger('idkonsumen')->unsigned();
+		// 	$table->double('nilai',16,2);
+		// 	$table->date('tglsetoran');
+		// });
 	}
 
 	/**
@@ -27,7 +27,7 @@ class CreateSetdepositsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('setdeposit');
+		// Schema::drop('setdeposit');
 	}
 
 }

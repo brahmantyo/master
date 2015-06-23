@@ -86,6 +86,59 @@ class MasterController extends Controller {
 		return view('pages.konsumen-edit')->with('konsumen',$konsumen);
 	}
 
+
+	//Jabatan
+
+	public function jabatan()
+	{
+		$jabatan = jabatan::paginate($this->pagination);
+		return view('pages.jabatan')->with('jabatan',$jabatan);
+	}
+
+	public function jabatanDelete($id)
+	{
+		$jabatan = jabatan::find($id);
+		$jabatan->delete();
+		return $this->jabatan();
+	}
+
+	public function jabatanCreate()
+	{
+		if(Request::method()=='POST'){
+		    $v = Validator::make(Request::all(),[
+		        'nama' => 'required',
+		    ]);
+		    if ($v->fails())
+		    {
+		        return redirect()->back()->withInput()->withErrors($v->errors());
+		    }
+			$jabatan = new jabatan;
+			$jabatan->nmjabatan = Request::get('nama');
+			$jabatan->save();
+			return Redirect::to('/jabatan');
+		}
+		return view('pages.jabatan-add');
+	}
+
+	public function jabatanEdit($id)
+	{
+		$jabatan = jabatan::find($id);
+		if(Request::method()=='POST'){
+		    $v = Validator::make(Request::all(),[
+		        'nama' => 'required',
+		    ]);
+		    if ($v->fails())
+		    {
+		        return redirect()->back()->withInput()->withErrors($v->errors());
+		    }
+			$jabatan->nmjabatan = Request::get('nama');
+			$jabatan->save();
+			return Redirect::to('/jabatan');
+		}
+		return view('pages.jabatan-edit')->with('jabatan',$jabatan);
+	}	
+
+
 	//Pegawai
 
 	public function pegawai()
@@ -118,7 +171,7 @@ class MasterController extends Controller {
 			$pegawai->nama = Request::get('nama');
 			$pegawai->alamat = Request::get('alamat');
 			$pegawai->idjabatan = Request::get('jabatan');
-			$pegawai->tglrekrut = date_format(Request::get('tglrekrut'),'Y-m-d');
+			$pegawai->tglrekrut = date_format(date_create(Request::get('tglrekrut')),'Y-m-d');
 			$pegawai->gajipokok = Request::get('gajipokok');
 			$pegawai->save();
 			return Redirect::to('/pegawai');
@@ -129,7 +182,7 @@ class MasterController extends Controller {
 		{
 			$jabatan[$j->idjabatan] = ucfirst($j->nmjabatan);	
 		}
-		return view('pages.pegawai-add');
+		return view('pages.pegawai-add')->with('jabatan',$jabatan);
 	}
 
 	public function pegawaiEdit($id)
@@ -148,7 +201,7 @@ class MasterController extends Controller {
 			$pegawai->nama = Request::get('nama');
 			$pegawai->alamat = Request::get('alamat');
 			$pegawai->idjabatan = Request::get('jabatan');
-			$pegawai->tglrekrut = date_format(Request::get('tglrekrut'),'Y-m-d');
+			$pegawai->tglrekrut = date_format(date_create(Request::get('tglrekrut')),'Y-m-d');
 			$pegawai->gajipokok = Request::get('gajipokok');
 			$pegawai->save();
 			return Redirect::to('/pegawai');
@@ -159,7 +212,7 @@ class MasterController extends Controller {
 		{
 			$jabatan[$j->idjabatan] = ucfirst($j->nmjabatan);	
 		}
-		return view('pages.pegawai-edit')->with('jabatan',$jabatan);
+		return view('pages.pegawai-edit')->with('pegawai',$pegawai)->with('jabatan',$jabatan);
 	}
 
 	//Armada

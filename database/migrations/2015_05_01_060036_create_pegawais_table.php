@@ -20,6 +20,12 @@ class CreatePegawaisTable extends Migration {
 			$table->smallInteger('idjabatan')->unsigned();
 			$table->date('tglrekrut')->default(date('Y-m-d'));
 			$table->double('gajipokok',16,2)->default(0);
+
+		});
+
+		Schema::table('pegawai', function(Blueprint $table)
+		{
+			$table->foreign('idjabatan')->references('idjabatan')->on('jabatan');
 		});
 	}
 
@@ -30,6 +36,11 @@ class CreatePegawaisTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::table('pegawai', function(Blueprint $table)
+		{
+			$table->dropForeign('pegawai_idjabatan_foreign');
+		});
+
 		Schema::drop('pegawai');
 	}
 

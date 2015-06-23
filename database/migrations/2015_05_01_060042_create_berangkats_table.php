@@ -24,8 +24,16 @@ class CreateBerangkatsTable extends Migration {
 			$table->time('jamberangkat');
 			$table->date('tgltiba');
 			$table->time('jamtiba');
+
 		});
 
+		Schema::table('berangkat', function(Blueprint $table)
+		{
+			$table->foreign('idsopir')->references('idpegawai')->on('pegawai');
+			$table->foreign('idkenek')->references('idpegawai')->on('pegawai');
+			$table->foreign('idasal')->references('kode')->on('kota');
+			$table->foreign('idtujuan')->references('kode')->on('kota');
+		});
 	}
 
 	/**
@@ -35,6 +43,13 @@ class CreateBerangkatsTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::table('berangkat', function(Blueprint $table)
+		{
+			$table->dropForeign('berangkat_idsopir_foreign');
+			$table->dropForeign('berangkat_idkenek_foreign');
+			$table->dropForeign('berangkat_idasal_foreign');
+			$table->dropForeign('berangkat_idtujuan_foreign');
+		});
 		Schema::drop('berangkat');
 	}
 

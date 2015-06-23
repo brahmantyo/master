@@ -26,6 +26,12 @@ class CreateDaftarresisTable extends Migration {
 			$table->primary('noresi');
 		});
 
+		Schema::table('daftarresi', function(Blueprint $table)
+		{
+			$table->foreign('idkonsumen')->references('idkonsumen')->on('konsumen');
+			$table->foreign('idberangkat')->references('idberangkat')->on('berangkat');
+		});
+
 	}
 
 	/**
@@ -35,6 +41,11 @@ class CreateDaftarresisTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::table('daftarresi', function(Blueprint $table)
+		{
+			$table->dropForeign('daftarresi_idkonsumen_foreign');
+			$table->dropForeign('daftarresi_idberangkat_foreign');
+		});		
 		Schema::drop('daftarresi');
 	}
 

@@ -15,14 +15,19 @@ class CreateDetailresisTable extends Migration {
 		Schema::create('detailresi', function(Blueprint $table)
 		{
 			$table->smallInteger('id')->unique()->autoIncrement();
-			$table->smallInteger('idresi')->unsigned();
+			$table->char('idresi',20);
 			$table->char('barang',25)->default('-');
 			$table->smallInteger('qty')->default(0);
 			$table->enum('satuan',['kg','ton','koli','carter'])->default('kg');
 			$table->double('hrgsatuan',16,2)->default(0);
 			$table->double('subtotal',16,2)->default(0);
+
 		});
 
+		Schema::table('detailresi', function(Blueprint $table)
+		{
+			$table->foreign('idresi')->references('noresi')->on('daftarresi');
+		});
 
 	}
 
@@ -33,6 +38,11 @@ class CreateDetailresisTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::table('detailresi', function(Blueprint $table)
+		{
+			$table->dropForeign('detailresi_idresi_foreign');
+		});
+
 		Schema::drop('detailresi');
 	}
 

@@ -33,7 +33,7 @@
 							<td>{{ $list->nopeg }}</td>
 							<td>{{ $list->nama }}</td>
 							<td>{{ $list->alamat }}</td>
-							<td>{{ $list->tglrekrut }}</td>
+							<td>{{ date_format(date_create($list->tglrekrut),'d-m-Y') }}</td>
 							<td>{{ $list->jabatan }}</td>
 							<td>{{ $list->gajipokok }}</td>
 							<td>

@@ -12,8 +12,8 @@ class HapusTableSetdepositDanPenerimaanpiutang extends Migration {
 	 */
 	public function up()
 	{
-		Schema::dropIfExists('setdeposit');
-		Schema::dropIfExists('penerimaanpiutang');
+		// Schema::dropIfExists('setdeposit');
+		// Schema::dropIfExists('penerimaanpiutang');
 	}
 
 	/**

@@ -16,6 +16,8 @@ class CreateKotasTable extends Migration {
 		{
 			$table->char('kode',4)->unique();
 			$table->char('namakota',15);
+
+			$table->primary('kode');
 		});
 	}
 

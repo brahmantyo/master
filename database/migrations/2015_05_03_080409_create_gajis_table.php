@@ -20,6 +20,11 @@ class CreateGajisTable extends Migration {
 			$table->smallInteger('idpegawai')->unsigned();
 			$table->text('keterangan');
 		});
+
+		Schema::table('gaji', function(Blueprint $table)
+		{
+			$table->foreign('idpegawai')->references('idpegawai')->on('pegawai');
+		});
 	}
 
 	/**
@@ -29,6 +34,10 @@ class CreateGajisTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::table('gaji', function(Blueprint $table)
+		{
+			$table->dropForeign('gaji_idpegawai_foreign');
+		});
 		Schema::drop('gaji');
 	}
 

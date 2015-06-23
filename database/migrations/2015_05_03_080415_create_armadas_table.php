@@ -17,6 +17,8 @@ class CreateArmadasTable extends Migration {
 			$table->char('nopolisi',10)->unique();
 			$table->char('jeniskendaraan',10);
 			$table->char('tahun',4);
+
+			$table->primary('nopolisi');
 		});
 	}
 

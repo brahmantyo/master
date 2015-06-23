@@ -6,5 +6,6 @@ class jabatan extends Model {
 
 	protected $table = 'jabatan';
 	protected $primaryKey = 'idjabatan';
+	public $timestamps = false;
 
 }

@@ -4,7 +4,7 @@
 <ol class="breadcrumb">
     <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
     <li><a href="/pegawai"><i class="fa fa-users"></i>Master Pegawai</a></li>
-    <li class="active">Add</li>
+    <li class="active">Edit</li>
 </ol>
 @endsection
 
@@ -13,7 +13,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h1><i class='fa fa-user'></i>Add Pegawai</h1>
+                <h1><i class='fa fa-user'></i>Edit Pegawai</h1>
                 <hr>
             </div>
             <div class="box-body" width="50%">
@@ -23,7 +23,7 @@
                 @endforeach
             @endif
 
-            {!! Form::open(['role' => 'form', 'url' => '/pegawai/create']) !!}
+            {!! Form::open(['role' => 'form', 'url' => '/pegawai/edit/'.$pegawai->idpegawai]) !!}
 
                 <div class='form-group'>
                     {!! Form::label('nama', 'Nama') !!}
@@ -31,19 +31,19 @@
                 </div>
                 <div class='form-group'>
                     {!! Form::label('alamat', 'Alamat') !!}
-                    {!! Form::text('alamat', old('alamat'), ['placeholder' => 'Alamat', 'class' => 'form-control']) !!}
+                    {!! Form::text('alamat', $pegawai->alamat, ['placeholder' => 'Alamat', 'class' => 'form-control']) !!}
                 </div>
                 <div class='form-group'>
                     {!! Form::label('jabatan', 'Jabatan') !!}
-                    {!! Form::select('jabatan', $jabatan) !!}
+                    {!! Form::select('jabatan', $jabatan,$pegawai->idjabatan) !!}
                 </div>
                 <div class='form-group'>
                     {!! Form::label('tglrekrut', 'Tanggal Rekrutmen') !!}
-                    {!! Form::date('tglrekrut', old('tglrekrut'), ['placeholder' => 'Tanggal Rekrutmen', 'class' => 'form-control']) !!}
+                    {!! Form::date('tglrekrut', $pegawai->tglrekrut, ['placeholder' => 'Tanggal Rekrutmen', 'class' => 'form-control']) !!}
                 </div>
                 <div class='form-group'>
                     {!! Form::label('gajipokok', 'Gaji Pokok') !!}
-                    {!! Form::text('gajipokok', old('gajipokok'), ['placeholder' => 'Gaji Pokok', 'class' => 'form-control']) !!}
+                    {!! Form::text('gajipokok', $pegawai->gajipokok, ['placeholder' => 'Gaji Pokok', 'class' => 'form-control']) !!}
                 </div>
                 <div class='form-group'>
                     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

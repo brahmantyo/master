@@ -20,6 +20,11 @@ class CreateDetailservisTable extends Migration {
 			$table->char('bengkel',30)->default('-');
 			$table->text('keterangan');
 		});
+
+		Schema::table('detailservis', function(Blueprint $table)
+		{
+			$table->foreign('idservis')->references('id')->on('servisarmada');
+		});		
 	}
 
 	/**
@@ -29,6 +34,10 @@ class CreateDetailservisTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::table('detailservis', function(Blueprint $table)
+		{
+			$table->dropForeign('detailservis_idservis_foreign');
+		});
 		Schema::drop('detailservis');
 	}
 

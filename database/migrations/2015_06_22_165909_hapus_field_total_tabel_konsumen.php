@@ -12,10 +12,10 @@ class HapusFieldTotalTabelKonsumen extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('konsumen', function(Blueprint $table){
-			$table->dropColumn('totalpiutang');
-			$table->dropColumn('totaldeposit');
-		});
+		// Schema::table('konsumen', function(Blueprint $table){
+		// 	$table->dropColumn('totalpiutang');
+		// 	$table->dropColumn('totaldeposit');
+		// });
 	}
 
 	/**

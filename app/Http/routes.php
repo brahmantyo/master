@@ -31,6 +31,16 @@ Route::get('konsumen/edit/{id}', 'MasterController@konsumenEdit');
 Route::post('konsumen/edit/{id}', 'MasterController@konsumenEdit');
 Route::get('konsumen/delete/{id}', 'MasterController@konsumenDelete');
 
+///////////////////////////////////////////
+Route::get('jabatan', 'MasterController@jabatan');
+Route::get('jabatan/create', 'MasterController@jabatanCreate');
+Route::post('jabatan/create', 'MasterController@jabatanCreate');
+Route::get('jabatan/edit/{id}', 'MasterController@jabatanEdit');
+Route::post('jabatan/edit/{id}', 'MasterController@jabatanEdit');
+Route::get('jabatan/delete/{id}','MasterController@jabatanDelete');
+
+
+/////////////////////////////////////////////////
 Route::get('pegawai', 'MasterController@pegawai');
 Route::get('pegawai/create', 'MasterController@pegawaiCreate');
 Route::post('pegawai/create', 'MasterController@pegawaiCreate');

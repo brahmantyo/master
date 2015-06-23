@@ -12,7 +12,7 @@ class RubahTableKlaimkonsumenToPembayaranklaimkonsumen extends Migration {
 	 */
 	public function up()
 	{
-		Schema::rename('klaimkonsumen','pembayaranklaimkonsumen');
+		// Schema::rename('klaimkonsumen','pembayaranklaimkonsumen');
 	}
 
 	/**
@@ -22,7 +22,7 @@ class RubahTableKlaimkonsumenToPembayaranklaimkonsumen extends Migration {
 	 */
 	public function down()
 	{
-		Schema::rename('pembayaranklaimkonsumen','klaimkonsumen');
+		// Schema::rename('pembayaranklaimkonsumen','klaimkonsumen');
 	}
 
 }

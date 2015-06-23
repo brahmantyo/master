@@ -19,6 +19,11 @@ class CreateServisarmadasTable extends Migration {
 			$table->date('tglservis');
 			$table->double('totalpengeluaran')->default(0);
 			$table->char('diketahui',30)->default('-');
+			
+		});
+		Schema::table('servisarmada', function(Blueprint $table)
+		{
+			$table->foreign('nopolisi')->references('nopolisi')->on('armada');
 		});
 	}
 
@@ -29,6 +34,10 @@ class CreateServisarmadasTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::table('servisarmada', function(Blueprint $table)
+		{
+			$table->dropForeign('servisarmada_nopolisi_foreign');
+		});
 		Schema::drop('servisarmada');
 	}
 

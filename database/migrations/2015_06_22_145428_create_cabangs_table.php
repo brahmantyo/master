@@ -18,8 +18,7 @@ class CreateCabangsTable extends Migration {
 			$table->char('nama',30);
 			$table->text('alamat')->nullable();
 			$table->char('telp',15)->nullable();
-			$table->char('sync',1)->default('0');
-			$table->primary('idcabang');
+			$table->char('syn',1)->default('0');
 		});
 	}
 

@@ -12,14 +12,19 @@ class CreateKlaimkonsumensTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('klaimkonsumen', function(Blueprint $table)
+		Schema::create('pembayaranklaimkonsumen', function(Blueprint $table)
 		{
 			$table->char('nokwitansi',15)->unique();
 			$table->date('tglklaim');
-			$table->smallInteger('noresi')->unsigned();
+			$table->char('noresi',20);
 			$table->text('keterangan');
 			$table->double('nilaiklaim',16,2)->default(0);
 			$table->char('status',10)->default('-');
+		});
+
+		Schema::table('pembayaranklaimkonsumen', function(Blueprint $table)
+		{
+			$table->foreign('noresi')->references('noresi')->on('daftarresi');
 		});
 	}
 
@@ -30,7 +35,11 @@ class CreateKlaimkonsumensTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('klaimkonsumen');
+		Schema::table('pembayaranklaimkonsumen', function(Blueprint $table)
+		{
+			$table->dropForeign('pembayaranklaimkonsumen_noresi_foreign');
+		});
+		Schema::drop('pembayaranklaimkonsumen');
 	}
 
 }

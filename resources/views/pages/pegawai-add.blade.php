@@ -56,7 +56,7 @@
 </div>
 <script type="text/javascript">
     $('input[name="tglrekrut"]').datepicker({
-        format: "dd/mm/yyyy",
+        format: "dd-mm-yyyy",
         todayBtn: "linked",
         clearBtn: true,
         language: "id",
