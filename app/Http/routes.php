@@ -39,7 +39,6 @@ Route::get('jabatan/edit/{id}', 'MasterController@jabatanEdit');
 Route::post('jabatan/edit/{id}', 'MasterController@jabatanEdit');
 Route::get('jabatan/delete/{id}','MasterController@jabatanDelete');
 
-
 /////////////////////////////////////////////////
 Route::get('pegawai', 'MasterController@pegawai');
 Route::get('pegawai/create', 'MasterController@pegawaiCreate');
@@ -48,6 +47,13 @@ Route::get('pegawai/edit/{id}', 'MasterController@pegawaiEdit');
 Route::post('pegawai/edit/{id}', 'MasterController@pegawaiEdit');
 Route::get('pegawai/delete/{id}','MasterController@pegawaiDelete');
 
+/////////////////////////////////////////////////
+Route::get('cabang', 'MasterController@cabang');
+Route::get('cabang/create', 'MasterController@cabangCreate');
+Route::post('cabang/create', 'MasterController@cabangCreate');
+Route::get('cabang/edit/{id}', 'MasterController@cabangEdit');
+Route::post('cabang/edit/{id}', 'MasterController@cabangEdit');
+Route::get('cabang/delete/{id}','MasterController@cabangDelete');
 
 Route::get('armada', 'MasterController@armada');
 Route::get('kota', 'MasterController@kota');

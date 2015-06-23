@@ -136,7 +136,7 @@ class MasterController extends Controller {
 			return Redirect::to('/jabatan');
 		}
 		return view('pages.jabatan-edit')->with('jabatan',$jabatan);
-	}	
+	}
 
 
 	//Pegawai
@@ -230,9 +230,61 @@ class MasterController extends Controller {
 	}
 
 	//Cabang
+
 	public function cabang()
 	{
-		$cabang = cabang::pagination($this->pagination);
+		$cabang = cabang::paginate($this->pagination);
 		return view('pages.cabang')->with('cabang',$cabang);
+	}
+
+	public function cabangDelete($id)
+	{
+		$cabang = cabang::find($id);
+		$cabang->delete();
+		return $this->cabang();
+	}
+
+	public function cabangCreate()
+	{
+		if(Request::method()=='POST'){
+		    $v = Validator::make(Request::all(),[
+		        'nama' => 'required',
+		        'alamat' => 'required',
+		        'telp' => 'max:15',
+		    ]);
+		    if ($v->fails())
+		    {
+		        return redirect()->back()->withInput()->withErrors($v->errors());
+		    }
+			$cabang = new cabang;
+			$cabang->nama = Request::get('nama');
+			$cabang->alamat = Request::get('alamat');
+			$cabang->telp = Request::get('telp');
+			$cabang->save();
+			return Redirect::to('/cabang');
+		}
+		return view('pages.cabang-add');
+	}
+
+	public function cabangEdit($id)
+	{
+		$cabang = cabang::find($id);
+		if(Request::method()=='POST'){
+		    $v = Validator::make(Request::all(),[
+		        'nama' => 'required',
+		        'alamat' => 'required',
+		        'telp' => 'max:15',
+		    ]);
+		    if ($v->fails())
+		    {
+		        return redirect()->back()->withInput()->withErrors($v->errors());
+		    }
+			$cabang->nama = Request::get('nama');
+			$cabang->alamat = Request::get('alamat');
+			$cabang->telp = Request::get('telp');
+			$cabang->save();
+			return Redirect::to('/cabang');
+		}
+		return view('pages.cabang-edit')->with('cabang',$cabang);
 	}
 }
