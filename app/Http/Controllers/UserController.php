@@ -3,13 +3,14 @@
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\User;
+use File;
 use Hash;
 use Request;
 use Input;
 use Redirect;
 
 class UserController extends Controller {
-
+	public $pagination = 5;
 	public function __construct()
 	{
 		$this->middleware('auth');
@@ -26,7 +27,7 @@ class UserController extends Controller {
 		//Paginator::setCurrentPage($page);
 		//Paginator::setBaseUrl($baseUrl);
 		//Paginator::setPageName('page');
-		$users = User::paginate(2);
+		$users = User::paginate($this->pagination);
 		return view($page)->with('users',$users);
 	}
 
@@ -81,10 +82,9 @@ class UserController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$this->middleware('auth');
-
 		$user = User::find($id);
-		return view('user.edit')->with('user',$user);
+		$filename = File::name($user->photo).'.'.File::extension($user->photo);
+		return view('user.edit')->with('user',$user)->with('filename',$filename);
 	}
 
 	/**
@@ -102,7 +102,7 @@ class UserController extends Controller {
         $user->name 	  = Input::get('name');
         $user->email      = Input::get('email');
         $user->level      = Input::get('level');
-        $user->password   = Hash::make(Input::get('password'));
+        $user->password   = empty(Input::get('password'))?$user->password:Hash::make(Input::get('password'));
 		$user->photo = 'dist/img/'.Input::get('photo');
  
         $user->save();

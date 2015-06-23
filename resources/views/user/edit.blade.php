@@ -53,17 +53,17 @@
                 <div class='form-group'>
                     {!! Form::label('photo', 'Photo') !!}
                     <img src="{{ asset($user->photo) }}" class="user-image" alt="User Image"/>
-                    {!! Form::file('photo', ['class' => 'form-control']) !!}
+                    {!! Form::hidden('photo', $filename, ['class' => 'form-control']) !!}
                 </div>
              
                 <div class='form-group'>
                     {!! Form::label('password', 'Password') !!}
-                    {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control']) !!}
+                    {!! Form::password('password', ['placeholder' => 'Password :: Kosongan jika tidak berubah', 'class' => 'form-control']) !!}
                 </div>
              
                 <div class='form-group'>
                     {!! Form::label('password_confirmation', 'Confirm Password') !!}
-                    {!! Form::password('password_confirmation', ['placeholder' => 'Confirm Password', 'class' => 'form-control']) !!}
+                    {!! Form::password('password_confirmation', ['placeholder' => 'Confirm Password :: Kosongan jika tidak berubah', 'class' => 'form-control']) !!}
                 </div>
              
                 <div class='form-group'>
