@@ -72,8 +72,8 @@
     <script src="{{ asset('/dist/js/app.min.js') }}" type="text/javascript"></script>
     
     <!--Input Masking -->
-    <script src="{{ asset('plugins/input-mask/inputmask.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('plugins/input-mask/jquery.inputmask.js') }}" type="text/javascript"></script>    
+    <script src="{{ asset('plugins/inputmask/inputmask.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('plugins/inputmask/jquery.inputmask.js') }}" type="text/javascript"></script>    
 
     <!-- Shortkey -->
     {!! Html::script('/plugins/keypress/keypress-2.1.0.min.js') !!}

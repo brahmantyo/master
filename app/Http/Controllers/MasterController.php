@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\armada;
 use App\cabang;
 use App\jabatan;
 use App\konsumen;
@@ -219,9 +220,60 @@ class MasterController extends Controller {
 
 	public function armada()
 	{
-		//
+		$armada = armada::paginate($this->pagination);
+		return view('pages.armada')->with('armada',$armada);
 	}
 
+	public function armadaCreate()
+	{
+		if(Request::method()=='POST'){
+		    $v = Validator::make(Request::all(),[
+		        'nopol' => 'required',
+		        'jenis' => 'required',
+		        'tahun' => 'string|size:4',
+		    ]);
+		    if ($v->fails())
+		    {
+		        return redirect()->back()->withInput()->withErrors($v->errors());
+		    }
+			$armada = new armada;
+			$armada->nopolisi = strtoupper(Request::get('nopol'));
+			$armada->jeniskendaraan = Request::get('jenis');
+			$armada->tahun = Request::get('tahun');
+			$armada->save();
+			return Redirect::to('/armada');
+		}
+		return view('pages.armada-add');
+	}
+
+	public function armadaEdit($id)
+	{
+		$armada = armada::find($id);
+		if(Request::method()=='POST'){
+		    $v = Validator::make(Request::all(),[
+		        'nopol' => 'required',
+		        'jenis' => 'required',
+		        'tahun' => 'string|size:4',
+		    ]);
+		    if ($v->fails())
+		    {
+		        return redirect()->back()->withInput()->withErrors($v->errors());
+		    }
+			$armada->nopolisi = strtoupper(Request::get('nopol'));
+			$armada->jeniskendaraan = Request::get('jenis');
+			$armada->tahun = Request::get('tahun');
+			$armada->save();
+			return Redirect::to('/armada');
+		}
+		return view('pages.armada-edit')->with('armada',$armada);
+	}
+	
+	public function armadaDelete($id)
+	{
+		$armada = armada::find($id);
+		$armada->delete();
+		return $this->armada();
+	}
 	//Kota
 
 	public function kota()

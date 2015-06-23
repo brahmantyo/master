@@ -55,8 +55,17 @@ Route::get('cabang/edit/{id}', 'MasterController@cabangEdit');
 Route::post('cabang/edit/{id}', 'MasterController@cabangEdit');
 Route::get('cabang/delete/{id}','MasterController@cabangDelete');
 
+////////////////////////////////////////////////
 Route::get('armada', 'MasterController@armada');
-Route::get('kota', 'MasterController@kota');
+Route::get('armada/create', 'MasterController@armadaCreate');
+Route::post('armada/create', 'MasterController@armadaCreate');
+Route::get('armada/edit/{id}', 'MasterController@armadaEdit');
+Route::post('armada/edit/{id}', 'MasterController@armadaEdit');
+Route::get('armada/delete/{id}','MasterController@armadaDelete');
+
+/////////////////////////////////////////////////
+
+//Route::get('kota', 'MasterController@kota');
 
 /////////////////////////////////////////
 
