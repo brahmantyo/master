@@ -34,8 +34,8 @@
                     {!! Form::text('jenis', old('jenis'), ['placeholder' => 'Jenis Kendaraan', 'class' => 'form-control']) !!}
                 </div>
                 <div class='form-group'>
-                    {!! Form::label('tahun', 'Tahun Kendaraan') !!}
-                    {!! Form::text('tahun', old('tahun'), ['placeholder' => 'Tahun Keluaran Kendaraan', 'class' => 'form-control']) !!}
+                    {!! Form::label('tahun', 'Tahun Pembuatan') !!}
+                    {!! Form::text('tahun', old('tahun'), ['placeholder' => 'Tahun Pembuatan Kendaraan', 'class' => 'form-control']) !!}
                 </div>
                 <div class='form-group'>
                     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

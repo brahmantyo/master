@@ -21,7 +21,7 @@
 						<tr style="font-weight: bold">
 							<td>NO POLISI</td>
 							<td>JENIS KENDARAAN</td>
-							<td>TAHUN KELUARAN</td>
+							<td>TAHUN PEMBUATAN</td>
 							<td width="135"></td>
 						</tr>
 					</thead>
