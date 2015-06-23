@@ -16,6 +16,7 @@ class CreateJabatansTable extends Migration {
 		{
 			$table->smallInteger('idjabatan')->unique()->autoIncrement()->unsigned();
 			$table->char('nmjabatan',15);
+			$table->char('syn',1)->default('0');
 		});
 	}
 

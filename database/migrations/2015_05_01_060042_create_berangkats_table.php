@@ -14,7 +14,7 @@ class CreateBerangkatsTable extends Migration {
 	{
 		Schema::create('berangkat', function(Blueprint $table)
 		{
-			$table->smallInteger('idberangkat')->unique()->autoIncrement();
+			$table->char('idberangkat',20)->unique();
 			$table->char('nopolisi',10);
 			$table->smallInteger('idsopir')->unsigned();
 			$table->smallInteger('idkenek')->unsigned();
@@ -24,6 +24,8 @@ class CreateBerangkatsTable extends Migration {
 			$table->time('jamberangkat');
 			$table->date('tgltiba');
 			$table->time('jamtiba');
+
+			$table->primary('idberangkat');
 
 		});
 

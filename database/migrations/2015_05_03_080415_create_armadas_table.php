@@ -14,9 +14,10 @@ class CreateArmadasTable extends Migration {
 	{
 		Schema::create('armada', function(Blueprint $table)
 		{
-			$table->char('nopolisi',10)->unique();
-			$table->char('jeniskendaraan',10);
+			$table->char('nopolisi',15)->unique();
+			$table->char('jeniskendaraan',30);
 			$table->char('tahun',4);
+			$table->char('syn',1)->default('0');
 
 			$table->primary('nopolisi');
 		});

@@ -19,6 +19,7 @@ class CreateGajisTable extends Migration {
 			$table->date('tanggal');
 			$table->smallInteger('idpegawai')->unsigned();
 			$table->text('keterangan');
+			$table->char('syn',1)->default('0');
 		});
 
 		Schema::table('gaji', function(Blueprint $table)

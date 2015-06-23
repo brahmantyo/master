@@ -20,6 +20,7 @@ class CreatePegawaisTable extends Migration {
 			$table->smallInteger('idjabatan')->unsigned();
 			$table->date('tglrekrut')->default(date('Y-m-d'));
 			$table->double('gajipokok',16,2)->default(0);
+			$table->char('syn',1)->default('0');
 
 		});
 

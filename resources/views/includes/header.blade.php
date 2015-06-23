@@ -3,7 +3,8 @@
 ?>
 <header class="main-header">
     <!-- Logo -->
-    <a href="/" class="logo">Application Name</a>
+    <a href="/" class="logo">LANOGAN</a>
+    <span style="top:33px;left:44px;position:inherit;display:block;z-index: 100;">Intgreted Back Office</span>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
         <!-- Sidebar toggle button-->
