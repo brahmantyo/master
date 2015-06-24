@@ -109,6 +109,7 @@
 
 
     <script type="text/javascript">
+        $('input[type!=hidden]:first').focus();
         //Date range picker
         $('.date').daterangepicker();
 

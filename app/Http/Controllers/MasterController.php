@@ -6,6 +6,7 @@ use App\cabang;
 use App\jabatan;
 use App\konsumen;
 use App\pegawai;
+use Illuminate\Database\QueryException;
 use Input;
 use Redirect;
 use Request;
@@ -99,9 +100,17 @@ class MasterController extends Controller {
 	public function jabatanDelete($id)
 	{
 		$jabatan = jabatan::find($id);
-		$jabatan->delete();
-		return $this->jabatan();
-	}
+		try {
+			$jabatan->delete();
+    	} catch(QueryException $e) {
+    		switch($e->getCode()){
+    			case '23000' : $errors = 'Maaf Anda tidak bisa menghapus <b>'.$jabatan->nmjabatan.'</b> karena terkait dengan data lain.'; break;
+    		}
+    		return redirect('/jabatan')->withErrors($errors);
+    	} finally {
+    		return redirect('/jabatan');
+    	}
+    }
 
 	public function jabatanCreate()
 	{

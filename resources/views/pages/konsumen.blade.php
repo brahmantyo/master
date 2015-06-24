@@ -14,6 +14,11 @@
 		    	<hr>
 				<span class="pull-right"><a class="btn btn-success	" id="tambah" href="/konsumen/create">Tambah</a></span>		    	
 		 	</div>
+            @if ($errors->has())
+                @foreach ($errors->all() as $error)
+                <div class='bg-danger alert'>{!! $error !!}</div>
+                @endforeach
+            @endif
 		 	<div class="box-body table-responsive">
    			 	
 		        <table class="table table-condensed table-striped table-bordered table-hover no-margin">

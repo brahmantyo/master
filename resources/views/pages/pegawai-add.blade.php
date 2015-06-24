@@ -19,7 +19,7 @@
             <div class="box-body" width="50%">
             @if ($errors->has())
                 @foreach ($errors->all() as $error)
-                <div class='bg-danger alert'>{{ $error }}</div>
+                <div class='bg-danger alert'>{!! $error !!}</div>
                 @endforeach
             @endif
 
@@ -36,6 +36,7 @@
                 <div class='form-group'>
                     {!! Form::label('jabatan', 'Jabatan') !!}
                     {!! Form::select('jabatan', $jabatan) !!}
+                    {!! Form::button('Daftar Jabatan',['class' => 'btn btn-primary listitem', 'value' => '/jabatan']) !!}
                 </div>
                 <div class='form-group'>
                     {!! Form::label('tglrekrut', 'Tanggal Rekrutmen') !!}
@@ -63,6 +64,24 @@
         orientation: "auto left",
         autoclose: true,
         todayHighlight: true
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('button.listitem').click(function(){return false;}).each(function(){
+            $(this).fancybox({
+                type : 'iframe',
+                href : this.value,
+                autoSize: true,
+                height: 800,
+                openSpeed: 1,
+                closeSpeed: 1,
+                ajax : {
+                    dataType : 'html',
+                },
+                afterClose : function(){ window.location.replace('/pegawai/create') },
+            });
+        });
     });
 </script>
 @endsection

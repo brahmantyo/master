@@ -18,7 +18,7 @@ Route::get('/', 'WelcomeController@index');
     $pdf->send();
 });*/
 
-Route::get('home', 'HomeController@index');
+//Route::get('home', 'HomeController@index');
 
 Route::resource('user', 'UserController');
 

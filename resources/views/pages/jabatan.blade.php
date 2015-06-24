@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app-modal')
 @section('content-header')
 <ol class="breadcrumb">
     <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
@@ -12,10 +12,14 @@
 			<div class="box-header">
 		    	<span><h1><i class="fa fa-users"></i>Master Jabatan</h1></span>
 		    	<hr>
-				<span class="pull-right"><a class="btn btn-success	" id="tambah" href="/jabatan/create">Tambah</a></span>		    	
 		 	</div>
-		 	<div class="box-body table-responsive">
-   			 	
+		 	@if ($errors->has())
+                @foreach ($errors->all() as $error)
+                <div class='bg-danger alert'>{!! $error !!}</div>
+                @endforeach
+            @endif
+			<span><a class="btn btn-success" id="tambah" href="/jabatan/create">Tambah</a></span>		    	
+		 	<div class="box-body table-responsive col-lg-12">
 		        <table class="table table-condensed table-striped table-bordered table-hover no-margin">
 					<thead>
 						<tr style="font-weight: bold">

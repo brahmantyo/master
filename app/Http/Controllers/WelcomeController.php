@@ -1,5 +1,5 @@
 <?php namespace App\Http\Controllers;
-use App\User;
+//use App\User;
 use Session;
 class WelcomeController extends Controller {
 
@@ -14,7 +14,7 @@ class WelcomeController extends Controller {
 	|
 	*/
 	public $credential;
-	public $user;
+	//public $user;
 	/**
 	 * Create a new controller instance.
 	 *
@@ -22,9 +22,10 @@ class WelcomeController extends Controller {
 	 */
 	public function __construct()
 	{
-		$this->credential = Session::get('user');
-		$this->user = User::where('name','=',$this->credential)->first();
+		//$this->user = User::where('name','=',$this->credential)->first();
 		$this->middleware('auth');
+		$this->credential = Session::get('user');
+		
 	}
 
 	/**

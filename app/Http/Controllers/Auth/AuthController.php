@@ -1,12 +1,13 @@
 <?php namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\User;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\User;
 
 class AuthController extends Controller {
 
@@ -53,12 +54,15 @@ class AuthController extends Controller {
 	    ]);
 
 	    $credentials = $request->only('name', 'password');
-
-	    session()->regenerate();
-	    
-	    $user = User::where('name','=',$request->only('name'))->firstOrFail();
-	    Session::put('user',$user);
-
+	    try {
+		    $user = User::where('name','=',$request->only('name'))->firstOrFail();
+	    } catch(ModelNotFoundException $e){
+	    	return redirect('/');
+	    }
+	    if($user){
+	    	session()->regenerate();
+	    	Session::put('user',$user);
+		}
 	    if ($this->auth->attempt($credentials, $request->has('remember')))
 	    {
 	        return redirect()->intended($this->redirectPath());
