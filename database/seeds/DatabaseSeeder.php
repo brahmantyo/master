@@ -71,13 +71,13 @@ class UserTableSeeder extends Seeder {
 			'password'=>Hash::make('123456'),
 			'photo'=>'dist/img/avatar04.png'
 		]);
-/*		/////////
+		/////////
 		cabang::create([
 			'nama'=>'Cabang Bandung Pusat',
-			'alamat'=>'Jl.Suka Menak No.007 Jl.Sukamenak',
+			'alamat'=>'Jl.Suka Menak No.147',
 			'telp'=>'022-123421'
 		]);
-		///for  demo only
+/*		///for  demo only
 		//cabang
 		cabang::create([
 			'nama'=>'Cabang Pekan Baru',

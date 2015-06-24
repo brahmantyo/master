@@ -20,6 +20,11 @@ class MasterController extends Controller {
 		$this->middleware('auth');
 	}
 
+	private function errorDict($e, $context, $value ){
+		switch($e->getCode()){
+			case '23000' : return 'Maaf Anda tidak bisa menghapus <b>'.strtoupper($context).' '.strtoupper($value).'</b> karena terkait dengan data lain.'; break;
+		}
+	}
 	//Konsumen
 
 	public function konsumen()
@@ -31,8 +36,14 @@ class MasterController extends Controller {
 	public function konsumenDelete($id)
 	{
 		$konsumen = konsumen::find($id);
-		$konsumen->delete();
-		return Redirect::to('/konsumen');
+		try {
+			$konsumen->delete();
+		} catch(QueryException $e){
+			$errors = $this->errorDict($e,'konsumen',$konsumen->nama);
+			return Redirect::to('/konsumen')->withErrors($errors);
+		} finally{
+			return Redirect::to('/konsumen');
+		}
 	}
 
 	public function konsumenCreate()
@@ -103,12 +114,10 @@ class MasterController extends Controller {
 		try {
 			$jabatan->delete();
     	} catch(QueryException $e) {
-    		switch($e->getCode()){
-    			case '23000' : $errors = 'Maaf Anda tidak bisa menghapus <b>'.$jabatan->nmjabatan.'</b> karena terkait dengan data lain.'; break;
-    		}
-    		return redirect('/jabatan')->withErrors($errors);
+    		$errors = $this->errorDict($e,'jabatan',$jabatan->nmjabatan);
+    		return Redirect::to('/jabatan')->withErrors($errors);
     	} finally {
-    		return redirect('/jabatan');
+    		return Redirect::to('/jabatan');
     	}
     }
 
@@ -161,8 +170,14 @@ class MasterController extends Controller {
 	public function pegawaiDelete($id)
 	{
 		$pegawai = pegawai::find($id);
-		$pegawai->delete();
-		return $this->pegawai();
+		try {
+			$pegawai->delete();
+    	} catch(QueryException $e){
+    		$errors = $this->errorDict($e,'pegawai',$pegawai->nama);
+    		return Redirect::to('/pegawai')->withErrors($errors);
+    	} finally {
+			return Redirect::to('/pegawai');
+		}
 	}
 
 	public function pegawaiCreate()
@@ -280,8 +295,15 @@ class MasterController extends Controller {
 	public function armadaDelete($id)
 	{
 		$armada = armada::find($id);
-		$armada->delete();
-		return $this->armada();
+		try {
+			$armada->delete();
+		} catch(QueryException $e){
+			$errors = $this->errorDict($e,'armada',$armada->nopolisi);
+			return $this->armada()->withErrors($errors);
+		} finally {
+			return $this->armada();			
+		}
+
 	}
 	//Kota
 
