@@ -15,7 +15,7 @@ class CreateTableKonsumen extends Migration {
 		//
 		Schema::create('konsumen', function(Blueprint $table)
 		{
-			$table->smallInteger('idkonsumen')->unique()->unsigned()->autoIncrement();
+			$table->smallInteger('idkonsumen')->unique()->autoIncrement()->unsigned();
 			$table->char('nama',30);
 			$table->text('alamat');
 			$table->char('notelp',16);

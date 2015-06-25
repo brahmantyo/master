@@ -12,13 +12,13 @@ class CreateKotasTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('kota', function(Blueprint $table)
+/*		Schema::create('kota', function(Blueprint $table)
 		{
 			$table->char('kode',4)->unique();
 			$table->char('namakota',15);
 
 			$table->primary('kode');
-		});
+		});*/
 	}
 
 	/**
@@ -28,7 +28,7 @@ class CreateKotasTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('kota');
+/*		Schema::drop('kota');*/
 	}
 
 }

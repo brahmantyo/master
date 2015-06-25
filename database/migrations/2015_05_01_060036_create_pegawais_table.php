@@ -14,7 +14,7 @@ class CreatePegawaisTable extends Migration {
 	{
 		Schema::create('pegawai', function(Blueprint $table)
 		{
-			$table->smallInteger('idpegawai')->unique()->unsigned()->autoIncrement();
+			$table->smallInteger('idpegawai')->unique()->autoIncrement()->unsigned();
 			$table->char('nama',30);
 			$table->text('alamat');
 			$table->smallInteger('idjabatan')->unsigned();

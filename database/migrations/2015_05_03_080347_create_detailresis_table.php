@@ -14,7 +14,7 @@ class CreateDetailresisTable extends Migration {
 	{
 		Schema::create('detailresi', function(Blueprint $table)
 		{
-			$table->smallInteger('id')->unique()->autoIncrement();
+			$table->smallInteger('id')->unique()->autoIncrement()->unsigned();
 			$table->char('idresi',20);
 			$table->char('barang',25)->default('-');
 			$table->smallInteger('qty')->default(0);

@@ -18,12 +18,14 @@ class CreateBerangkatsTable extends Migration {
 			$table->char('nopolisi',10);
 			$table->smallInteger('idsopir')->unsigned();
 			$table->smallInteger('idkenek')->unsigned();
-			$table->char('idasal',4);
-			$table->char('idtujuan',4);
+			$table->smallInteger('idasal')->unsigned();
+			$table->smallInteger('idtujuan')->unsigned();
 			$table->date('tglberangkat');
 			$table->time('jamberangkat');
-			$table->date('tgltiba');
-			$table->time('jamtiba');
+			$table->date('tgltiba')->nullable();
+			$table->time('jamtiba')->nullable();
+			$table->smallInteger('user')->unsigned();
+			$table->char('syn',1)->default('0');
 
 			$table->primary('idberangkat');
 
@@ -33,8 +35,9 @@ class CreateBerangkatsTable extends Migration {
 		{
 			$table->foreign('idsopir')->references('idpegawai')->on('pegawai');
 			$table->foreign('idkenek')->references('idpegawai')->on('pegawai');
-			$table->foreign('idasal')->references('kode')->on('kota');
-			$table->foreign('idtujuan')->references('kode')->on('kota');
+			$table->foreign('user')->references('id')->on('users');
+			$table->foreign('idasal')->references('idcabang')->on('cabang');
+			$table->foreign('idtujuan')->references('idcabang')->on('cabang');
 		});
 	}
 

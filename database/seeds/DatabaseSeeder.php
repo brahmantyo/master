@@ -34,7 +34,7 @@ class UserTableSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		User::truncate();
+		//User::truncate();
 		User::create([
 			'first_name'=>'yosef brahmantyo',
 			'last_name'=>'adi k',

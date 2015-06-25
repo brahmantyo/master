@@ -14,14 +14,16 @@ class CreateDaftarresisTable extends Migration {
 	{
 		Schema::create('daftarresi', function(Blueprint $table)
 		{
-			$table->char('noresi',20)->unique();
+			$table->char('noresi',20);
 			$table->smallInteger('idkonsumen')->unsigned();
 			$table->date('tgltibapool');
 			$table->double('totalbiaya',16,2);
-			$table->smallInteger('idberangkat');
-			$table->char('status',50);
+			$table->char('idberangkat',20)->nullable();
+			$table->char('status',50);//status pengiriman
 			$table->double('downpayment',16,2);
 			$table->double('sisabayar',16,2);
+			$table->smallInteger('user');
+			$table->char('syn',1)->default('0');
 
 			$table->primary('noresi');
 		});
