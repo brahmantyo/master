@@ -91,6 +91,13 @@ Route::get('resipengiriman', 'LaporanController@resipengiriman');
 Route::get('sjt', 'LaporanController@sjt');
 
 
+
+// World outside routing //////////////
+Route::get('about', view('world.about'));
+Route::get('tracking', view('world.tracking'));
+
+////////////////////////////////////////
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

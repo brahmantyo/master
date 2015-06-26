@@ -34,7 +34,7 @@
             </li>
             @endif
             
-            @if ((($user->level == 'SUPER')||($user->level == 'MANAGER'))&&!(Auth::guest()))
+            @if ((($user->level == 'SUPER')||($user->level == 'MANAGER')||($user->level == 'STAFF'))&&!(Auth::guest()))
             <li class="treeview">
                 <a><i class="fa fa-plus-square-o"></i><span>Master</span></a>
                 <ul class="treeview-menu">
@@ -45,7 +45,7 @@
                 </ul>
             </li>
             @endif
-
+            @if ((($user->level == 'SUPER')||($user->level == 'MANAGER'))&&!(Auth::guest()))
             <li class="treeview">
                 <a><i class="fa fa-plus-square-o"></i><span>Laporan</span></a>
                 <ul class="treeview-menu">
@@ -56,6 +56,7 @@
                     <li><a href="/sjt" id="menu-stj"><i class="fa fa-file-text-o"></i>Surat Jalan Truck</a></li>
                 </ul>
             </li>
+            @endif
         </ul>
     </section>
     <!-- /.sidebar -->
