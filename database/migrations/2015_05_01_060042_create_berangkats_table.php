@@ -36,8 +36,8 @@ class CreateBerangkatsTable extends Migration {
 			$table->foreign('idsopir')->references('idpegawai')->on('pegawai');
 			$table->foreign('idkenek')->references('idpegawai')->on('pegawai');
 			$table->foreign('user')->references('id')->on('users');
-			$table->foreign('idasal')->references('idcabang')->on('cabang');
-			$table->foreign('idtujuan')->references('idcabang')->on('cabang');
+			//$table->foreign('idasal')->references('idcabang')->on('cabang');
+			//$table->foreign('idtujuan')->references('idcabang')->on('cabang');	
 		});
 	}
 
@@ -52,8 +52,8 @@ class CreateBerangkatsTable extends Migration {
 		{
 			$table->dropForeign('berangkat_idsopir_foreign');
 			$table->dropForeign('berangkat_idkenek_foreign');
-			$table->dropForeign('berangkat_idasal_foreign');
-			$table->dropForeign('berangkat_idtujuan_foreign');
+			//$table->dropForeign('berangkat_idasal_foreign');
+			//$table->dropForeign('berangkat_idtujuan_foreign');
 		});
 		Schema::drop('berangkat');
 	}
