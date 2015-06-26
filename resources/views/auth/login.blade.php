@@ -79,7 +79,7 @@ $(document).ready(function() {
 		$('#login').show();
 		$('[name="name"]').focus();
 	});
-	$('#link').mouseout(function() { $('#login').hide(); });
+	//$('#login').click(function() { $('#login').hide(); });
 });
 
 </script>
@@ -92,7 +92,7 @@ $(document).ready(function() {
 		</span>
 		<span class="menu-login">
 			<a id="link">Login
-			<div id="login" onblur="$(this).hide()">
+			<div id="login" onmouseout="$(this).hide()">
 				<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			
