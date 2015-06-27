@@ -10,7 +10,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::get('/', 'WelcomeController@index');
 /*Route::get('/', function() {
     $pdf = PDF::make();
@@ -93,9 +92,25 @@ Route::get('sjt', 'LaporanController@sjt');
 
 
 // World outside routing //////////////
-Route::get('about', function(){view('world.about');});
-//Route::get('tracking', view('world.tracking'));
+// Articles//
+Route::resource('article', 'ArticleController');
 
+// About /////
+// Route::get('/about', function(){
+// 	$about = \App\article::where('type','=','about')->first();
+// 	return view('world.about')->with('about',$about);
+// });
+// Tracking ////
+Route::get('tracking', function(){return view('world.tracking');});
+
+// News ////
+Route::get('news/{id}', function($id){
+	$dnews = \App\article::select('article.*','users.first_name','users.last_name')
+		->leftJoin('users','article.user','=','users.id')
+		->where('article.id','=',$id)->first();
+	return view('master')->with('dnews',$dnews);
+});
+/// End World section
 ////////////////////////////////////////
 
 Route::controllers([
@@ -103,4 +118,11 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('print', 'HomeController@cetak');
+		// Event::listen('illuminate.query', function($query)
+		// {
+		//     var_dump($query);
+		// });
+
+//Route::get('print', 'HomeController@cetak');
+
+//Route::any('{all}','WelcomeController@index'); //always go to home on unregistered routing

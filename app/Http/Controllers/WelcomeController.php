@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 //use App\User;
+use App\article;
 use Session;
 class WelcomeController extends Controller {
 
@@ -35,7 +36,15 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home')->with('credential',$this->credential);
+		$about = array('');
+		//$news = array();
+		$articles = article::all();
+
+		foreach($articles as $article){
+			//echo $article->type;
+		}
+		$about = \App\article::where('type','=','about')->first();
+		return view('home')->with('credential',$this->credential)->with('about',$about);
 	}
 
 }

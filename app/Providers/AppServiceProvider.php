@@ -1,6 +1,7 @@
 <?php namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use View;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -11,7 +12,26 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		//
+		$abouts  = array();
+		$news = array();
+		
+		$articles = \App\article::select('article.*','users.first_name','users.last_name')
+		->leftJoin('users','article.user','=','users.id')->get();
+		
+		foreach ($articles as $article) {
+			switch($article->type){
+				case 'about' : 
+					$abouts[] = $article;break;
+				case 'news' :
+					$news[] = $article;break;
+			}
+			
+		}
+		$data = array(
+			'abouts'=>$abouts,
+			'news'=>$news
+		);
+		return View::share($data);
 	}
 
 	/**

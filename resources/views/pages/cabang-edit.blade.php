@@ -39,6 +39,7 @@
                 </div>
                 <div class='form-group'>
                     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::button('Cancel', ['class' => 'btn btn-info','onclick'=>'window.history.back()']) !!}
                 </div>
 
             {!! Form::close() !!}

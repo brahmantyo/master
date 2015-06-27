@@ -57,7 +57,11 @@
                 </ul>
             </li>
             @endif
-        </ul>
+            <li class="treeview">
+                <a href="/article" id="article">
+                    <i class="fa fa-pencil-square-o"></i><span>Article</span>
+                </a>
+            </li>        </ul>
     </section>
     <!-- /.sidebar -->
 </aside>
