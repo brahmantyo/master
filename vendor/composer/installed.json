@@ -3369,5 +3369,51 @@
             "persistence",
             "queryobject"
         ]
+    },
+    {
+        "name": "misterphilip/maintenance-mode",
+        "version": "dev-development",
+        "version_normalized": "dev-development",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/MisterPhilip/maintenance-mode.git",
+            "reference": "281e962873edd647b146decef268876e38c1bcd9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/MisterPhilip/maintenance-mode/zipball/281e962873edd647b146decef268876e38c1bcd9",
+            "reference": "281e962873edd647b146decef268876e38c1bcd9",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "5.0.*",
+            "php": ">=5.4.0"
+        },
+        "time": "2015-01-07 02:23:56",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "MisterPhilip\\MaintenanceMode": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Philip Lawrence",
+                "email": "philip@misterphilip.com",
+                "homepage": "http://misterphilip.com"
+            }
+        ],
+        "description": "An enhanced drop-in replacement for Laravel 5's maintenance mode",
+        "keywords": [
+            "l5",
+            "laravel",
+            "laravel5",
+            "maintenance"
+        ]
     }
 ]

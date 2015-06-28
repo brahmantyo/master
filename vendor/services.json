@@ -27,7 +27,9 @@
         "App\\Providers\\BusServiceProvider",
         "App\\Providers\\ConfigServiceProvider",
         "App\\Providers\\EventServiceProvider",
-        "App\\Providers\\RouteServiceProvider"
+        "App\\Providers\\RouteServiceProvider",
+        "MisterPhilip\\MaintenanceMode\\MaintenanceModeServiceProvider",
+        "MisterPhilip\\MaintenanceMode\\MaintenanceCommandServiceProvider"
     ],
     "eager": [
         "Illuminate\\Auth\\AuthServiceProvider",
@@ -45,7 +47,8 @@
         "App\\Providers\\BusServiceProvider",
         "App\\Providers\\ConfigServiceProvider",
         "App\\Providers\\EventServiceProvider",
-        "App\\Providers\\RouteServiceProvider"
+        "App\\Providers\\RouteServiceProvider",
+        "MisterPhilip\\MaintenanceMode\\MaintenanceModeServiceProvider"
     ],
     "deferred": {
         "command.app.name": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
@@ -56,7 +59,7 @@
         "command.console.make": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
         "command.event.generate": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
         "command.event.make": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
-        "command.down": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
+        "command.down": "MisterPhilip\\MaintenanceMode\\MaintenanceCommandServiceProvider",
         "command.environment": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
         "command.fresh": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
         "command.handler.command": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
@@ -141,6 +144,7 @@
         "Illuminate\\Redis\\RedisServiceProvider": [],
         "Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider": [],
         "Illuminate\\Translation\\TranslationServiceProvider": [],
-        "Collective\\Html\\HtmlServiceProvider": []
+        "Collective\\Html\\HtmlServiceProvider": [],
+        "MisterPhilip\\MaintenanceMode\\MaintenanceCommandServiceProvider": []
     }
 }

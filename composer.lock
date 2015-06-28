@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bf5e6a87f38d5f3888601dee6bd8fd94",
+    "hash": "3c994685c73bad4d285767a0d6bce64f",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1070,6 +1070,50 @@
                 "storage"
             ],
             "time": "2015-06-07 21:27:37"
+        },
+        {
+            "name": "misterphilip/maintenance-mode",
+            "version": "dev-development",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MisterPhilip/maintenance-mode.git",
+                "reference": "281e962873edd647b146decef268876e38c1bcd9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MisterPhilip/maintenance-mode/zipball/281e962873edd647b146decef268876e38c1bcd9",
+                "reference": "281e962873edd647b146decef268876e38c1bcd9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.0.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "MisterPhilip\\MaintenanceMode": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philip Lawrence",
+                    "email": "philip@misterphilip.com",
+                    "homepage": "http://misterphilip.com"
+                }
+            ],
+            "description": "An enhanced drop-in replacement for Laravel 5's maintenance mode",
+            "keywords": [
+                "l5",
+                "laravel",
+                "laravel5",
+                "maintenance"
+            ],
+            "time": "2015-01-07 02:23:56"
         },
         {
             "name": "monolog/monolog",
@@ -3268,7 +3312,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "misterphilip/maintenance-mode": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

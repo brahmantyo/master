@@ -145,6 +145,9 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
+		
+		'MisterPhilip\MaintenanceMode\MaintenanceModeServiceProvider',
+	    'MisterPhilip\MaintenanceMode\MaintenanceCommandServiceProvider',
 
 	],
 
