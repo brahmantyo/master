@@ -7,5 +7,8 @@
 	          <h4></h4>
 	          
 	          <p>{!! $dnews->content !!}</p>
+
+              <a class="btn btn-info" href="/">Kembali</a>
+
 	        </div>
         </div>
