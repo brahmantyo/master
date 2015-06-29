@@ -14,6 +14,7 @@ class TrackingController extends Controller {
 	 */
 	public function index()
 	{
+		$error = '';
 		$track = resi::select('r.noresi','k.nama AS konsumen',
 					'ca.nama AS asal','ct.nama AS tujuan',
 					'b.tglberangkat','b.jamberangkat',
@@ -36,7 +37,8 @@ class TrackingController extends Controller {
 			}
 		} else {
 			$trackingreport = $track;
+			$error = 'Maaf data tidak ditemukan';
 		}
-		return view('master')->with('trackingreport',$trackingreport);		
+		return view('master')->with('trackingreport',$trackingreport)->withErrors($error);		
 	}
 }
