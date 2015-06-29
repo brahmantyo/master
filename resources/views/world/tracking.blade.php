@@ -2,7 +2,8 @@
 {!! Form::text('id','',['placeholder'=>'Masukan Nomer Resi']) !!}
 {!! Form::submit('Cari') !!}
 {!! Form::close() !!}
-@if(isset($trackingreport))
+@if(isset($trackingreport)&&is_object($trackingreport))
+	@if($trackingreport->count())
 <hr>
 <!-- 
 			'noresi'=>'1000',
@@ -55,4 +56,9 @@
 	</thead>
 </table>
 </div>
+	@else
+maaf resi tidak ditemukan
+	@endif
 @endif
+
+

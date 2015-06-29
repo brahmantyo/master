@@ -29,9 +29,13 @@ class TrackingController extends Controller {
 					->leftJoin('users as u','u.id','=','r.user')
 					->where('noresi','=',Request::get('id'))->get();
 					//
-		
-		foreach($track as $t){
-			$trackingreport = $t;
+
+		if($track->count()){
+			foreach($track as $t){
+				$trackingreport = $t;
+			}
+		} else {
+			$trackingreport = $track;
 		}
 		return view('master')->with('trackingreport',$trackingreport);		
 	}
