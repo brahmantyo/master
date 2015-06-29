@@ -71,16 +71,14 @@
           </div>
         </div>
 <!--  End of header section -->
-<!--  Content section -->
 
+<!--  Content section -->
       <div class="row">
         <div class="panel">
         <div class="panel-heading">
           <ul class="nav nav-tabs">
-            <li class="active"><a href="/">Home</a></li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="tab" href="#tracking">Tracking</a>
-            </li>
+            <li class="active"><a data-toggle="tab" href="#home" >Home</a></li>
+            <li><a data-toggle="tab" href="#tracking">Tracking</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tentang Kami<span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -111,8 +109,6 @@
         <div class="panel-body">        
         <div class="tab-content">
           <div id="home" class="tab-pane fade in active">
-
-
               @if(\Request::get('detail'))
                 @include('world.news')                
               @else
@@ -127,13 +123,12 @@
                 </div>
               @endforeach
               @endif
-
           </div>
           <div id="tracking" class="tab-pane fade">
             <div class="panel panel-primary">
               <div class="panel-heading">Informasi Status Pengiriman</div>
               <div class="panel-body">
-                tracking
+                @include('world.tracking')
                </div>
             </div>
           </div>
@@ -157,9 +152,16 @@
   <footer>
       <div >
         <div class="col-md-12">
-          <b><strong>Copyright &copy; 2014-2015 <a href="#">Niclogic</a>.</strong> All rights reserved.        </div>
+          <b><strong>Copyright &copy; 2014-2015 <a href="#">Niclogic</a>.</strong> All rights reserved.</div>
       </div>
   </footer>
 <!--  Footer section -->
+@if(isset($trackingreport))
+<script type="text/javascript">
+    $('*').removeClass('in').removeClass('active');
+    $('a:contains("Tracking")').parent().addClass('active');
+    $('#tracking').addClass('active').addClass('in');
+</script>
+@endif
 </body>
 </html>

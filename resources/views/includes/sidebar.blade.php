@@ -28,9 +28,12 @@
 
             @if (($user->level == 'SUPER')&&!(Auth::guest()))
             <li class="treeview">
-                <a href="/user" id="user-manager">
-                    <i class="fa fa-user-secret"></i><span>User Manager</span>
-                </a>
+                <a><i class="fa fa-plus-square-o"></i>Administor Tools</a>
+                <ul class="treeview-menu">
+                    <li><a href="/user" id="user-manager"><i class="fa fa-user-secret"></i><span>User Manager</span></a></li>
+                    <li><a href="#" id="user-manager"><i class="fa fa-user-secret"></i><span>Site Status</span></a></li>
+                    <li><a href="#" id="user-manager"><i class="fa fa-user-secret"></i><span>Configuration</span></a></li>
+                </ul>
             </li>
             @endif
             

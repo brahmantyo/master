@@ -101,7 +101,7 @@ Route::resource('article', 'ArticleController');
 // 	return view('world.about')->with('about',$about);
 // });
 // Tracking ////
-Route::get('tracking', function(){return view('world.tracking');});
+Route::resource('tracking/search', 'TrackingController');
 
 // News ////
 Route::get('news/{id}', function($id){
