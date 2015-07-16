@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\resi;
 use Illuminate\Support\Facades\DB;
 use Request;
+use Illuminate\Support\MessageBag;
 
 class TrackingController extends Controller {
 
@@ -20,7 +21,8 @@ class TrackingController extends Controller {
 					'b.tglberangkat','b.jamberangkat',
 					'b.tgltiba','b.jamtiba',
 					'b.nopolisi','ps.nama AS sopir','pk.nama AS kenek',
-					'u.name AS user')
+					'u.name AS user',
+					'r.status')
 					->leftJoin('konsumen as k','k.idkonsumen','=','r.idkonsumen')
 					->leftJoin('berangkat as b','b.idberangkat','=','r.idberangkat')
 					->leftJoin('cabang as ca','ca.idcabang','=','b.idasal')
@@ -37,8 +39,12 @@ class TrackingController extends Controller {
 			}
 		} else {
 			$trackingreport = $track;
-			$error = 'Maaf data tidak ditemukan';
+
+			$error = new MessageBag;
+			$error->add('notfound','Maaf data tidak ditemukan');
+
 		}
-		return view('master')->with('trackingreport',$trackingreport)->withErrors($error);		
+
+		return view('master')->with('trackingreport',$trackingreport)->with('errorstracking',$error);
 	}
 }

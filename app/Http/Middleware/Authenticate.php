@@ -11,7 +11,7 @@ class Authenticate {
 	 * @var Guard
 	 */
 	protected $auth;
-
+	protected $loginPath = '/';
 	/**
 	 * Create a new filter instance.
 	 *
@@ -40,8 +40,8 @@ class Authenticate {
 			}
 			else
 			{
-				return view('auth/login');
-				//return redirect()->guest('auth/login');
+				//return view('auth.login');
+				return redirect('/');
 			}
 		}
 

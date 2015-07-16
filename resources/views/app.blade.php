@@ -44,7 +44,7 @@
     <!-- Bootstrap 3.3.2 JS -->
     <script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>    
     <!-- Morris.js charts -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="{{ asset('/plugins/raphael-2.1.0/raphael-min.js')}}"></script>
     <script src="{{ asset('/plugins/morris/morris.min.js') }}" type="text/javascript"></script>
     <!-- Sparkline -->
     <script src="{{ asset('/plugins/sparkline/jquery.sparkline.min.js') }}" type="text/javascript"></script>
@@ -100,14 +100,13 @@
             <div class="pull-right hidden-xs">
                 Press F1 for help
             </div>
-            <b>Version</b> 1.2 || <strong>Copyright &copy; 2014-2015 <a href="#">Niclogic</a>.</strong> All rights reserved.
+            <b>Version</b> 1.5 || <strong>Copyright &copy; 2014-2015 <a href="#">Niclogic</a>.</strong> All rights reserved.
         </footer>
     </div><!-- ./wrapper -->
 
 
 
     <script type="text/javascript">
-        $('input[type!=hidden]:first').focus();
         //Date range picker
         $('.date').daterangepicker();
 
@@ -115,119 +114,134 @@
                 autoSize: false,
                 openSpeed: 100,
         });
+        $(document).ready(function(){
+            //Shortkey dictionary
+            var frontkeys = [
+                {
+                    "keys"          : "f1",
+                    "is_exclusive"  : true,
+                    "on_keyup"      : function(event) {
+                        $('#help').click();    
+                        return true;
+                    },
+                    "this"          : this
+                },
+                {
+                    "keys"          : "f10",
+                    "is_exclusive"  : true,
+                    "on_keyup"      : function(event) {
+                        window.location.replace("/auth/logout");
+                        return true;
+                    },
+                    "prevent_default": true,
+                    "this"          : this
+                },
+                {
+                    "keys"          : "ctrl p",
+                    "is_exclusive"  : true,
+                    "on_keyup"      : function(event) {
+                        $('#user-profile').click();    
+                        return true;
+                    },
+                    "prevent_default": true,
+                    "this"          : this
+                },
+                @if(\Auth::user()->level!='KONSUMEN')
+                {
+                    "keys"          : "ctrl u",
+                    "is_exclusive"  : true,
+                    "on_keyup"      : function(event) {
+                        $('a#user-manager').click();    
+                        return true;
+                    },
+                    "prevent_default": true,
+                    "this"          : this
+                },
+                {
+                    "keys"          : "ctrl m",
+                    "is_exclusive"  : true,
+                    "on_keyup"      : function(event) {
+                        $('#menu-mutasi').click();
+                        return true;
+                    },
+                    "prevent_default": true,
+                    "this"          : this
+                },
+                {
+                    "keys"          : "ctrl d",
+                    "is_exclusive"  : true,
+                    "on_keyup"      : function(event) {
+                        $('#menu-pendapatan').click();
+                        return true;
+                    },
+                    "prevent_default": true,
+                    "this"          : this
+                },
+                {
+                    "keys"          : "ctrl t",
+                    "is_exclusive"  : true,
+                    "on_keyup"      : function(event) {
+                        $('#menu-penagihan').click();
+                        return true;
+                    },
+                    "prevent_default": true,
+                    "this"          : this
+                },
+                {
+                    "keys"          : "ctrl r",
+                    "is_exclusive"  : true,
+                    "on_keyup"      : function(event) {
+                        $('#menu-resi').click();
+                        return true;
+                    },
+                    "prevent_default": true,
+                    "this"          : this
+                },
+                {
+                    "keys"          : "ctrl j",
+                    "is_exclusive"  : true,
+                    "on_keyup"      : function(event) {
+                        $('#menu-sjt').click();
+                        return true;
+                    },
+                    "prevent_default": true,
+                    "this"          : this
+                },
+                @endif
+            ];
 
-        var listener = new window.keypress.Listener();
-        $('input[type=text]')
-            .bind("focus", function() { listener.stop_listening(); })
-            .bind("blur", function() { listener.listen(); });
 
-        //Shortkey dictionary
-        var frontkeys = [
-            {
-                "keys"          : "f1",
-                "is_exclusive"  : true,
-                "on_keyup"      : function(event) {
-                    $('#help').click();    
-                    return true
-                },
-                "this"          : this
-            },
-            {
-                "keys"          : "ctrl s",
-                "is_exclusive"  : true,
-                "on_keyup"      : function(event) {
-                    $('#q').focus();    
-                    return true
-                },
-                "prevent_default":true,
-                "this"          : this
-            },
-            {
-                "keys"          : "ctrl p",
-                "is_exclusive"  : true,
-                "on_keyup"      : function(event) {
-                    $('#user-profile').click();    
-                    return true
-                },
-                "prevent_default": true,
-                "this"          : this
-            },
-            {
-                "keys"          : "ctrl u",
-                "is_exclusive"  : true,
-                "on_keyup"      : function(event) {
-                    $('#user-manager').click();    
-                    return true
-                },
-                "prevent_default": true,
-                "this"          : this
-            },
-            {
-                "keys"          : "ctrl m",
-                "is_exclusive"  : true,
-                "on_keyup"      : function(event) {
-                    $('#menu-mutasi').click();
-                    return true
-                },
-                "prevent_default": true,
-                "this"          : this
-            },
-            {
-                "keys"          : "ctrl d",
-                "is_exclusive"  : true,
-                "on_keyup"      : function(event) {
-                    $('#menu-pendapatan').click();
-                    return true
-                },
-                "prevent_default": true,
-                "this"          : this
-            },
-            {
-                "keys"          : "ctrl t",
-                "is_exclusive"  : true,
-                "on_keyup"      : function(event) {
-                    $('#menu-penagihan').click();
-                    return true
-                },
-                "prevent_default": true,
-                "this"          : this
-            },
-            {
-                "keys"          : "ctrl r",
-                "is_exclusive"  : true,
-                "on_keyup"      : function(event) {
-                    $('#menu-resi').click();
-                    return true
-                },
-                "prevent_default": true,
-                "this"          : this
-            },
-            {
-                "keys"          : "ctrl j",
-                "is_exclusive"  : true,
-                "on_keyup"      : function(event) {
-                    $('#menu-sjt').click();
-                    return true
-                },
-                "prevent_default": true,
-                "this"          : this
-            },    
-        ];
+            var listener = new window.keypress.Listener();
+            var keylist = listener.register_many(frontkeys);       
 
-        var keylist = listener.register_many(frontkeys);
+            $('input')
+                 .bind("focus", function() { listener.stop_listening(keylist); })
+                 .bind("blur", function() { listener.listen(keylist); });
+
+            $('textarea')
+                 .bind("focus", function() { listener.stop_listening(keylist); })
+                 .bind("blur", function() { listener.listen(keylist); });
+
+            $('input[type!=hidden]:first').focus();
+        });
+        
     </script>
     <!-- Hidden area -->
     <div id="help" class="modalbox  ">
     <p><b>Shortcut For Keyboard</b></p>
     <hr>
     <p>F1 = menampilkan halaman bantuan ini</p>
+    <p>F10 = Logout</p>
     <p>Ctrl + P = menampilkan Profile User</p>
+
     <p></p>
+    @if(\Auth::user()->level!='KONSUMEN')   
     <p>Ctrl + M = Laporan Mutasi</p>
     <p>Ctrl + D = Laporan Pendapatan</p>
     <p>Ctrl + T = Laporan Penagihan</p>
     <p>Ctrl + R = Daftar Resi Penagihan</p>
     <p>Ctrl + J = Daftar Surat Jalan Truck</p>
+    @endif
     <hr>
     @yield('help')
     </div>

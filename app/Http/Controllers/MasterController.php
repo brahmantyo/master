@@ -6,6 +6,7 @@ use App\cabang;
 use App\jabatan;
 use App\konsumen;
 use App\pegawai;
+use App\User;
 use Illuminate\Database\QueryException;
 use Input;
 use Redirect;
@@ -17,7 +18,7 @@ class MasterController extends Controller {
 	private $pagination = 5;
 
 	public function __construct(){
-		$this->middleware('auth');
+		//$this->middleware('auth');
 	}
 
 	private function errorDict($e, $context, $value ){
@@ -37,12 +38,19 @@ class MasterController extends Controller {
 	{
 		$konsumen = konsumen::find($id);
 		try {
-			$konsumen->delete();
-		} catch(QueryException $e){
-			$errors = $this->errorDict($e,'konsumen',$konsumen->nama);
-			return Redirect::to('/konsumen')->withErrors($errors);
-		} finally{
-			return Redirect::to('/konsumen');
+			$user = User::find($konsumen->iduser);
+			$user->delete();
+		} catch(QueryException $ue){
+			//$errors = $this->errorDict($ue,'user',$konsumen->name);
+		}finally{
+			try {
+				$konsumen->delete();
+			} catch(QueryException $ke){
+				$errors = $this->errorDict($ke,'konsumen',$konsumen->nama);
+				return Redirect::to('/konsumen')->withErrors($errors);
+			} finally{
+				return Redirect::to('/konsumen');
+			}
 		}
 	}
 
@@ -62,8 +70,9 @@ class MasterController extends Controller {
 			$konsumen = new konsumen;
 			$konsumen->nama = Request::get('nama');
 			$konsumen->alamat = Request::get('alamat');
+			$konsumen->kota = Request::get('kota');
 			$konsumen->notelp = Request::get('telp');
-			$konsumen->contactperson = Request::get('contact');
+			$konsumen->cp = Request::get('contact');
 			$konsumen->email = Request::get('email');
 			$konsumen->tgldaftar = date('Y-m-d H:i:s');
 			$konsumen->save();
@@ -89,8 +98,9 @@ class MasterController extends Controller {
 		    }
 			$konsumen->nama = Request::get('nama');
 			$konsumen->alamat = Request::get('alamat');
+			$konsumen->kota = Request::get('kota');
 			$konsumen->notelp = Request::get('telp');
-			$konsumen->contactperson = Request::get('contact');
+			$konsumen->cp = Request::get('contact');
 			$konsumen->email = Request::get('email');
 			$konsumen->tgldaftar = date('Y-m-d H:i:s');
 			$konsumen->save();

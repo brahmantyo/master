@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Hash;
 
 class AuthController extends Controller {
 
@@ -57,24 +58,34 @@ class AuthController extends Controller {
 
 	    $credentials = $request->only('name', 'password');
 	    try {
-		    $user = User::where('name','=',$request->only('name'))->firstOrFail();
+		    $user = User::where('name','=',$credentials['name'])->firstOrFail();
+		    
 	    } catch(ModelNotFoundException $e){
-	    	return redirect('/');
+		    return redirect('/')
+                ->withInput($request->only('name', 'remember'))
+                ->withErrors([
+                    'name' => 'These credentials do not match our records.',
+                ]);
 	    }
+
 	    if($user){
 	    	session()->regenerate();
 	    	Session::put('user',$user);
 		}
 	    if ($this->auth->attempt($credentials, $request->has('remember')))
 	    {
-	        return redirect()->intended($this->redirectPath());
+	    	if($this->auth->user()->level!='KONSUMEN'){
+	    		return redirect('/admin');
+	    	}else{
+	        	return redirect()->intended($this->redirectPath());
+	    	}
 	    }
+	    return redirect('/')
+            ->withInput($request->only('name', 'remember'))
+            ->withErrors([
+                'password' => 'Password is wrong',
+            ]);
 
-	    return redirect($this->loginPath())
-	                ->withInput($request->only('name', 'remember'))
-	                ->withErrors([
-	                    'name' => 'These credentials do not match our records.',
-	                ]);
 	}
 
 }

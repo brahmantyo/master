@@ -11,15 +11,26 @@
   <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
   <meta http-equiv="content-style-type" content="text/css">
   <meta http-equiv="expires" content="0">
+  <meta name="_token" content="{{ csrf_token() }}"/>
   <!-- Bootstrap 3.3.2 -->
   <link href="{{ asset('/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ asset('/bootstrap/css/bootstrap-theme.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+
+  <link href="{{ asset('/plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css" />
+
 
   <script src="{{ asset('/plugins/jQuery/jQuery-2.1.3.min.js') }}"></script>
   <!-- Bootstrap 3.3.2 JS -->
-  <script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>    
+  <script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
+
+  <script src="{{ asset('/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
+
+  <script src="{{ asset('plugins/datatables/jquery.dataTables-1.10.6.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables/dataTables.responsive.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables/jquery.dataTables.rowGrouping.js') }}"></script>
+
+
 </head>
 <body>
 <style type="text/css">
@@ -67,7 +78,7 @@
       <div class="container">
         <div class="row">
           <div class="well" style="border-radius: 20px">
-            <img src="{{asset('dist/img/banner.png')}}" class="img-responsive">
+            <a href="/"><img src="{{asset('dist/img/banner.png')}}" class="img-responsive"></a>
           </div>
         </div>
 <!--  End of header section -->
@@ -78,6 +89,7 @@
         <div class="panel-heading">
           <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#home" >Home</a></li>
+            <li><a data-toggle="tab" href="#order">Order</a></li>
             <li><a data-toggle="tab" href="#tracking">Tracking</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tentang Kami<span class="caret"></span></a>
@@ -87,6 +99,13 @@
               @endforeach
               </ul>
             </li>
+            @if(!Auth::guest())
+              <?php $dashboard = (Auth::user()->level=='KONSUMEN')?'konsumenpanel':'admin'; ?>
+            <div class='pull-right'>
+              <a href="{{ $dashboard }}" class="btn btn-info btn-sm" ><i class="fa fa-unlock"></i> Dashboard {{strtoupper(Auth::user()->name)}}</a>
+              <a href="/auth/logout" class="btn btn-info btn-sm" ><i class="fa fa-unlock"></i> Logout</a>
+            </div>
+            @else
             <div class="dropdown pull-right">
               <a href="#" class="dropdown-toggle btn btn-info btn-sm" data-toggle="dropdown"><i class="fa fa-lock"></i> Login</a>
               <ul class="dropdown-menu"  style="min-width: 200px;">
@@ -104,9 +123,15 @@
                 </form>
               </ul>
             </div>
+            @endif
           </ul>
         </div>
-        <div class="panel-body">        
+        <div class="panel-body">
+        @if($errors->has())
+          @foreach ($errors->all() as $error)
+            <div class='bg-danger alert'>{!! $error !!}</div>
+          @endforeach
+        @endif      
         <div class="tab-content">
           <div id="home" class="tab-pane fade in active">
               @if(\Request::get('detail'))
@@ -124,11 +149,29 @@
               @endforeach
               @endif
           </div>
+          <div id="order" class="tab-pane fade">
+            <div class="panel panel-primary">
+              <div class="panel-heading">Halaman Order</div>
+              <div class="panel-body">
+                @if(isset($errorsorder))
+                  @include('world.quote',['errorsorder'=>$errorsorder])
+                @elseif(isset($success))
+                  @include('world.quote',['successorder'=>true])
+                @else
+                  @include('world.quote')
+                @endif
+               </div>
+            </div>
+          </div>          
           <div id="tracking" class="tab-pane fade">
             <div class="panel panel-primary">
               <div class="panel-heading">Informasi Status Pengiriman</div>
               <div class="panel-body">
+              @if(isset($errorstracking))
+                @include('world.tracking',['errorstracking'=>$errorstracking])
+              @else
                 @include('world.tracking')
+              @endif
                </div>
             </div>
           </div>
@@ -148,6 +191,8 @@
     </div>
 <!-- End Content section -->
 
+          @yield('content')
+
 <!--  Footer section -->
   <footer>
       <div >
@@ -161,6 +206,15 @@
     $('*').removeClass('in').removeClass('active');
     $('a:contains("Tracking")').parent().addClass('active');
     $('#tracking').addClass('active').addClass('in');
+</script>
+@endif
+@if(session()->has('errorsorder'))
+<script type="text/javascript">
+    $('a:contains("Order")').tab('show');
+</script>
+@elseif(isset($successorder))
+<script type="text/javascript">
+    $('a:contains("Order")').tab('show');
 </script>
 @endif
 </body>

@@ -24,7 +24,7 @@ class WelcomeController extends Controller {
 	public function __construct()
 	{
 		//$this->user = User::where('name','=',$this->credential)->first();
-		$this->middleware('auth');
+		//$this->middleware('auth');
 		$this->credential = Session::get('user');
 		
 	}

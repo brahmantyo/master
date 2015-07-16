@@ -12,6 +12,8 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
+		date_default_timezone_set('Asia/Jakarta');
+
 		$abouts  = array();
 		$news = array();
 		
@@ -27,9 +29,23 @@ class AppServiceProvider extends ServiceProvider {
 			}
 			
 		}
+		$kota = \App\kota::all();
+		foreach ($kota as $v) {
+			$dkota[$v->idkota] = $v->nmkota;
+		}
+		$satuan = \App\satuan::all();
+		foreach ($satuan as $v) {
+			$dsatuan[$v->idsatuan]= $v->namasatuan;
+		}
+
+		$quotes = \App\quote::where('status','=','0')->get();
+
 		$data = array(
 			'abouts'=>$abouts,
-			'news'=>$news
+			'news'=>$news,
+			'kota'=>$dkota,
+			'satuan'=>$dsatuan,
+			'nquotes'=>$quotes->count(),
 		);
 		return View::share($data);
 	}

@@ -13,7 +13,7 @@ class UserController extends Controller {
 	public $pagination = 5;
 	public function __construct()
 	{
-		$this->middleware('auth');
+		//$this->middleware('auth');
 	}
 
 	/**

@@ -10,8 +10,8 @@ class LaporanController extends Controller {
 
 	public function __construct()
 	{
-		$this->middleware('auth');
-		$this->user = Auth::user();
+		// $this->middleware('auth');
+		// $this->user = Auth::user();
 	}
 
 	public function mutasi()

@@ -60,11 +60,41 @@
                 </ul>
             </li>
             @endif
+            @if ((($user->level == 'SUPER')||($user->level == 'MANAGER')||($user->level == 'STAFF'))&&!(Auth::guest()))
+            <li class="treeview">
+                <a>
+                    <i class="fa fa-pencil-square-o"></i>
+                    <span>Transaksi</span>
+                    @if($nquotes)
+                    <span class="label label-danger">{{$nquotes}}</span>
+                    @endif
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/quotation" id="menu-orders"><i class="fa fa-calculator"></i>Permintaan Kirim</a></li>
+                </ul>
+            </li>
+            @endif            
+            @if ((($user->level == 'SUPER')||($user->level == 'MANAGER')||($user->level == 'STAFF'))&&!(Auth::guest()))
             <li class="treeview">
                 <a href="/article" id="article">
                     <i class="fa fa-pencil-square-o"></i><span>Article</span>
                 </a>
-            </li>        </ul>
+            </li>
+            @endif
+            @if (($user->level == 'KONSUMEN')&&!(Auth::guest()))
+            <li class="treeview"><a href="/profil" id=""><i class="fa "></i><span>Profil</span></a></li>
+            <li class="treeview">
+                <a>
+                    <i class="fa fa-pencil-square-o"></i>
+                    <span>Order</span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="treeview"><a href="/quote" id=""><i class="fa "></i><span>Permintaan Kirim</span></a></li>
+                    <li class="treeview"><a href="#" id=""><i class="fa "></i><span>Pengiriman</span></a></li>
+                </ul>
+            </li>
+            @endif
+        </ul>
     </section>
     <!-- /.sidebar -->
 </aside>

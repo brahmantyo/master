@@ -26,6 +26,7 @@
 						<tr style="font-weight: bold">
 							<td>NAMA</td>
 							<td>ALAMAT</td>
+							<td>KOTA</td>
 							<td>TELP</td>
 							<td>CONTACT</td>
 							<td>EMAIL</td>
@@ -37,8 +38,9 @@
 						<tr>
 							<td>{{ $list->nama }}</td>
 							<td>{{ $list->alamat }}</td>
+							<td>{{ $kota[$list->kota] }}</td>
 							<td>{{ $list->notelp }}</td>
-							<td>{{ $list->contactperson }}</td>
+							<td>{{ $list->cp }}</td>
 							<td>{{ $list->email }}</td>
 							<td>
 								<a class="btn btn-info" href="/konsumen/edit/{{$list->idkonsumen}}">Edit</a>

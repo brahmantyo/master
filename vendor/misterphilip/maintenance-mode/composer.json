@@ -12,12 +12,12 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "5.0.*"
+        "illuminate/support": "5.0 - 5.1",
+        "nesbot/carbon": "~1.19"
     },
     "autoload": {
         "psr-0": {
             "MisterPhilip\\MaintenanceMode": "src/"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }

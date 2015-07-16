@@ -19,11 +19,12 @@ class CreateDaftarresisTable extends Migration {
 			$table->date('tgltibapool');
 			$table->double('totalbiaya',16,2);
 			$table->char('idberangkat',20)->nullable();
-			$table->char('status',50);//status pengiriman
+			$table->char('status',1);//status pengiriman
 			$table->double('downpayment',16,2);
 			$table->double('sisabayar',16,2);
 			$table->smallInteger('user');
 			$table->char('syn',1)->default('0');
+			$table->text('keterangan')->nullable();
 
 			$table->primary('noresi');
 		});

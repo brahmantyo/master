@@ -3,7 +3,14 @@
 ?>
 <header class="main-header">
     <!-- Logo -->
-    <a href="/" class="logo">LANOGAN</a>
+    <?php if(Auth::user()->level!='KONSUMEN'){
+        $home = '/admin';
+    }else{
+        $home = '/konsumenpanel';
+    }
+    ?>
+
+    <a href="{{ $home }}" class="logo">LANOGAN</a>
     <span style="top:33px;left:44px;position:inherit;display:block;z-index: 100;">Intgreted Back Office</span>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
@@ -12,6 +19,9 @@
         <span class="sr-only">Toggle navigation</span>
         </a>
         <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li><a href="/"><i class="fa fa-home"></i> Halaman Depan</a></li>
+            </ul>
             <ul class="nav navbar-nav">
 
                 <!-- User Account: style can be found in dropdown.less -->
@@ -47,7 +57,7 @@
                                 <a href="/user/{{$user->id}}" class="btn btn-default btn-flat">Profile</a>
                             </div> -->
                             <div class="pull-right">
-                                <a href="auth/logout" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="/auth/logout" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>

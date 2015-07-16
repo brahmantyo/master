@@ -33,6 +33,10 @@
                     {!! Form::label('alamat', 'Alamat') !!}
                     {!! Form::text('alamat', old('alamat'), ['placeholder' => 'Alamat', 'class' => 'form-control']) !!}
                 </div>
+                <div class="form-group">
+                    {!! Form::label('kota','Kota') !!}
+                    {!! Form::select('kota',array_merge(['--Pilih Kota--'],$kota),old('kota'),['class'=>'form-control']) !!}
+                </div>
                 <div class='form-group'>
                     {!! Form::label('telp', 'Telp') !!}
                     {!! Form::text('telp', old('telp'), ['placeholder' => 'Telp', 'class' => 'form-control']) !!}

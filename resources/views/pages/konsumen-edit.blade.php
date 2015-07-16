@@ -33,6 +33,10 @@
                     {!! Form::label('alamat', 'Alamat') !!}
                     {!! Form::text('alamat', $konsumen->alamat, ['placeholder' => 'Alamat', 'class' => 'form-control']) !!}
                 </div>
+                <div class="form-group">
+                    {!! Form::label('kota','Kota') !!}
+                    {!! Form::select('kota',array_merge(['--Pilih Kota--'],$kota),$konsumen->kota,['class'=>'form-control']) !!}
+                </div>
                 <div class='form-group'>
                     {!! Form::label('telp', 'Telp') !!}
                     {!! Form::text('telp', $konsumen->notelp, ['placeholder' => 'Telp', 'class' => 'form-control']) !!}
@@ -43,7 +47,7 @@
                 </div>
                 <div class='form-group'>
                     {!! Form::label('contact', 'Contact') !!}
-                    {!! Form::text('contact', $konsumen->contactperson, ['placeholder' => 'Contact', 'class' => 'form-control']) !!}
+                    {!! Form::text('contact', $konsumen->cp, ['placeholder' => 'Contact', 'class' => 'form-control']) !!}
                 </div>
                 <div class='form-group'>
                     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
