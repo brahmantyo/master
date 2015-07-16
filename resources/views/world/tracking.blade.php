@@ -30,7 +30,6 @@
 			<td>{{ $trackingreport->tglberangkat }}</td>
 			<td>{{ $trackingreport->jamberangkat }}</td>
 			<td>{{ $trackingreport->tgltiba }}</td>
-			<td>{{ $trackingreport->jamtiba }}</td>
 			<td>{{ \App\Helpers::getResiStatus($trackingreport->status) }}</td>
 		</tr>
 	</tbody>
@@ -40,7 +39,7 @@
 			<td rowspan="2">Cabang Tujuan</td>
 			<td colspan="2">Armada</td>
 			<td colspan="2">Berangkat</td>
-			<td colspan="2">Tiba</td>
+			<td >Tiba</td>
 			<td rowspan="2">Status</td>
 		</tr>
 		<tr>
