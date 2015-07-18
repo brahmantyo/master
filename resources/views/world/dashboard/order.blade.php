@@ -26,7 +26,7 @@
 			@endif
 			<div class="box-body">
 <!-- 				<div class="form-control"><b>Cari: </b><input type="text" name="search"></div> -->
-				<table id="quotes" class="table table-responsive table-condensed table-bordered table-striped table-hover no-margin">
+				<table id="quotes" class="display responsive no-wrap" width="100%">
 				<tbody>
 					@foreach($quotes as $quote)
 					<tr class="{{($quote->status)?'':'new-quote'}}">
@@ -83,7 +83,8 @@
 	$('#quotes').dataTable({
 		"order" : [1,"asc"],
 		"iDisplayLength": 5,
-		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]	
+		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+		"responsive": true
 	});
 </script>
 @endsection
