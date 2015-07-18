@@ -87,8 +87,8 @@ class LaporanController extends Controller {
 									'ktk.nmkota AS kotapengirim',
 									't.nama AS ppenerima',
 									't.cp AS cppenerima',
-									'k.notelp AS telppenerima',
-									'k.alamat AS alamatpenerima',
+									't.notelp AS telppenerima',
+									't.alamat AS alamatpenerima',
 									'ktp.nmkota AS kotapenerima',
 									'u.name AS pegawai')
 					->leftJoin('konsumen AS k','k.idkonsumen','=','r.idkonsumen')
