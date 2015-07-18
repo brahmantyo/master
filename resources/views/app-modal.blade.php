@@ -18,7 +18,8 @@
   <script src="{{ asset('/plugins/jQuery/jQuery-2.1.3.min.js') }}"></script>
   <!-- jQuery UI 1.11.2 -->
   <script src="{{ asset('/plugins/jQueryUI/jQuery-ui-1.11.2.min.js') }}"></script>
-
+  <!-- Bootstrap 3.3.2 JS -->
+  <script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>    
    	
 @yield('script')
 

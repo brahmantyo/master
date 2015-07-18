@@ -91,8 +91,9 @@ Route::group(['middleware' => 'admin'], function()
 	//Route::get('kota', 'MasterController@kota');
 
 	/////////////////////////////////////////
+	////Laporan/////////////////////////////
 
-	Route::get('mutasi', 'LaporanController@mutasi');
+
 
 	/*Route::get('penagihan', function(){
 		return view('errors/maintenance');
@@ -108,6 +109,12 @@ Route::group(['middleware' => 'admin'], function()
 	});
 	*/
 	Route::get('penagihan', 'LaporanController@penagihan');
+	Route::post('penagihan','LaporanController@penagihan');
+	Route::get('penagihan/{id}','LaporanController@dpenagihan');
+	Route::get('history',function(){
+		return view('laporan.history');
+	});
+	Route::get('mutasi', 'LaporanController@mutasi');
 	Route::get('pendapatan', 'LaporanController@pendapatan');
 	Route::get('resipengiriman', 'LaporanController@resipengiriman');
 	Route::get('sjt', 'LaporanController@sjt');
@@ -115,6 +122,7 @@ Route::group(['middleware' => 'admin'], function()
 	//Transaksi/////////////////////////////////////////////////////////
 	Route::get('quotation', 'OrderController@index');
 	Route::get('quotation/{id}','OrderController@detail');
+
 
 });
 

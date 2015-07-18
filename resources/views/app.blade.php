@@ -23,8 +23,6 @@
     <link href="{{ asset('/plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet" type="text/css" />
     <!-- Date Picker -->
     <link href="{{ asset('/plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css" />
-    <!-- Daterange picker -->
-    <link href="{{ asset('/plugins/daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Fancy Box -->
     {!! Html::style('/bootstrap/css/bootstrap.min.css') !!}
@@ -44,7 +42,6 @@
     <!-- Bootstrap 3.3.2 JS -->
     <script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>    
     <!-- Morris.js charts -->
-    <script src="{{ asset('/plugins/raphael-2.1.0/raphael-min.js')}}"></script>
     <script src="{{ asset('/plugins/morris/morris.min.js') }}" type="text/javascript"></script>
     <!-- Sparkline -->
     <script src="{{ asset('/plugins/sparkline/jquery.sparkline.min.js') }}" type="text/javascript"></script>
@@ -53,9 +50,7 @@
     <script src="{{ asset('/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}" type="text/javascript"></script>
     <!-- jQuery Knob Chart -->
     <script src="{{ asset('/plugins/knob/jquery.knob.js') }}" type="text/javascript"></script>
-    <!-- daterangepicker -->
-    <script src="{{ asset('/plugins/daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
-    <!-- datepicker -->
+   <!-- datepicker -->
     <script src="{{ asset('/plugins/datepicker/bootstrap-datepicker.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/plugins/datepicker/locales/bootstrap-datepicker.id.js') }}" charset="UTF-8"></script>    
     <!-- Bootstrap WYSIHTML5 -->
@@ -100,7 +95,7 @@
             <div class="pull-right hidden-xs">
                 Press F1 for help
             </div>
-            <b>Version</b> 1.5 || <strong>Copyright &copy; 2014-2015 <a href="#">Niclogic</a>.</strong> All rights reserved.
+            <b>Version</b> 1.5.2 || <strong>Copyright &copy; 2014-2015 <a href="#">Niclogic</a>.</strong> All rights reserved.
         </footer>
     </div><!-- ./wrapper -->
 
@@ -140,7 +135,7 @@
                     "keys"          : "ctrl p",
                     "is_exclusive"  : true,
                     "on_keyup"      : function(event) {
-                        $('#user-profile').click();    
+                        $('#user-profile').eq(0).click();    
                         return true;
                     },
                     "prevent_default": true,
@@ -151,7 +146,7 @@
                     "keys"          : "ctrl u",
                     "is_exclusive"  : true,
                     "on_keyup"      : function(event) {
-                        $('a#user-manager').click();    
+                        $('#user-manager').click();    
                         return true;
                     },
                     "prevent_default": true,
@@ -181,7 +176,7 @@
                     "keys"          : "ctrl t",
                     "is_exclusive"  : true,
                     "on_keyup"      : function(event) {
-                        $('#menu-penagihan').click();
+                        $('#menu-penagihan')[0].click();
                         return true;
                     },
                     "prevent_default": true,
@@ -222,7 +217,7 @@
                  .bind("focus", function() { listener.stop_listening(keylist); })
                  .bind("blur", function() { listener.listen(keylist); });
 
-            $('input[type!=hidden]:first').focus();
+            $('input[type=text]:first').focus();
         });
         
     </script>

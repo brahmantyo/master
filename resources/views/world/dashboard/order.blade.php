@@ -81,9 +81,10 @@
 		@endif
 	});
 	$('#quotes').dataTable({
-		    	"order" : [1,"asc"],
-		    	"page" : 5,
-		    });
+		"order" : [1,"asc"],
+		"iDisplayLength": 5,
+		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]]	
+	});
 </script>
 @endsection
 
