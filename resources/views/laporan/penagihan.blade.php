@@ -47,7 +47,7 @@
             				<div class="form-group  {{ $errors->has('tanggal') ? 'has-error' : '' }} ">
             					{!! Form::label('tanggal','Tanggal',['class'=>'control-label  col-md-12']) !!}
             					<div class="col-md-12">
-            						{!! Form::date('tanggal',old('tanggal'),['placeholder'=>'Pilih range tanggal','class'=>'form-control','']) !!}
+            						{!! Form::date('tanggal',old('tanggal'),['placeholder'=>'Pilih range tanggal','class'=>'form-control','onclick'=>'this.preventDefault()']) !!}
             						{!! $errors->first('tanggal', '<p class="help-block">:message</p>') !!}
             					</div>
             					<script type="text/javascript">
