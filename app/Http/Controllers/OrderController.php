@@ -20,11 +20,11 @@ class OrderController extends Controller {
 						->get();
 						//->paginate(5);
 		} else {
-			$idkonsumen = \App\konsumen::where('iduser','=',$iduser);
+			$konsumen = \App\konsumen::where('iduser','=',$iduser)->first();
 			$quotes = quote::select('quote.id as id','quote.tglquote','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima','quote.status')
 						->leftJoin('konsumen as k','k.idkonsumen','=','quote.idkonsumen')
 						->leftJoin('konsumen as t','t.idkonsumen','=','quote.idpenerima')
-						->where('k.idkonsumen','=',$idkonsumen)
+						->where('k.idkonsumen','=',$konsumen->idkonsumen)
 						->paginate(5);
 		}
 		return view('world.dashboard.order')->with('quotes',$quotes);
