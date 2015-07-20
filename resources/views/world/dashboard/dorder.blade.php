@@ -33,7 +33,7 @@
                     @foreach($dquotes as $dquote)
                     <tr>
                         <td></td>
-                        <td>{{$dquote->nmbarang}}</td>
+                        <td>{{$dquote->barang}}</td>
                         <td>{{$dquote->qty}}</td>
                         <td>{{$dquote->satuan}}</td>
                     </tr>
