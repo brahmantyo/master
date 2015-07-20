@@ -12,6 +12,7 @@ class OrderController extends Controller {
 	{
 		$level = \Auth::user()->level;
 		$iduser = \Auth::user()->id;
+
 		if($level!=='KONSUMEN'){
 			$quotes = quote::select('quote.id as id','quote.tglquote','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima','quote.status')
 						->leftJoin('konsumen as k','k.idkonsumen','=','quote.idkonsumen')
@@ -19,10 +20,11 @@ class OrderController extends Controller {
 						->get();
 						//->paginate(5);
 		} else {
+			$idkonsumen = \App\konsumen::where('iduser','=',$iduser);
 			$quotes = quote::select('quote.id as id','quote.tglquote','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima','quote.status')
 						->leftJoin('konsumen as k','k.idkonsumen','=','quote.idkonsumen')
 						->leftJoin('konsumen as t','t.idkonsumen','=','quote.idpenerima')
-						->where('k.idkonsumen','=',$iduser)
+						->where('k.idkonsumen','=',$idkonsumen)
 						->paginate(5);
 		}
 		return view('world.dashboard.order')->with('quotes',$quotes);
