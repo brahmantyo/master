@@ -22,7 +22,6 @@
 			<td>{{ $trackingreport->nopolisi }}</td>
 			<td>{{ $trackingreport->sopir }}</td>
 			<td>{{ $trackingreport->tglberangkat }}</td>
-			<td>{{ $trackingreport->jamberangkat }}</td>
 			<td>{{ $trackingreport->tgltiba }}</td>
 			<td>{{ \App\Helpers::getResiStatus($trackingreport->status) }}</td>
 		</tr>
