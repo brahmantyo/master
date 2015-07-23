@@ -89,7 +89,7 @@
                     <span>Order</span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="treeview"><a href="/quote" id=""><i class="fa "></i><span>Permintaan Kirim</span></a></li>
+                    <li class="treeview"><a href="/order" id=""><i class="fa "></i><span>Permintaan Kirim</span></a></li>
                     <li class="treeview"><a href="#" id=""><i class="fa "></i><span>Pengiriman</span></a></li>
                 </ul>
             </li>

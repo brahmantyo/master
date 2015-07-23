@@ -13,7 +13,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h1><i class='fa fa-truck'></i>Quotation No. {{$header->id}} </h1>
+                <h1><i class='fa fa-truck'></i>Quotation No. {{$quote->id}} </h1>
                 <hr>
             </div>
             <div class="box-body" width="50%">
@@ -23,20 +23,20 @@
                 @endforeach
             @endif
             <table class="table table-striped">
-                <tr><th width="100">Tanggal</th><td>: {{$header->tglquote}}</td></tr>
-                <tr><th>Pengirim</th><td>: {{$header->ppengirim?$header->ppengirim:$header->cppengirim}}</td></tr>
-                <tr><th>Penerima</th><td>: {{$header->ppenerima?$header->ppenerima:$header->cppenerima}}</td></tr>
-                <tr><th>Status</th><td>: {{$header->status?'':'Sudah diterima'}}</td></tr>
+                <tr><th width="100">Tanggal</th><td>: {{$quote->tglquote}}</td></tr>
+                <tr><th>Pengirim</th><td>: {{$quote->pkonsumen?$quote->pkonsumen:$quote->cpkonsumen}}</td></tr>
+                <tr><th>Penerima</th><td>: {{$quote->ppenerima?$quote->ppenerima:$quote->cppenerima}}</td></tr>
+                <tr><th>Status</th><td>: {{$quote->status?'':'Sudah diterima'}}</td></tr>
             </table>
-            <table class="table table-bordered table-condensed table-striped table-hover">
-                <tbody>
+            <table id="detail" class="display responsive no-wrap" width="100%">
+                <tbody><?php $i=1;?>
                     @foreach($dquotes as $dquote)
                     <tr>
-                        <td></td>
+                        <td>{{$i}}</td>
                         <td>{{$dquote->barang}}</td>
                         <td>{{$dquote->qty}}</td>
                         <td>{{$dquote->satuan}}</td>
-                    </tr>
+                    </tr><?php $i++;?>
                     @endforeach
                 </tbody>
                 <thead>
@@ -48,9 +48,29 @@
                     </tr>
                 </thead>
             </table>
-            {!! $dquotes->render() !!}
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $('#detail').dataTable({
+        "order" : [0,"asc"],
+        "searching" : false,
+        "iDisplayLength": 5,
+        "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "responsive" : true,
+        "pagingType" : "full_numbers",
+    });    
+</script>
+@endsection
+@section('script')
+<script src="{{ asset('/plugins/datatables/jquery.dataTables-1.10.6.min.js') }}"></script>
+<script src="{{ asset('/plugins/datatables/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('/plugins/datatables/dataTables.bootstrap.js') }}"></script>
+@endsection
+
+@section('style')
+<link href="{{ asset('/plugins/datatables/jquery.dataTables.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/plugins/datatables/dataTables.responsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" /> 
 @endsection

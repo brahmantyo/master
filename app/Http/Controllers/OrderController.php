@@ -14,28 +14,30 @@ class OrderController extends Controller {
 		$iduser = \Auth::user()->id;
 
 		if($level!=='KONSUMEN'){
-			$quotes = quote::select('quote.id as id','quote.tglquote','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima','quote.status')
-						->leftJoin('konsumen as k','k.idkonsumen','=','quote.idkonsumen')
-						->leftJoin('konsumen as t','t.idkonsumen','=','quote.idpenerima')
-						->get();
+			// $quotes = quote::select('quote.id as id','quote.tglquote','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima','quote.status')
+			// 			->leftJoin('konsumen as k','k.idkonsumen','=','quote.idkonsumen')
+			// 			->leftJoin('konsumen as t','t.idkonsumen','=','quote.idpenerima')
+			// 			->get();
 						//->paginate(5);
 		} else {
-			$konsumen = \App\konsumen::where('iduser','=',$iduser)->first();
-			$quotes = quote::select('quote.id as id','quote.tglquote','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima','quote.status')
-						->leftJoin('konsumen as k','k.idkonsumen','=','quote.idkonsumen')
-						->leftJoin('konsumen as t','t.idkonsumen','=','quote.idpenerima')
-						->where('k.idkonsumen','=',$konsumen->idkonsumen)
-						->paginate(5);
+			//$konsumen = \App\konsumen::where('iduser','=',$iduser)->first();
+			// $quotes = quote::select('quote.id as id','quote.tglquote','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima','quote.status')
+			// 			->leftJoin('konsumen as k','k.idkonsumen','=','quote.idkonsumen')
+			// 			->leftJoin('konsumen as t','t.idkonsumen','=','quote.idpenerima')
+			// 			->where('k.idkonsumen','=',$konsumen->idkonsumen)
+			// 			->paginate(5);
+			$quotes = quote::where('iduser','=',$iduser)->get();
 		}
 		return view('world.dashboard.order')->with('quotes',$quotes);
 	}
 
 	public function detail($id)
 	{
-		$qhead = quote::select('quote.id as id','quote.tglquote','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima','quote.status')
-					->leftJoin('konsumen as k','k.idkonsumen','=','quote.idkonsumen')
-					->leftJoin('konsumen as t','t.idkonsumen','=','quote.idpenerima')
-					->where('quote.id','=',$id)->first();
+		$qhead = quote::where('quote.id','=',$id)->first();
+					// ->select('quote.id as id','quote.tglquote','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima','quote.status')
+					// ->leftJoin('konsumen as k','k.idkonsumen','=','quote.idkonsumen')
+					// ->leftJoin('konsumen as t','t.idkonsumen','=','quote.idpenerima')
+					
 		//dd($qhead);
 		$dquotes = dquote::where('idquote','=',$id)->paginate(5);
 		return view('world.dashboard.dorder')->with('header',$qhead)->with('dquotes',$dquotes);

@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class resi extends Model {
 
-	protected $table = 'resi as r';
+	protected $table = 'resi';
 	protected $primaryKey = 'noresi';
 
 	public $timestamps = false;

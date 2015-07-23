@@ -206,7 +206,7 @@
 		</div>
 	</fieldset>
 	
-	<fieldset class="panel {{ $errors->has('quote') ? 'panel-danger' : 'panel-info' }} col-md-12">
+	<fieldset class="panel {{ $errors->has('items') ? 'panel-danger' : 'panel-info' }} col-md-12">
 		<legend class="{{ $errors->has('quote') ? 'text-danger' : '' }}">Rincian Item</legend>
 		<div>
 		<table class="table table-bordered" id="items">

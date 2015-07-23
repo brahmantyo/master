@@ -26,10 +26,8 @@ Route::group(['middleware' => 'konsumen'], function()
 
 	//Route::get('profil', 'OrderController@profil');
 	
-	Route::get('order',function(){
-
-	 	return view('welcome');
-	});
+	Route::resource('order','OrderKonsumenController');
+	
 
 
 

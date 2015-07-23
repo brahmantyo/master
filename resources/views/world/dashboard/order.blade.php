@@ -18,6 +18,7 @@
 			<div class="box-header">
 				<span><h1><i class="fa fa-truck"></i>Daftar Permintaan Kirim (Quotation)</h1></span>
 				<hr>
+				<a id="tambah" href="/order/create" class="btn btn-success">Tambah Quote Baru</a>
 			</div>
 			@if ($errors->has())
 			@foreach ($errors->all() as $error)
@@ -25,24 +26,21 @@
 			@endforeach
 			@endif
 			<div class="box-body">
-<!-- 				<div class="form-control"><b>Cari: </b><input type="text" name="search"></div> -->
 				<table id="quotes" class="display responsive no-wrap" width="100%">
 				<tbody>
 					@foreach($quotes as $quote)
 					<tr class="{{($quote->status)?'':'new-quote'}}">
 						<td>{{$quote->tglquote}}</td>
 						<td><b>{{$quote->id}}</b></td>
-						<td>{{$quote->ppengirim?$quote->ppengirim:$quote->cppengirim}}</td>
+						<td>{{$quote->pkonsumen?$quote->pkonsumen:$quote->cpkonsumen}}</td>
 						<td>{{$quote->ppenerima?$quote->ppenerima:$quote->cppenerima}}</td>
 						<td>{{$quote->tipe?'Borongan':'Regular'}}</td>
 						<td>{{(!$quote->status)?'Menunggu':'Sedang Proses'}}</td>
 						<td>
-							@if(\Auth::user()->level=='KONSUMEN')
-							<a href="/quote/{{$quote->id}}" class="btn btn-warning">View</a>
-							@else
-							<a href="/quotation/{{$quote->id}}" class="btn btn-warning">View</a>
-							<a href="#" class="btn btn-danger disabled">Delete</a>
-							@endif
+	                        {!! Form::open(['url' =>'/order/'.$quote->id,'method'=>'DELETE']) !!}
+							<a href="/order/{{$quote->id}}" class="btn btn-success">Lihat</a>
+	                        {!! Form::submit('Delete',['class'=>'btn btn-danger'])!!}
+	                        {!! Form::close() !!}
 						</td>
 					</tr>
 					@endforeach
@@ -64,7 +62,7 @@
 	</div>
 </div>
 <script type="text/javascript">
-	$('a:contains("View")').fancybox({
+	$('a:contains("Lihat")').fancybox({
 		type : 'iframe',
 		href : this.value,
 		autoSize: false,
@@ -74,17 +72,26 @@
 		ajax : {
 			dataType : 'html',
 		},
-		@if(\Auth::user()->level=='KONSUMEN')
-		afterClose : function(){ window.location.replace('/quote') },
-		@else
-		afterClose : function(){ window.location.replace('/quotation') },
-		@endif
+		afterClose : function(){ window.location.replace('/order') },
+	});
+	$('#tambah').fancybox({
+		type : 'iframe',
+		href : this.value,
+		autoSize: false,
+		height: 800,
+		openSpeed: 1,
+		closeSpeed: 1,
+		ajax : {
+			dataType : 'html',
+		},
+		afterClose : function(){ window.location.replace('/order') },		
 	});
 	$('#quotes').dataTable({
 		"order" : [1,"asc"],
 		"iDisplayLength": 5,
 		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-		"responsive": true
+		"responsive": true,
+		"pagingType" : "full_numbers",
 	});
 </script>
 @endsection
