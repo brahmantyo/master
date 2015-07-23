@@ -3,13 +3,7 @@
 {!! Form::submit('Cari') !!}
 {!! Form::close() !!}
 
-@if(isset($errorstracking))
-	@if($errorstracking->has())
-	    @foreach ($errorstracking->all() as $error)
-	    <div class='bg-danger alert'>{!! $error !!}</div>
-	    @endforeach
-	@endif
-@endif
+
 
 @if(isset($trackingreport)&&is_object($trackingreport))
 	@if($trackingreport->count())

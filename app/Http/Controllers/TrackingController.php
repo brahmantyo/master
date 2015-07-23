@@ -44,7 +44,6 @@ class TrackingController extends Controller {
 			$error->add('notfound','Maaf data tidak ditemukan');
 
 		}
-
-		return view('master')->with('trackingreport',$trackingreport)->with('errorstracking',$error);
+		return view('master')->with('trackingreport',$trackingreport)->withErrors($error);//('errorstracking',$error);
 	}
 }
