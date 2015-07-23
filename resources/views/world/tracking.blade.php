@@ -14,7 +14,7 @@
 	<tr><td class="info" >Konsumen Pengirim</td><td>{{ $trackingreport->konsumen }}</td></tr>
 </table>
 
-<table class="table table-condensed table-striped table-bordered ">
+<table class="table table-condensed table-striped table-bordered" width="100%">
 	<tbody>
 		<tr class="success">
 			<td>{{ $trackingreport->asal }}</td>
@@ -31,7 +31,7 @@
 			<td rowspan="2">Cabang Asal</td>
 			<td rowspan="2">Cabang Tujuan</td>
 			<td colspan="2">Armada</td>
-			<td colspan="2">Berangkat</td>
+			<td >Berangkat</td>
 			<td >Tiba</td>
 			<td rowspan="2">Status</td>
 		</tr>
@@ -39,9 +39,7 @@
 			<td>No.Polisi</td>
 			<td>Sopir</td>
 			<td>Tanggal</td>
-			<td>Jam</td>
-			<td>Tgl</td>
-			<td>Jam</td>
+			<td>Tanggal</td>
 		</tr>
 	</thead>
 </table>
