@@ -18,7 +18,7 @@ class TrackingController extends Controller {
 		$error = '';
 		$track = resi::select('r.noresi','k.nama AS konsumen',
 					'ca.nama AS asal','ct.nama AS tujuan',
-					'b.tglberangkat','b.jamberangkat',
+					'b.tglberangkat',//'b.jamberangkat',
 					'b.tgltiba',
 					'b.nopolisi','ps.nama AS sopir','pk.nama AS kenek',
 					'u.name AS user',
