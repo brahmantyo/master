@@ -100,7 +100,7 @@
               </ul>
             </li>
             @if(!Auth::guest())
-              <?php $dashboard = '/'.(Auth::user()->level=='KONSUMEN')?'konsumenpanel':'admin'; ?>
+              <?php $dashboard = (Auth::user()->level=='KONSUMEN')?'/konsumenpanel':'/admin'; ?>
             <div class='pull-right'>
               <a href="{{ $dashboard }}" class="btn btn-info btn-sm" ><i class="fa fa-unlock"></i> Dashboard {{strtoupper(Auth::user()->name)}}</a>
               <a href="/auth/logout" class="btn btn-info btn-sm" ><i class="fa fa-unlock"></i> Logout</a>
