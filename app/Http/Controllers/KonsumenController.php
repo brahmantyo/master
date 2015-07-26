@@ -8,6 +8,7 @@ use Validator;
 use Input;
 use Hash;
 use App\User;
+use App\konsumen;
 
 class KonsumenController extends Controller {
 
@@ -20,12 +21,16 @@ class KonsumenController extends Controller {
 	{
 		return view('world.dashboard.index');
 	}
-
+	public function profilShowStart()
+	{
+		$user = \Auth::user();
+		$konsumen = \App\konsumen::where('iduser','=',$user->id)->first();
+		return view('world.dashboard.profil-modal')->with('user',$user)->with('konsumen',$konsumen);
+	}
 	public function profilShow()
 	{
 		$user = \Auth::user();
 		$konsumen = \App\konsumen::where('iduser','=',$user->id)->first();
-		//$tmp_order = tmp_order::where('iduser','=',$user->id)->get();
 		return view('world.dashboard.profil')->with('user',$user)->with('konsumen',$konsumen);
 	}
 
@@ -101,5 +106,10 @@ class KonsumenController extends Controller {
 		$konsumen->save();
 
 		return $this->index();
+	}
+	public function simpan()
+	{
+		$konsumen = new konsumen;
+		$konsumen->save();
 	}
 }

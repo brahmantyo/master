@@ -23,15 +23,10 @@ Route::group(['middleware' => 'konsumen'], function()
 
 	//Route::post('konsumenpanel/save', 'OrderController@addToDraft');
 
-
 	//Route::get('profil', 'OrderController@profil');
-	
+	Route::get('start','KonsumenController@profilShowStart');
 	Route::resource('order','OrderKonsumenController');
-	
-
-
-
-	
+	Route::get('getkon/{id}','OrderKonsumenController@getKonsumen');
 });
 
 Route::group(['middleware' => 'admin'], function()

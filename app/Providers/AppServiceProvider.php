@@ -2,6 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use View;
+use Config;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -16,6 +17,8 @@ class AppServiceProvider extends ServiceProvider {
 
 		$abouts  = array();
 		$news = array();
+		
+		Config::set('registered',false);
 		
 		$articles = \App\article::select('article.*','users.first_name','users.last_name')
 		->leftJoin('users','article.user','=','users.id')->get();

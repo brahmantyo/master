@@ -22,6 +22,10 @@ class KonsumenMiddleware {
 	{
 		if(!$this->auth->guest()){
 			if($this->auth->user()->level=='KONSUMEN'){
+				$konsumen = \Auth::user()->konsumen;
+				if($konsumen){
+					\Config::set('registered',true);
+				}
 				return $next($request);
 			}
 		}

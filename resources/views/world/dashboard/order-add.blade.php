@@ -30,10 +30,18 @@
             @endif
 
             <style type="text/css">
+            	fieldset.panel {
+				    padding-left:10px;
+				    padding-right: 10px;
+				   	margin: 5px;
+            	}
+
 				fieldset.panel > legend:nth-child(1) {
 					width: auto; /* Or auto */
-				    padding:0 10px; /* To give a bit of padding on the left and right */
-				    border-bottom: none;
+				    padding:10px 10px; /* To give a bit of padding on the left and right */
+				    border: none;
+				    background-color: #daa;
+				    border-radius: 10px;
 				    margin-bottom: 5px;
 				}
 
@@ -47,7 +55,7 @@
 				  box-shadow: inset 1px 1px 2px 0 #c9c9c9;
 				}
 				#items select {
-					width:100%;
+					/*width:100%;*/
 					padding:5px;
 					border: none;
 				}
@@ -68,104 +76,73 @@
 					content: "\f069";
 				}
 			</style>
-			{!! Form::open(['url'=>'order','class'=>'form-horizontal']) !!}
-				<fieldset class="col-md-12">
-					<legend>Data Personal</legend>
-					<div class="form-group {{ $errors->has('nmdepan') ? 'has-error' : '' }} required">
-						{!! Form::label('nmdepan','Nama Depan',['class'=>'required control-label col-md-']) !!}
-						<div class="col-md-4">
-							{!! Form::text('nmdepan',old('nmdepan'),['placeholder'=>'Nama depan contact person','class'=>'form-control','required']) !!}
-							{!! $errors->first('nmdepan', '<p class="help-block">:message</p>') !!}
-						</div>
-						{!! Form::label('nmbelakang','Nama Belakang',['placeholder'=>'Nama belakang contact person','class'=>'control-label col-md-2']) !!}
-						<div class="col-md-4">
-							{!! Form::text('nmbelakang',old('nmbelakang'),['class'=>'form-control']) !!}
-							{!! $errors->first('nmbelakang', '<p class="help-block">:message</p>') !!}
-						</div>
-					</div>
-					<div class="form-group">
-						{!! Form::label('nmperusahaan','Nama Perusahaan',['placeholder'=>'Kosongkan jika pengiriman pribadi','class'=>'control-label col-md-4']) !!}
-						<div class="col-md-8">
-							{!! Form::text('nmperusahaan',old('nmperusahaan'),['class'=>'form-control']) !!}
-							{!! $errors->first('nmperusahaan', '<p class="help-block">:message</p>') !!}
-						</div>
-					</div>
-					<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }} required">
-						{!! Form::label('email','Email',['class'=>'control-label col-md-4']) !!}
-						<div class="col-md-8">
-							{!! Form::email('email',old('email'),['placeholder'=>'Email pengirim wajib diisi','class'=>'form-control','required']) !!}
-							{!! $errors->first('email', '<p class="help-block">:message</p>') !!}
-						</div>
-					</div>
-					<div class="form-group {{ $errors->has('notelp') ? 'has-error' : '' }} required">
-						{!! Form::label('notelp','No. Telp',['class'=>'control-label col-md-4']) !!}
-						<div class="col-md-8">
-							{!! Form::text('notelp',old('notelp'),['placeholder'=>'Nomer telepon perusahaan/pribadi pengirim (wajib diisi)','class'=>'form-control','required']) !!}
-							{!! $errors->first('notelp', '<p class="help-block">:message</p>') !!}
-						</div>
-					</div>
-					<div class="form-group {{ $errors->has('alamat') ? 'has-error' : '' }} required">
-						{!! Form::label('alamat','Alamat',['class'=>'control-label col-md-4']) !!}
-						<div class="col-md-8">
-							{!! Form::textarea('alamat',old('alamat'),['placeholder'=>'Alamat perusahaan pengirim atau alamat pribadi jika bukan perusahaan','class'=>'form-control','rows'=>'5','required']) !!}
-							{!! $errors->first('alamat', '<p class="help-block">:message</p>') !!}
-						</div>
-					</div>
-					<div class="form-group {{ $errors->has('kota') ? 'has-error' : '' }} required">
-						{!! Form::label('kota','Kota',['class'=>'control-label col-md-4']) !!}
-						<div class="col-md-8">
-							{!! Form::select('kota',array_merge(['--Pilih Kota--'],$kota),old('kota'),['class'=>'form-control','required']) !!}
-							{!! $errors->first('kota', '<p class="help-block">:message</p>') !!}
-						</div>
-					</div>
-				</fieldset>
-				<fieldset class="col-md-12">
+			@if(!$errors->has())
+			{!! Form::open(['id'=>'form1','url'=>'order','method'=>'POST','class'=>'form-horizontal']) !!}
+				{!! Form::hidden('pengirim',$pengirim) !!}
+				<div class="col-md-12">
+				<fieldset class=" panel panel-primary">
 					<legend>Data Penerima</legend>
+					<div class="form-group {{ $errors->has('penerima') ? 'has-error' : '' }}">
+						{!! Form::label('penerima','Penerima',['class'=>'control-label col-md-2']) !!}
+						<div class="col-md-10">
+							{!! Form::select('penerima',$penerima,'',['class'=>'form-control','onchange'=>'getPenerima()']) !!}
+							{!! $errors->first('penerima', '<p class="help-block">:message</p>') !!}
+						</div>
+					</div>
+					<hr>
 					<div class="form-group {{ $errors->has('cppenerima') ? 'has-error' : '' }} required">
-						{!! Form::label('cppenerima','Contact Person',['class'=>'required control-label col-md-4']) !!}
-						<div class="col-md-8">
+						{!! Form::label('cppenerima','Contact Person',['class'=>'required control-label col-md-2']) !!}
+						<div class="col-md-10">
 							{!! Form::text('cppenerima',old('cppenerima'),['class'=>'form-control','required']) !!}
 							{!! $errors->first('cppenerima', '<p class="help-block">:message</p>') !!}
 						</div>
 					</div>
 					<div class="form-group {{ $errors->has('nppenerima') ? 'has-error' : '' }}">
-						{!! Form::label('nppenerima','Nama Perusahaan',['class'=>'control-label col-md-4']) !!}
-						<div class="col-md-8">
+						{!! Form::label('nppenerima','Nama Perusahaan',['class'=>'control-label col-md-2']) !!}
+						<div class="col-md-10">
 							{!! Form::text('nppenerima',old('nppenerima'),['placeholder'=>'Kosongkan jika penerima perorangan','class'=>'form-control']) !!}
 							{!! $errors->first('nppenerima', '<p class="help-block">:message</p>') !!}
 						</div>
 					</div>
 					<div class="form-group {{ $errors->has('emailpenerima') ? 'has-error' : '' }}">
-						{!! Form::label('emailpenerima','Email',['class'=>'control-label col-md-4']) !!}
-						<div class="col-md-8">
+						{!! Form::label('emailpenerima','Email',['class'=>'control-label col-md-2']) !!}
+						<div class="col-md-10">
 							{!! Form::email('emailpenerima',old('emailpenerima'),['placeholder'=>'Email pengirim','class'=>'form-control']) !!}
 							{!! $errors->first('emailpenerima', '<p class="help-block">:message</p>') !!}
 						</div>
 					</div>
 					<div class="form-group {{ $errors->has('notelppenerima' ? 'has-error' : '')}} required">
-						{!! Form::label('notelppenerima','No. Telp',['class'=>'control-label col-md-4']) !!}
-						<div class="col-md-8">
+						{!! Form::label('notelppenerima','No. Telp',['class'=>'control-label col-md-2']) !!}
+						<div class="col-md-10">
 							{!! Form::text('notelppenerima',old('notelppenerima'),['placeholder'=>'Nomer telepon perusahaan/pribadi penerima','class'=>'form-control','required']) !!}
 							{!! $errors->first('notelppenerima', '<p class="help-block">:message</p>') !!}
 						</div>
 					</div>
 					<div class="form-group {{ $errors->has('alamatpenerima') ? 'has-error' : '' }} required">
-						{!! Form::label('alamatpenerima','Alamat',['class'=>'control-label col-md-4']) !!}
-						<div class="col-md-8">
+						{!! Form::label('alamatpenerima','Alamat',['class'=>'control-label col-md-2']) !!}
+						<div class="col-md-10">
 							{!! Form::textarea('alamatpenerima',old('alamatpenerima'),['placeholder'=>'Alamat perusahaan penerima, alamat pribadi jika bukan perusahaan','class'=>'form-control','rows'=>'5']) !!}
 							{!! $errors->first('alamatpenerima', '<p class="help-block">:message</p>') !!}
 						</div>
 					</div>
 					<div class="form-group {{ $errors->has('kotapenerima') ? 'has-error' : '' }} required">
-						{!! Form::label('kotapenerima','Kota',['class'=>'control-label col-md-4']) !!}
-						<div class="col-md-8">
+						{!! Form::label('kotapenerima','Kota',['class'=>'control-label col-md-2']) !!}
+						<div class="col-md-10">
 							{!! Form::select('kotapenerima',array_merge(['--Pilih Kota--'],$kota),old('kotapenerima'),['class'=>'form-control']) !!}
 							{!! $errors->first('kotapenerima', '<p class="help-block">:message</p>') !!}
 						</div>
 					</div>
 				</fieldset>
-				<fieldset class="col-md-12">
+
+				<fieldset class="panel panel-primary">
 					<legend>Data Pengiriman</legend>
+					<div class="form-group {{ $errors->has('tagihan') ? 'has-error' : '' }}">
+						{!! Form::label('tagihan','Penerima tagihan',['class'=>'control-label col-md-2']) !!}
+						<div class="col-md-10">
+							{!! Form::select('tagihan',['Pengirim'=>'Pengirim','Penerima'=>'Penerima'],old('tagihan'),['class'=>'form-control']) !!}
+							{!! $errors->first('tagihan', '<p class="help-block">:message</p>') !!}
+						</div>
+					</div>
 					<div class="form-group {{ $errors->has('tipe') ? 'has-error' : '' }}">
 						{!! Form::label('tipe','Tipe Kiriman',['class'=>'control-label col-md-2']) !!}
 						<div class="col-md-10">
@@ -192,7 +169,7 @@
 						<div class="col-md-10 checkbox">
 							<label>
 							<input type="checkbox" name="asalsama"/>
-							<span  class="control-label">Kosongkan centang jika alamat asal TIDAK SAMA dengan data pengirim</span>
+							<span  class="control-label">Centang jika data alamat dan kota asal sama dengan pengirim</span>
 							</label>
 						</div>
 					</div>
@@ -212,7 +189,7 @@
 					</div>
 				</fieldset>
 				
-				<fieldset class="panel {{ $errors->has('items') ? 'panel-danger' : 'panel-info' }} col-md-12">
+				<fieldset class="panel {{ $errors->has('items') ? 'panel-danger' : 'panel-info' }}">
 					<legend class="{{ $errors->has('quote') ? 'text-danger' : '' }}">Rincian Item</legend>
 					<div>
 					<table class="table table-bordered" id="items">
@@ -249,14 +226,28 @@
 						</div>
 					</div>
 				</fieldset>
+				</div>
 			{!! Form::close() !!}
-
+			@endif
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
 	var id=0;
+	function getPenerima(){
+
+		idpenerima = $('select[name="penerima"]').val();
+		$.getJSON('/getkon/'+idpenerima, function(data){
+			$('input[name="cppenerima"]').val(data.cp);
+			$('input[name="nppenerima"]').val(data.nama);
+			$('input[name="emailpenerima"]').val(data.email);
+			$('input[name="notelppenerima"]').val(data.notelp);
+			$('textarea[name="alamatpenerima"]').val(data.alamat);
+			$('select[name="kotapenerima"]').val(data.kota);
+		});
+	}
+
 	function addItem(){
 		id++;
 		nama = '<input type="text" name="nmbarang['+id+']"></input>';
@@ -296,6 +287,44 @@
 			$('select[name="kotaasal"]').prop('disabled',false);
 		}
 	});
+    $('#form1').on('submit',function(e){
+        e.preventDefault();
+        $.ajaxSetup({
+           headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+        });
+        var form = $(this);
+        var dataString = form.serialize();
+        var formAction = form.attr('action');
+
+        //alert(dataString);
+        $.ajax({
+            url: formAction,
+            type: 'POST',
+            cache:false,
+            data: dataString,
+            dataType: 'json',
+        	success: function(data){
+        		if(data.error){
+        			BootstrapDialog.alert({
+        				type: BootstrapDialog.TYPE_DANGER,
+        				title: 'Ada kesalahan !',
+        				message: data.message,
+        			});
+        		}else{
+					BootstrapDialog.alert({
+						title: 'Informasi',
+						message:'Penyimpanan sukses',
+						callback:function(r){
+        					if(r){
+        						parent.$.fancybox.close();
+							}
+						}
+					});
+				}
+        	},
+        });
+    });
+
 </script>
 @endsection
 

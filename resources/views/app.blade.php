@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Application Name | Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta name="_token" content="{{ csrf_token() }}"/>
     <!-- Bootstrap 3.3.2 -->
     <link href="{{ asset('/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />    
     <!-- FontAwesome 4.3.0 -->
@@ -98,8 +99,6 @@
             <b>Version</b> 1.5.2 || <strong>Copyright &copy; 2014-2015 <a href="#">Niclogic</a>.</strong> All rights reserved.
         </footer>
     </div><!-- ./wrapper -->
-
-
 
     <script type="text/javascript">
         //Date range picker
@@ -221,8 +220,37 @@
         });
         
     </script>
+
+    @if(\Auth::user()->level=='KONSUMEN'&&!(\Config::get('registered')))
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $.fancybox.open({
+            type : 'iframe',
+            href : '/start',
+            autoSize: false,
+            height: 800,
+            openSpeed: 1,
+            closeSpeed: 1,
+            closeBtn: false,
+            keys : {
+                close  : null
+            },
+            ajax : {
+                dataType : 'html',
+            },
+            afterClose : function(){ window.location.replace('/') },
+            helpers:{
+                overlay:{
+                    locked : false,
+                    closeClick: false,
+                },
+            }
+        });
+    });
+    </script>
+    @endif
     <!-- Hidden area -->
-    <div id="help" class="modalbox  ">
+    <div id="help" class="modalbox">
     <p><b>Shortcut For Keyboard</b></p>
     <hr>
     <p>F1 = menampilkan halaman bantuan ini</p>

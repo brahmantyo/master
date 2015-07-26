@@ -1,7 +1,7 @@
 @extends('app')
 @section('content-header')
 <ol class="breadcrumb">
-    <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+    <li><a href="/konsumenpanel"><i class="fa fa-dashboard"></i>Home</a></li>
     <li class="active"><i class="fa fa-truck"></i>Daftar Permintaan Kirim (Quotation)</li>
 </ol>
 @endsection
@@ -30,10 +30,10 @@
 				<tbody>
 					@foreach($quotes as $quote)
 					<tr class="{{($quote->status)?'':'new-quote'}}">
-						<td>{{$quote->tglquote}}</td>
+						<td>{{\App\Helpers::dateFromMySqlSystem($quote->tglquote)}}</td>
 						<td><b>{{$quote->id}}</b></td>
-						<td>{{$quote->pkonsumen?$quote->pkonsumen:$quote->cpkonsumen}}</td>
-						<td>{{$quote->ppenerima?$quote->ppenerima:$quote->cppenerima}}</td>
+						<td>{{($quote->pengirim->nama!='-')&&$quote->pengirim->nama?$quote->pengirim->nama:$quote->pengirim->cp}}</td>
+						<td>{{($quote->penerima->nama!='-')&&$quote->penerima->nama?$quote->penerima->nama:$quote->penerima->cp}}</td>
 						<td>{{$quote->tipe?'Borongan':'Regular'}}</td>
 						<td>{{(!$quote->status)?'Menunggu':'Sedang Proses'}}</td>
 						<td>
@@ -77,17 +77,27 @@
 	$('#tambah').fancybox({
 		type : 'iframe',
 		href : this.value,
-		autoSize: false,
+		
+		width: 1000,
 		height: 800,
 		openSpeed: 1,
 		closeSpeed: 1,
 		ajax : {
 			dataType : 'html',
 		},
+		helpers: {
+			overlay: {
+				locked: true,
+				closeClick: false,
+			},
+		},
 		afterClose : function(){ window.location.replace('/order') },		
 	});
+	function afterSubmit() {
+    	parent.$.fancybox.close();
+	}
 	$('#quotes').dataTable({
-		"order" : [1,"asc"],
+		"order" : [1,"desc"],
 		"iDisplayLength": 5,
 		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 		"responsive": true,

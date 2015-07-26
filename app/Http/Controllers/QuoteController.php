@@ -16,8 +16,6 @@ class QuoteController extends Controller {
 	public function generateId(){
 		$tmp = 'QTE'.Date('ymd'.'.');
 		$quotes = \App\quote::select('id')->whereRaw('id like "'.$tmp.'%"')->get();
-		/*SELECT MAX(CAST(SUBSTRING(id,11) AS SIGNED)) AS id FROM QUOTE WHERE id LIKE 'QTE150715.%'*/
-		/*SELECT MAX(CAST(RIGHT(id,POSITION('.' IN REVERSE(id))-1) AS SIGNED)) AS id FROM `quote` WHERE id LIKE 'QTE150715.%'*/
 		$res = \App\quote::selectRaw('MAX(CAST(RIGHT(id,POSITION("." IN REVERSE(id))-1) AS SIGNED)) AS id')->whereRaw('id LIKE "'.$tmp.'%"')->first();
 		
 		$max = $res->id;

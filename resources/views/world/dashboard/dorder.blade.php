@@ -24,9 +24,9 @@
             @endif
             <table class="table table-striped">
                 <tr><th width="100">Tanggal</th><td>: {{$quote->tglquote}}</td></tr>
-                <tr><th>Pengirim</th><td>: {{$quote->pkonsumen?$quote->pkonsumen:$quote->cpkonsumen}}</td></tr>
-                <tr><th>Penerima</th><td>: {{$quote->ppenerima?$quote->ppenerima:$quote->cppenerima}}</td></tr>
-                <tr><th>Status</th><td>: {{$quote->status?'':'Sudah diterima'}}</td></tr>
+                <tr><th>Pengirim</th><td>: {{($quote->pengirim->nama)&&($quote->pengirim->nama!='-')?$quote->pengirim->nama:$quote->pengirim->cp}}</td></tr>
+                <tr><th>Penerima</th><td>: {{($quote->penerima->nama)&&($quote->penerima->nama!='-')?$quote->penerima->nama:$quote->penerima->cp}}</td></tr>
+                <tr><th>Status</th><td>: {{$quote->status?$quote->status:'Menunggu di proses'}}</td></tr>
             </table>
             <table id="detail" class="display responsive no-wrap" width="100%">
                 <tbody><?php $i=1;?>
