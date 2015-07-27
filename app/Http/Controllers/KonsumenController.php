@@ -2,8 +2,8 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
+use Redirect;
+use Request;
 use Validator;
 use Input;
 use Hash;
@@ -21,12 +21,42 @@ class KonsumenController extends Controller {
 	{
 		return view('world.dashboard.index');
 	}
+
 	public function profilShowStart()
 	{
 		$user = \Auth::user();
 		$konsumen = \App\konsumen::where('iduser','=',$user->id)->first();
 		return view('world.dashboard.profil-modal')->with('user',$user)->with('konsumen',$konsumen);
 	}
+
+	public function profilSaveStart()
+	{
+		$nmperusahaan = Request::get('nmperusahaan');
+		$alamat = Request::get('alamat');
+		$kota = Request::get('kota');
+		$notelp = Request::get('telp');
+		$email = Request::get('email');
+		$contactperson = Request::get('contact');
+		$id = Request::get('id');
+
+
+
+		$konsumen = new konsumen;
+		$konsumen->nama = $nmperusahaan?$nmperusahaan:'-';
+		$konsumen->alamat = $alamat; //required. alamat perusahaan
+		$konsumen->kota = $kota;
+		$konsumen->notelp = $notelp?$notelp:'-';
+		$konsumen->email = $email;
+		$konsumen->cp = $contactperson;
+		$konsumen->tgldaftar = date('Y-m-d');
+		$konsumen->iduser = $id;
+		$konsumen->save();
+		return Redirect::to('/konsumenpanel');
+	}
+
+
+
+
 	public function profilShow()
 	{
 		$user = \Auth::user();
@@ -107,9 +137,5 @@ class KonsumenController extends Controller {
 
 		return $this->index();
 	}
-	public function simpan()
-	{
-		$konsumen = new konsumen;
-		$konsumen->save();
-	}
+
 }

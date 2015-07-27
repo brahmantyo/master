@@ -65,7 +65,6 @@
 	$('a:contains("Lihat")').fancybox({
 		type : 'iframe',
 		href : this.value,
-		autoSize: false,
 		height: 800,
 		openSpeed: 1,
 		closeSpeed: 1,

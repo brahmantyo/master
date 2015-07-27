@@ -227,7 +227,6 @@
         $.fancybox.open({
             type : 'iframe',
             href : '/start',
-            autoSize: false,
             height: 800,
             openSpeed: 1,
             closeSpeed: 1,
@@ -238,7 +237,13 @@
             ajax : {
                 dataType : 'html',
             },
-            afterClose : function(){ window.location.replace('/') },
+            afterClose : function(data){
+                if(data=='success'){
+                    window.location.replace('/konsumenpanel');
+                }else{
+                    window.location.replace('/');
+                }
+            },
             helpers:{
                 overlay:{
                     locked : false,

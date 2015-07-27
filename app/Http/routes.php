@@ -15,18 +15,30 @@ use App\Helpers as Helpers;
 Route::group(['middleware' => 'konsumen'], function()
 {
 
-	Route::get('konsumenpanel', 'KonsumenController@index');
-	Route::get('profil','KonsumenController@profilShow');
-	Route::post('profil/edit', 'KonsumenController@profilEdit');
+	//-- Paksa user agar tercatat sebagai konsumen --//
+	Route::get('start','KonsumenController@profilShowStart');
+	Route::post('save','KonsumenController@profilSaveStart');
+	//----------------------------------------------//
+
+	//-- Routing untuk menu utama konsumen ------//
+	Route::get('konsumenpanel', 'KonsumenController@index'); // Masuk ke panel konsumen
+	Route::get('profil','KonsumenController@profilShow'); // Lihat profil konsumen
+	Route::post('profil/edit', 'KonsumenController@profilEdit'); // Simpan perubahan dari profil
+	//-------------------------------------------//
+
+	//-- Routing orderan dari web non user --//
 	Route::get('quote','OrderController@index');
 	Route::get('quote/{id}','OrderController@detail');
+	//--------------------------------------//
 
 	//Route::post('konsumenpanel/save', 'OrderController@addToDraft');
 
 	//Route::get('profil', 'OrderController@profil');
-	Route::get('start','KonsumenController@profilShowStart');
-	Route::resource('order','OrderKonsumenController');
-	Route::get('getkon/{id}','OrderKonsumenController@getKonsumen');
+
+
+	//-- Routing untuk order dari dalam konsumen panel --//
+	Route::resource('order','OrderKonsumenController'); // CRUD untuk order konsumen
+	Route::get('getkon/{id}','OrderKonsumenController@getKonsumen'); // Load daftar konsumen penerima (AJAX Get)
 });
 
 Route::group(['middleware' => 'admin'], function()
