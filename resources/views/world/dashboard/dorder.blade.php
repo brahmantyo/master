@@ -26,7 +26,7 @@
                 <tr><th width="100">Tanggal</th><td>: {{$quote->tglquote}}</td></tr>
                 <tr><th>Pengirim</th><td>: {{($quote->pengirim->nama)&&($quote->pengirim->nama!='-')?$quote->pengirim->nama:$quote->pengirim->cp}}</td></tr>
                 <tr><th>Penerima</th><td>: {{($quote->penerima->nama)&&($quote->penerima->nama!='-')?$quote->penerima->nama:$quote->penerima->cp}}</td></tr>
-                <tr><th>Status</th><td>: {{$quote->status?$quote->status:'Menunggu di proses'}}</td></tr>
+                <tr><th>Status</th><td>: {{$quote->status?'Sedang diproses':'Menunggu di proses'}}</td></tr>
             </table>
             <table id="detail" class="display responsive no-wrap" width="100%">
                 <tbody><?php $i=1;?>

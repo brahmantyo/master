@@ -5,10 +5,10 @@ use App\Http\Controllers\Controller;
 use Redirect;
 use Request;
 use Validator;
-use Input;
 use Hash;
 use App\User;
 use App\konsumen;
+use Input;
 
 class KonsumenController extends Controller {
 
@@ -31,6 +31,30 @@ class KonsumenController extends Controller {
 
 	public function profilSaveStart()
 	{
+		$rules = [
+			'alamat'		=> 'required|min:10',
+			'kota'			=> 'required|not_in:0',
+			'telp'			=> 'required',
+			'email'			=> 'email',
+			'contact'		=> 'required',
+			'id'			=> 'required',
+		];
+
+		$messages = [
+			'alamat.required'	=> 'Alamat harus diisi',
+			'alamat.min'		=> 'Alamat yang Anda masukan terlalu pendek',
+			'kota.required'		=> 'Kota wajib diisi',
+			'kota.not_in'		=> 'Kota belum dipilih',
+			'telp.required'		=> 'Telp dari Perusahaan/Contact Person wajib dicantumkan',
+			'email.email'		=> 'Format pengisian email belum benar',
+			'contact.required'	=> 'Nama contact person wajib tercantum',
+			'id.required'		=> 'Maaf Anda tidak berhak melakukan operasi ini !',
+		];
+		$validator = Validator::make(Request::all(),$rules,$messages);
+		if($validator->fails()){
+			return Redirect::back()->withErrors($validator->errors())->withInput();
+		}
+
 		$nmperusahaan = Request::get('nmperusahaan');
 		$alamat = Request::get('alamat');
 		$kota = Request::get('kota');
@@ -52,6 +76,7 @@ class KonsumenController extends Controller {
 		$konsumen->iduser = $id;
 		$konsumen->save();
 		return Redirect::to('/konsumenpanel');
+		//return '<script type="text/javascript">window.location.href("/konsumenpanel");parent.$.fancybox.close()</script>';
 	}
 
 
@@ -87,7 +112,7 @@ class KonsumenController extends Controller {
 			'kpassword.same' => 'Password konfimasi tidak sama'
 		];
 
-		$validator = Validator::make(Input::all(),$rules,$messages);
+		$validator = Validator::make(Request::all(),$rules,$messages);
 
 		if($validator->fails()){
 			return view('world.dashboard.profil')->with('user',$user)->with('konsumen',$konsumen)->withErrors($validator->errors());
@@ -95,23 +120,23 @@ class KonsumenController extends Controller {
 
 		$cekprofil=false;
 
-		$firstname = Input::get('contactfirst'); //contact first name
-		$lastname = Input::get('contactlast');	//contact last name
+		$firstname = Request::get('contactfirst'); //contact first name
+		$lastname = Request::get('contactlast');	//contact last name
 		$space = ($firstname&&$lastname)?' ':'';
 		$contactperson = ($firstname||$lastname)?$firstname.$space.$lastname:'';
-		$nmperusahaan = Input::get('nmperusahaan');
-		$alamat = Input::get('alamat');
-		$kota = Input::get('kota');
-		$notelp =  Input::get('telp');
-		$email = Input::get('email');
-		$password = Input::get('password');
-		$kpassword = Input::get('kpassword');
+		$nmperusahaan = Request::get('nmperusahaan');
+		$alamat = Request::get('alamat');
+		$kota = Request::get('kota');
+		$notelp =  Request::get('telp');
+		$email = Request::get('email');
+		$password = Request::get('password');
+		$kpassword = Request::get('kpassword');
 
 		//update data user
 
 		$user->name = $user->name; //required. nama user
 		$user->email = $user->email; //required. email user
-		$user->level = $user->level; //requiered. level user
+		$user->level = $user->level; //required. level user
 		$user->password = Hash::make($password?$password:$user->password); //required. if empty use old password 
 		$user->photo = 'dist/img/avatar.png';
 		$user->first_name = $firstname?$firstname:'-';

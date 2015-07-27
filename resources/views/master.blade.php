@@ -158,7 +158,8 @@
                 @elseif(isset($success))
                   @include('world.quote',['successorder'=>true])
                 @else
-                  @include('world.quote')
+                  {!! ''/*@include('world.quote')*/ !!}
+                  @include('world.order')
                 @endif
                </div>
             </div>

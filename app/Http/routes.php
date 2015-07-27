@@ -172,6 +172,6 @@ Route::get('test',function(){
 	$test = new \App\quote;
 	$test->id = $id;
 	$test->save();*/
-	return $id.'<br>';
+	return \App\Helpers::number_parser('8,5');
 });
 

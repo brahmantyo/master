@@ -22,7 +22,19 @@ class OrderKonsumenController extends Controller {
 	 */
 	public function index()
 	{
-		$quotes = quote::where('iduser','=',\Auth::user()->id)->get();
+		//$quotes = quote::where('iduser','=',\Auth::user()->id)->where('status','=',0)->get();
+		$quotes = quote::select('quote.*','k.*','p.*','pk.nmkota AS kota')
+			->leftJoin('konsumen AS k','k.idkonsumen','=','quote.idkonsumen')
+			->leftJoin('konsumen AS p','p.idkonsumen','=','quote.idpenerima')
+			->leftJoin('kota AS pk','pk.idkota','=','p.kota')
+			->where('quote.iduser','=',\Auth::user()->id)->get();
+		//$quotes->first()->penerima;
+		//$quotes1 = quote::select('konsumen.nama')->leftJoin('konsumen','quote.idpenerima','=','konsumen.idkonsumen')->first();
+		/*$quotes = quote::all();
+		foreach($quotes as $quote){
+			$quote->penerima->nama;
+		}*/
+		//exit();
 		return view('world.dashboard.order')->with('quotes',$quotes);
 	}
 
@@ -34,6 +46,7 @@ class OrderKonsumenController extends Controller {
 	public function create()
 	{
 		$user = User::find(\Auth::user()->id);
+
 		if($user)
 		{
 			$pengirim = $user->konsumen->idkonsumen;
@@ -143,11 +156,12 @@ class OrderKonsumenController extends Controller {
 			$quote->tagihan = Request::get('tagihan');
 			$quote->save();
 
+
 			foreach ($sat as $k => $v) {
 				$dquote = new dquote;
 				$dquote->idquote = $idquote;
 				$dquote->barang = $brg[$k];
-				$dquote->qty = $qty[$k];
+				$dquote->qty = \App\Helpers::number_parser($qty[$k]);
 				$dquote->satuan = $sat[$k];
 				$dquote->save();
 			}

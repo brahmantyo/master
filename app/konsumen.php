@@ -13,4 +13,8 @@ class konsumen extends Model {
 	{
 		return $this->belongsTo('\App\User','iduser');
 	}
+	public function dtkota()
+	{
+		return $this->belongsTo('\App\kota','kota','idkota');
+	}
 }

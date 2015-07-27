@@ -34,7 +34,8 @@
 						<td><b>{{$quote->id}}</b></td>
 						<td>{{($quote->pengirim->nama!='-')&&$quote->pengirim->nama?$quote->pengirim->nama:$quote->pengirim->cp}}</td>
 						<td>{{($quote->penerima->nama!='-')&&$quote->penerima->nama?$quote->penerima->nama:$quote->penerima->cp}}</td>
-						<td>{{$quote->tipe?'Borongan':'Regular'}}</td>
+						<td>{{$quote->kota}}</td>
+						<td>{{$quote->tipe=='Borongan'?'Borongan':'Regular'}}</td>
 						<td>{{(!$quote->status)?'Menunggu':'Sedang Proses'}}</td>
 						<td>
 	                        {!! Form::open(['url' =>'/order/'.$quote->id,'method'=>'DELETE']) !!}
@@ -51,6 +52,7 @@
 						<th>Quote No.</th>
 						<th>Pengirim</th>
 						<th>Penerima</th>
+						<th>Kota Penerima</th>
 						<th>Tipe</th>
 						<th>Status</th>
 						<th></th>

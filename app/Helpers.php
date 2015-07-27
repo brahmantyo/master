@@ -43,6 +43,11 @@ class Helpers {
     public static function number($number,$decimal=0){
         return number_format($number,$decimal,",",".");
     }
+
+    public static function number_parser($number,$lang='id_ID'){
+        $tmp = explode(',',$number);
+        return $tmp[0].'.'.$tmp[1];
+    }
     
     public static function dateToMySqlSystem($date){
         /*//$result = date_create_from_format("d-m-Y",$date);

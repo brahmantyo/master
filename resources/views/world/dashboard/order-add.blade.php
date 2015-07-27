@@ -196,7 +196,7 @@
 						<tbody>
 							<tr>
 								<td><input name="nmbarang[0]" type="text" placeholder="Masukan nama atau keterangan barang di sini"></td>
-								<td><input name="qty[0]" type="number" min="1" placeholder="Masukan jumlah/kuantitas"></td>
+								<td><input name="qty[0]" type="text" min="1" placeholder="Masukan jumlah/kuantitas" lang="id_ID" step="0.001"></td>
 								<td>
 									<select name="satuan[0]">
 									@foreach($satuan as $k=>$s)
@@ -251,7 +251,7 @@
 	function addItem(){
 		id++;
 		nama = '<input type="text" name="nmbarang['+id+']"></input>';
-		qty = '<input type="number" name="qty['+id+']" min="1"></input>';
+		qty = '<input type="text" name="qty['+id+']" min="1" lang="id_ID" step="0.001"></input>';
 		unit = '<select name="satuan['+id+']">'+
 				@foreach($satuan as $k=>$s)
 				'<option value="{{$k}}">{{$s}}</option>'+

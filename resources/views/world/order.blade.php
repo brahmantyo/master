@@ -1,116 +1,80 @@
-<style type="text/css">
-    .info-header {
-        padding: 20px 10px;
-        background-color: #E7F2F6;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1) inset;
-        border-bottom: 1px solid #DDD;
-    }
-</style>
-
-<div class="tab-content">
-<div class="info-header">
-    <p>
-        Cara Order :<br/>
-
-
-    </p>
-    <div id="error"></div>
-</div>
-    <div id="steps" class="col-md-12 panel-heading">
-		<a href="#step1" data-toggle="tab" class="btn btn-warning">Order </a> <i class="fa fa-chevron-right"></i>
-		<a href="#step2" data-toggle="tab" class="btn btn-info disable">Daftar <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-		<a href="#step3" data-toggle="tab" class="btn btn-info disable">Resume <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-		<a href="#step4" data-toggle="tab" class="btn btn-info disable">Konfirmasi <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-		<a href="#step5" data-toggle="tab" class="btn btn-info disable">Selesai <i class="fa fa-chevron-right"></i></a>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h1><i class='fa fa-FA_ICON'></i>PAGE_TITLE</h1>
+                <hr>
+            </div>
+            <div class="box-body" width="50%">
+					<div class="row">
+						<a href="">Pendaftaran Konsumen Baru</a>
+						{!! Form::loginForm('coba','Ini percobaan macro') !!}
+					</div>
+					<div class="row">
+						Login
+						<style type="text/css">
+							fieldset.panel > legend:nth-child(1) {
+								width: auto; /* Or auto */
+							    padding:0 10px; /* To give a bit of padding on the left and right */
+							    border-bottom: none;
+							    margin-bottom: 5px;
+							}
+						
+							#items input {
+								width:100%;
+								padding:5px;
+								border: none;
+							}
+							#items input:focus,
+							#items input.focus {
+							  box-shadow: inset 1px 1px 2px 0 #c9c9c9;
+							}
+							#items select {
+								width:100%;
+								padding:5px;
+								border: none;
+							}
+							#items select:focus,
+							#items select.focus {
+							  box-shadow: inset 1px 1px 2px 0 #c9c9c9;
+							}
+						
+							.form-group.required .control-label:after { 
+							    color: #d00;
+							    content: "*";
+							    position: absolute;
+							    margin-left: 8px;
+							    top:7px;
+							    font-family: 'FontAwesome';
+								font-weight: normal;
+								font-size: 10px;
+								content: "\f069";
+							}
+						</style>
+						{!! Form::open(['url'=>'/auth/login','class'=>'form-horizontal']) !!}
+							<fieldset class="col-md-12">
+								<legend>Login</legend>
+								<div class="form-group {{ $errors->has('name') ? 'has-error' : '' }} required">
+									{!! Form::label('name','Login Name',['class'=>'control-label required col-md-4']) !!}
+									<div class="col-md-8">
+										{!! Form::text('name',old('name'),['placeholder'=>'Login Name','class'=>'form-control','required']) !!}
+										{!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+									</div>
+								</div>
+								<div class="form-group {{ $errors->has('password') ? 'has-error' : '' }} required">
+									{!! Form::label('password','Password',['class'=>'control-label required col-md-4']) !!}
+									<div class="col-md-8">
+										{!! Form::password('password',old('password'),['placeholder'=>'Password','class'=>'form-control','required']) !!}
+										{!! $errors->first('password', '<p class="help-block">:message</p>') !!}
+									</div>
+								</div>
+								<div class="form-group">
+									{!! Form::submit('Login',['class'=>'btn btn-info']) !!}
+								</div>
+							</fieldset>
+						{!! Form::close() !!}
+					</div>
+            </div>
+        </div>
     </div>
-	<div id="step1" class="tab-pane fade in active panel panel-primary">
-	    <div class="panel-body">
-			@include('world.order1')
-	    </div>
-	</div>
-	<div id="step2" class="tab-pane fade panel panel-primary">
-<!-- 	    <div class="col-md-12 panel-heading">
-			<a href="#step1" data-toggle="tab" class="btn btn-warning">Order <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step2" data-toggle="tab" class="btn btn-warning">Daftar <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step3" data-toggle="tab" class="btn btn-info disable">Resume <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step4" data-toggle="tab" class="btn btn-info disable">Konfirmasi <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step5" data-toggle="tab" class="btn btn-info disable">Selesai <i class="fa fa-chevron-right"></i></a>
-	    </div> -->
-	    <div class="panel-body">
-			@include('world.order2')
-	    </div>
-	</div>
-	<div id="step3" class="tab-pane fade panel panel-primary">
-<!-- 	    <div class="col-md-12 panel-heading">
-			<a href="#step1" data-toggle="tab" class="btn btn-warning">Order <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step2" data-toggle="tab" class="btn btn-warning">Daftar <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step3" data-toggle="tab" class="btn btn-warning">Resume <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step4" data-toggle="tab" class="btn btn-info disable">Konfirmasi <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step5" data-toggle="tab" class="btn btn-info disable">Selesai <i class="fa fa-chevron-right"></i></a>
-	    </div> -->
-	    <div class="panel-body">
-			@include('world.order3')
-	    </div>
-	</div>
-	<div id="step4" class="tab-pane fade panel panel-primary">
-<!-- 	    <div class="col-md-12 panel-heading">
-			<a href="#step1" data-toggle="tab" class="btn btn-warning">Order <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step2" data-toggle="tab" class="btn btn-warning">Daftar <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step3" data-toggle="tab" class="btn btn-warning">Resume <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step4" data-toggle="tab" class="btn btn-warning">Konfirmasi <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step5" data-toggle="tab" class="btn btn-info disable">Selesai <i class="fa fa-chevron-right"></i></a>
-	    </div> -->
-	    <div class="panel-body">
-			@include('world.order4')
-	    </div>
-	</div>
-	<div id="step5" class="tab-pane fade panel panel-primary">
-<!-- 	    <div class="col-md-12 panel-heading">
-			<a href="#step1" data-toggle="tab" class="btn btn-warning">Order <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step2" data-toggle="tab" class="btn btn-warning">Daftar <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step3" data-toggle="tab" class="btn btn-warning">Resume <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step4" data-toggle="tab" class="btn btn-warning">Konfirmasi <i class="fa fa-chevron-right"></i></a> <i class="fa fa-chevron-right"></i>
-			<a href="#step5" data-toggle="tab" class="btn btn-danger">Selesai <i class="fa fa-chevron-right"></i></a>
-	    </div> -->
-	    <div class="panel-body">
-   			@include('world.order5')
-	    </div>
-	</div>
 </div>
-
-<script type="text/javascript">
-	function getUrlParameter(sParam)
-	{
-	    var sPageURL = window.location.search.substring(1);
-	    var sURLVariables = sPageURL.split('&');
-	    for (var i = 0; i < sURLVariables.length; i++) 
-	    {
-	        var sParameterName = sURLVariables[i].split('=');
-	        if (sParameterName[0] == sParam) 
-	        {
-	            return sParameterName[1];
-	        }
-	    }
-	}
-
-	$('#steps a[data-toggle="tab"]').on('shown.bs.tab',function(e){
-		target = $(e.target);
-		step = target.attr('href');
-		switch(step){
-			case '#step1' : ;break;
-			case '#step2' : target.removeClass('btn-info');target.addClass('btn-warning');break;
-			case '#step3' : getOrderan();target.removeClass('btn-info');target.addClass('btn-warning');break;
-			case '#step4' : target.removeClass('btn-info');target.addClass('btn-warning');break;
-			case '#step5' : target.removeClass('btn-info');target.addClass('btn-warning');break;			
-		}
-	});
-
-	$(document).ready(function(){
-		step = getUrlParameter('go');
-		if(step=='2'){
-			$('a:contains("Order")').tab('show');
-			goToStep2();
-		}
-	});
-
-</script>

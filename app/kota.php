@@ -8,4 +8,6 @@ class kota extends Model {
 	protected $table='kota';
 	public $timestamps = false;
 
+	protected $primaryId='idkota';
+
 }
