@@ -153,14 +153,14 @@
             <div class="panel panel-primary">
               <div class="panel-heading">Halaman Order</div>
               <div class="panel-body">
-                @if(isset($errorsorder))
+              {!!''/*  @if(isset($errorsorder)) !!}
                   @include('world.quote',['errorsorder'=>$errorsorder])
                 @elseif(isset($success))
                   @include('world.quote',['successorder'=>true])
                 @else
-                  {!! ''/*@include('world.quote')*/ !!}
+                  {!! ''/*@include('world.quote') !!}
                   @include('world.order')
-                @endif
+              {{''/*  @endif */// )}}
                </div>
             </div>
           </div>          
