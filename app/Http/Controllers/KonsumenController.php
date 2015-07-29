@@ -97,7 +97,7 @@ class KonsumenController extends Controller {
 		$konsumen->iduser = $user->id;
 		$konsumen->save();
 
-		return Redirect::back()->withErrors('Success: <div class="text text-success"><h1>Pendaftaran Berhasil. Silahkan Login ke <b><a href="/konsumenpanel">Konsumen Area</a></b> untuk melakukan pengiriman</h1></div>');
+		return Redirect::back()->withErrors('Success: <div class="text text-success"><h1>Pendaftaran Berhasil. Silahkan Login ke <b>Konsumen Area</b> untuk melakukan pengiriman</h1></div>');
 
 	}
 

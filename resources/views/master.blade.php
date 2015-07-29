@@ -107,12 +107,12 @@
             @if(!Auth::guest())
               <?php $dashboard = (Auth::user()->level=='KONSUMEN')?'/konsumenpanel':'/admin'; ?>
             <div class='pull-right'>
-              <a href="{{ $dashboard }}" class="btn btn-info btn-sm" ><i class="fa fa-unlock"></i> Dashboard {{strtoupper(Auth::user()->name)}}</a>
-              <a href="/auth/logout" class="btn btn-info btn-sm" ><i class="fa fa-unlock"></i> Logout</a>
+              <a href="{{ $dashboard }}" class="btn btn-success btn-sm" ><i class="fa fa-user"></i> KONSUMEN AREA</a>
+              <a href="/auth/logout" class="btn btn-info btn-sm" ><i class="fa fa-unlock"></i> LOGOUT</a>
             </div>
             @endif
             <div class="dropdown pull-right" style="display:none">
-              <a href="#" class="dropdown-toggle btn btn-info btn-sm" data-toggle="dropdown"><i class="fa fa-lock"></i> Login</a>
+              <a href="#" class="dropdown-toggle btn btn-info btn-sm" data-toggle="dropdown"><i class="fa fa-lock"></i> LOGIN</a>
               <ul class="dropdown-menu"  style="min-width: 200px;">
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -123,7 +123,7 @@
                     <input type="password" placeholder="Password" class="form-control" name="password">
                   </fieldset>
                   <fieldset class="form-group col-lg-12 pull-right">
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary">LOGIN</button>
                   </fieldset>
                 </form>
               </ul>
@@ -141,7 +141,7 @@
           @endforeach
         @endif      
 
-        <div class="tab-content col-md-10">
+        <div class="tab-content {{ Auth::guest()?'col-md-10':'col-md-12' }}">
           <div id="home" class="tab-pane fade in active">
               @if(\Request::get('detail'))
                 @include('world.news')                
@@ -189,17 +189,17 @@
           </div>
           @endforeach
         </div>
+        @if(Auth::guest())
         <div class="col-md-2">
           <div class="row">
               <a href="#daftar" class="btn btn-success btn-lg col-md-12">Konsumen Baru</a>
           </div>
           <div>&nbsp;</div>
-          @if(Auth::guest())
           <div class="row">
-            {!! Form::loginForm('login','/auth/login','Konsumen Area','Login',$errors) !!}
+            {!! Form::loginForm('login','/auth/login','Konsumen Area','LOGIN',$errors) !!}
           </div>
-          @endif
         </div>        
+        @endif
         </div>
       </div>
       <div class="panel panel-danger ">

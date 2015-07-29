@@ -1,12 +1,12 @@
 <?php
 
 Form::macro('loginForm',function ($name, $url, $title = null, $btnSubmit = 'Login', $errors = null) {
-	$openForm = Form::open(['name'=>$name,'id'=>$name,'url'=>$url,'class'=>'form-horizontal']);
+	$openForm = Form::open(['name'=>$name,'id'=>$name,'url'=>$url,'class'=>'form-vertical']);
 	$closeForm = Form::close();
 	$submit = Form::submit($btnSubmit,['class'=>'btn btn-info form-control']);
 	$css = asset('/css/form.css');
 	$username = Form::loginUsername('name','User ID',$errors);
-	$password = Form::loginPassword('password','Pass',$errors);
+	$password = Form::loginPassword('password','Password',$errors);
 
     $item = <<<HTML
 	<link href="$css" rel="stylesheet" type="text/css" />
@@ -30,7 +30,7 @@ HTML;
 });
 
 Form::macro('loginUsername',function($name,$title,$errors = null){
-	$label = Form::label($name,$title,['class'=>'control-label required col-md-4']);
+	$label = Form::label($name,$title,['class'=>'control-label required col-md-12']);
 	$input = Form::text($name,old($name),['placeholder'=>$title,'class'=>'form-control','required']);
 	$errClass = isset($errors)?($errors->has($name) ? 'has-error' : ''):'';
 	$errPHP = isset($errors)?($errors->first($name, '<p class="help-block">:message</p>')):'';
@@ -38,7 +38,7 @@ Form::macro('loginUsername',function($name,$title,$errors = null){
 	$item = <<<HTML
 	<div class="form-group $errClass required">
 		$label
-		<div class="col-md-8">
+		<div class="col-md-12">
 			$input
 			$errPHP
 		</div>
@@ -47,7 +47,7 @@ HTML;
 	return $item;
 });
 Form::macro('loginPassword',function($name,$title,$errors = null){
-	$label = Form::label($name,$title,['class'=>'control-label required col-md-4']);
+	$label = Form::label($name,$title,['class'=>'control-label required col-md-12']);
 	$input = Form::input('password',$name,old($name),['placeholder'=>$title,'class'=>'form-control','required']);
 	$errClass = isset($errors)?($errors->has($name) ? 'has-error' : ''):'';
 	$errPHP = isset($errors)?($errors->first($name, '<p class="help-block">:message</p>')):'';
@@ -55,7 +55,7 @@ Form::macro('loginPassword',function($name,$title,$errors = null){
 	$item = <<<HTML
 	<div class="form-group $errClass required">
 		$label
-		<div class="col-md-8">
+		<div class="col-md-12">
 			$input
 			$errPHP
 		</div>
