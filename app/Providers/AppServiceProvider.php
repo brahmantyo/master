@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider {
 
 		$abouts  = array();
 		$news = array();
+		$memo = array();
 		
 		Config::set('registered',false);
 		
@@ -29,6 +30,8 @@ class AppServiceProvider extends ServiceProvider {
 					$abouts[] = $article;break;
 				case 'news' :
 					$news[] = $article;break;
+				case 'memo' :
+					$memo[] = $article;break;
 			}
 			
 		}
@@ -46,6 +49,7 @@ class AppServiceProvider extends ServiceProvider {
 		$data = array(
 			'abouts'=>$abouts,
 			'news'=>$news,
+			'memo'=>$memo,
 			'kota'=>$dkota,
 			'satuan'=>$dsatuan,
 			'nquotes'=>$quotes->count(),

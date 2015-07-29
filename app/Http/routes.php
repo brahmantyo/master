@@ -136,6 +136,8 @@ Route::get('/',function(){
 	return view('master');
 });
 
+Route::post('daftar','KonsumenController@daftar');
+
 Route::get('getkota','QuoteController@getKota');
 Route::get('getsatuan','QuoteController@getSatuan');
 Route::get('getcabang','QuoteController@getCabang');
@@ -168,10 +170,6 @@ Route::controllers([
 ]);
 
 Route::get('test',function(){
-/*	$id = \App\Http\Controllers\QuoteController::generateId();
-	$test = new \App\quote;
-	$test->id = $id;
-	$test->save();*/
-	return \App\Helpers::number_parser('8,5');
+	return view('world.order');
 });
 

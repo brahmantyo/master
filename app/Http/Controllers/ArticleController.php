@@ -49,6 +49,7 @@ class ArticleController extends Controller {
 			$article->author = Request::get('author');
 			$article->description = Request::get('description');
 			$article->keywords = Request::get('keywords');
+			$article->tags = Request::get('tags');
 			$article->scontent = Request::get('short');
 			$article->content = Request::get('content');
 			$article->user = Session::get('user')->id;
@@ -98,6 +99,7 @@ class ArticleController extends Controller {
 			$article->author = Request::get('author');
 			$article->description = Request::get('description');
 			$article->keywords = Request::get('keywords');
+			$article->tags = Request::get('tags');
 			$article->scontent = Request::get('short');
 			$article->content = Request::get('content');
 			$article->user = Session::get('user')->id;

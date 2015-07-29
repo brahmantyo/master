@@ -22,6 +22,81 @@ class KonsumenController extends Controller {
 		return view('world.dashboard.index');
 	}
 
+	public function daftar()
+	{
+		$rules = [
+			'userid'		=> 'required|unique:users,name,NULL,NULL,level,KONSUMEN',
+			'password'		=> 'required',
+			'confirm'		=> 'required|same:password',
+			'alamat'		=> 'required|min:10',
+			'kota'			=> 'required|not_in:0',
+			'telp'			=> 'required',
+			'email'			=> 'email|unique:users,email,NULL,NULL,level,KONSUMEN',
+			'nmdepan'		=> 'required',
+		];
+
+		$messages = [
+			'userid.required'	=> 'User ID wajib diisi',
+			'userid.unique'		=> 'User '.Request::get('userid').' sudah terdaftar',
+			'password.required'	=> 'Password belum terisi',
+			'confirm.required'	=> 'Konfirmasi Password belum terisi',
+			'confirm.same'		=> 'Password konfirmasi tidak sama (pastikan tombol CAPS LOCK tidak aktif)',
+			'alamat.required'	=> 'Alamat harus diisi',
+			'alamat.min'		=> 'Alamat yang Anda masukan terlalu pendek (min:10 karakter)',
+			'kota.required'		=> 'Kota wajib diisi',
+			'kota.not_in'		=> 'Kota belum dipilih',
+			'telp.required'		=> 'Telp dari Perusahaan/Contact Person wajib dicantumkan',
+			'email.email'		=> 'Format pengisian email belum benar',
+			'email.unique'		=> 'Email '.Request::get('email').' sudah terdaftar',
+			'nmdepan.required'	=> 'Nama depan contact person wajib tercantum',
+		];
+		$validator = Validator::make(Request::all(),$rules,$messages);
+		if($validator->fails()){
+			return Redirect::back()->withErrors($validator->errors())->withInput();
+		}
+
+		//create user
+		$userid = Request::get('userid');
+		$password = Request::get('password');
+		$fname = Request::get('nmdepan');
+		$lname = Request::get('nmbelakang');
+		$email = Request::get('email');
+		$level = 'KONSUMEN';
+		$photo = '/dist/img/avatar.png';
+
+		$user = new User;
+		$user->name = $userid;
+		$user->password = Hash::make($password);
+		$user->first_name = $fname;
+		$user->last_name = $lname;
+		$user->email = $email;
+		$user->level = $level;
+		$user->photo = $photo;
+		$user->save();
+
+
+
+		//create konsumen
+		$contact = $fname.($lname==''?'':' '.$lname);
+		$nmperusahaan = Request::get('nmperusahaan');
+		$alamat = Request::get('alamat');
+		$kota = Request::get('kota');
+		$notelp = Request::get('telp');
+		
+
+		$konsumen = new konsumen;
+		$konsumen->nama = $nmperusahaan?$nmperusahaan:'-';
+		$konsumen->alamat = $alamat; //required. alamat perusahaan
+		$konsumen->kota = $kota;
+		$konsumen->notelp = $notelp?$notelp:'-';
+		$konsumen->email = $email;
+		$konsumen->cp = $contact;
+		$konsumen->tgldaftar = date('Y-m-d');
+		$konsumen->iduser = $user->id;
+		$konsumen->save();
+
+	}
+
 	public function profilShowStart()
 	{
 		$user = \Auth::user();
