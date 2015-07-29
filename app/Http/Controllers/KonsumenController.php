@@ -19,11 +19,13 @@ class KonsumenController extends Controller {
 	 */
 	public function index()
 	{
+
 		return view('world.dashboard.index');
 	}
 
 	public function daftar()
 	{
+
 		$rules = [
 			'userid'		=> 'required|unique:users,name',
 			'password'		=> 'required',
@@ -95,7 +97,7 @@ class KonsumenController extends Controller {
 		$konsumen->iduser = $user->id;
 		$konsumen->save();
 
-		return redirect('/');
+		return Redirect::back()->withErrors('Success: <div class="text text-success"><h1>Pendaftaran Berhasil. Silahkan Login ke <b><a href="/konsumenpanel">Konsumen Area</a></b> untuk melakukan pengiriman</h1></div>');
 
 	}
 

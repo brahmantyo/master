@@ -132,10 +132,15 @@
         </div>
         <div class="panel-body">
         @if($errors->has())
-          @foreach ($errors->all() as $error)
+          @foreach ($errors->all() as $k=>$error)
+            @if(substr($error,0,7)=='Success')
+            <div class='bg-success alert'>{!! $error !!}</div>
+            @else
             <div class='bg-danger alert'>{!! $error !!}</div>
+            @endif
           @endforeach
         @endif      
+
         <div class="tab-content col-md-10">
           <div id="home" class="tab-pane fade in active">
               @if(\Request::get('detail'))

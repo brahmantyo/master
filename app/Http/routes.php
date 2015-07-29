@@ -170,6 +170,7 @@ Route::controllers([
 ]);
 
 Route::get('test',function(){
+	
 	return view('world.order');
 });
 
