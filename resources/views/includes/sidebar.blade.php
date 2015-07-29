@@ -86,11 +86,10 @@
             <li class="treeview">
                 <a>
                     <i class="fa fa-pencil-square-o"></i>
-                    <span>Order</span>
+                    <span>Transaksi</span>
                 </a>
                 <ul class="treeview-menu">
                     <li class="treeview"><a href="/order" id=""><i class="fa "></i><span>Permintaan Kirim</span></a></li>
-                    <li class="treeview"><a href="#" id=""><i class="fa "></i><span>Pengiriman</span></a></li>
                 </ul>
             </li>
             @endif
