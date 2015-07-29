@@ -25,13 +25,13 @@ class KonsumenController extends Controller {
 	public function daftar()
 	{
 		$rules = [
-			'userid'		=> 'required|unique:users,name,NULL,NULL,level,KONSUMEN',
+			'userid'		=> 'required|unique:users,name',
 			'password'		=> 'required',
 			'confirm'		=> 'required|same:password',
 			'alamat'		=> 'required|min:10',
 			'kota'			=> 'required|not_in:0',
 			'telp'			=> 'required',
-			'email'			=> 'email|unique:users,email,NULL,NULL,level,KONSUMEN',
+			'email'			=> 'email|unique:users,email',
 			'nmdepan'		=> 'required',
 		];
 
@@ -94,6 +94,8 @@ class KonsumenController extends Controller {
 		$konsumen->tgldaftar = date('Y-m-d');
 		$konsumen->iduser = $user->id;
 		$konsumen->save();
+
+		return redirect('/');
 
 	}
 
