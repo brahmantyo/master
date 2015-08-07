@@ -77,7 +77,8 @@ class AuthController extends Controller {
 	    	if($this->auth->user()->level!='KONSUMEN'){
 	    		return redirect('/admin');
 	    	}else{
-	        	return redirect()->intended($this->redirectPath());
+	        	//return redirect()->intended($this->redirectPath());
+	        	return redirect('/konsumenpanel');
 	    	}
 	    }
 	    return redirect('/')
