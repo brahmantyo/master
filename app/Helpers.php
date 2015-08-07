@@ -45,8 +45,25 @@ class Helpers {
     }
 
     public static function number_parser($number,$lang='id_ID'){
-        $tmp = explode(',',$number);
-        return $tmp[0].'.'.$tmp[1];
+        switch($lang){
+            case 'id_ID' : {
+                                $tmp = explode(',',$number);
+                                if(count($tmp)>1){
+                                    return $tmp[0].'.'.$tmp[1];
+                                } else {
+                                    return $tmp[0];
+                                }                
+                            };break;
+            case 'en_US' : {
+                                $tmp = explode('.',$number);
+                                if(count($tmp)>1){
+                                    return $tmp[0].','.$tmp[1];
+                                } else {
+                                    return $tmp[0];
+                                }                
+                            };break;
+        }
+
     }
     
     public static function dateToMySqlSystem($date){

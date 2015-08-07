@@ -161,7 +161,7 @@ class OrderKonsumenController extends Controller {
 				$dquote = new dquote;
 				$dquote->idquote = $idquote;
 				$dquote->barang = $brg[$k];
-				$dquote->qty = \App\Helpers::number_parser($qty[$k]);
+				$dquote->qty = \App\Helpers::number_parser($qty[$k],'id_ID');
 				$dquote->satuan = $sat[$k];
 				$dquote->save();
 			}
