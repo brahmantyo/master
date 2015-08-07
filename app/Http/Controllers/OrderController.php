@@ -19,6 +19,7 @@ class OrderController extends Controller {
 			// 			->leftJoin('konsumen as t','t.idkonsumen','=','quote.idpenerima')
 			// 			->get();
 						//->paginate(5);
+			$quotes = quote::all();
 		} else {
 			//$konsumen = \App\konsumen::where('iduser','=',$iduser)->first();
 			// $quotes = quote::select('quote.id as id','quote.tglquote','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima','quote.status')
