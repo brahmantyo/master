@@ -24,16 +24,16 @@ class LaporanController extends Controller {
 	{
 		$title = 'Laporan Tagihan Pengiriman';
 		$arrdata = Request::all();
-		$tagihan = \App\resi::select('r.status','r.noresi','r.tglresi','r.tagihan','r.totalbiaya','r.dp','r.sisa','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima');
-		$tagihan->leftJoin('konsumen AS k','k.idkonsumen','=','r.idkonsumen');
-		$tagihan->leftJoin('konsumen AS t','t.idkonsumen','=','r.idpenerima');
+		$tagihan = \App\resi::select('resi.status','resi.noresi','resi.tglresi','resi.tagihan','resi.totalbiaya','resi.dp','resi.sisa','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima');
+		$tagihan->leftJoin('konsumen AS k','k.idkonsumen','=','resi.idkonsumen');
+		$tagihan->leftJoin('konsumen AS t','t.idkonsumen','=','resi.idpenerima');
 		$cab = 0;
 		if($arrdata){
 			$title .= "<div class='form-inline'>";
 			$subtitle = [];
 			if(Request::get('cabang')){
-				$tagihan->leftJoin('cabang','cabang.idcabang','=','r.idcab');
-				$tagihan->where('r.idcab','=',Request::get('cabang'));
+				$tagihan->leftJoin('cabang','cabang.idcabang','=','resi.idcab');
+				$tagihan->where('resi.idcab','=',Request::get('cabang'));
 				$cab = \App\cabang::where(	'idcabang','=',Request::get('cabang'))->first();
 				$subtitle[] = \App\Helpers::awsomeFilterLabel('Cabang',$cab->nama);
 			}
@@ -72,14 +72,14 @@ class LaporanController extends Controller {
 	public function dpenagihan($id)
 	{
 		$total = 0;
-		$header = \App\resi::select('r.*',
-									'r.status',
-									'r.noresi',
-									'r.tglresi',
-									'r.tagihan',
-									'r.totalbiaya',
-									'r.dp',
-									'r.sisa',
+		$header = \App\resi::select('resi.*',
+									'resi.status',
+									'resi.noresi',
+									'resi.tglresi',
+									'resi.tagihan',
+									'resi.totalbiaya',
+									'resi.dp',
+									'resi.sisa',
 									'k.nama AS ppengirim',
 									'k.cp AS cppengirim',
 									'k.notelp AS telppengirim',
@@ -91,11 +91,11 @@ class LaporanController extends Controller {
 									't.alamat AS alamatpenerima',
 									'ktp.nmkota AS kotapenerima',
 									'u.name AS pegawai')
-					->leftJoin('konsumen AS k','k.idkonsumen','=','r.idkonsumen')
-					->leftJoin('konsumen AS t','t.idkonsumen','=','r.idpenerima')
+					->leftJoin('konsumen AS k','k.idkonsumen','=','resi.idkonsumen')
+					->leftJoin('konsumen AS t','t.idkonsumen','=','resi.idpenerima')
 					->leftJoin('kota AS ktk','ktk.idkota','=','k.kota')
 					->leftJoin('kota AS ktp','ktp.idkota','=','t.kota')					
-					->leftJoin('users AS u','u.id','=','r.user')
+					->leftJoin('users AS u','u.id','=','resi.user')
 					->where('noresi','=',$id)->first();
 
 		$dresi = \App\dresi::where('dresi.idresi','=',$id)

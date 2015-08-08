@@ -128,7 +128,6 @@ Route::group(['middleware' => 'admin'], function()
 	Route::get('quotation', 'OrderController@index');
 	Route::get('quotation/{id}','OrderController@detail');
 
-
 });
 
 // World outside routing //////////////

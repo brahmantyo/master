@@ -19,7 +19,7 @@ class OrderController extends Controller {
 			// 			->leftJoin('konsumen as t','t.idkonsumen','=','quote.idpenerima')
 			// 			->get();
 						//->paginate(5);
-			$quotes = quote::all();
+			$quotes = quote::where('status','=','0')->get();
 		} else {
 			//$konsumen = \App\konsumen::where('iduser','=',$iduser)->first();
 			// $quotes = quote::select('quote.id as id','quote.tglquote','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima','quote.status')
@@ -34,13 +34,17 @@ class OrderController extends Controller {
 
 	public function detail($id)
 	{
-		$qhead = quote::where('quote.id','=',$id)->first();
+		//$quote = quote::where('quote.id','=',$id)->first();
+		$quote = quote::find($id);
+
 					// ->select('quote.id as id','quote.tglquote','k.nama AS ppengirim','k.cp AS cppengirim','t.nama AS ppenerima','t.cp AS cppenerima','quote.status')
 					// ->leftJoin('konsumen as k','k.idkonsumen','=','quote.idkonsumen')
 					// ->leftJoin('konsumen as t','t.idkonsumen','=','quote.idpenerima')
 					
 		//dd($qhead);
-		$dquotes = dquote::where('idquote','=',$id)->paginate(5);
-		return view('world.dashboard.dorder')->with('header',$qhead)->with('dquotes',$dquotes);
+		//$dquotes = dquote::where('idquote','=',$id)->paginate(5);
+		$dquotes = $quote->detail;
+		return view('world.dashboard.dorder')->with('quote',$quote)->with('dquotes',$dquotes);
 	}
+
 }

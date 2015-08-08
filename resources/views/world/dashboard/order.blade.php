@@ -18,7 +18,9 @@
 			<div class="box-header">
 				<span><h1><i class="fa fa-truck"></i>Daftar Permintaan Kirim (Quotation)</h1></span>
 				<hr>
+				@if(\Auth::user()->level=='KONSUMEN')
 				<a id="tambah" href="/order/create" class="btn btn-success">Tambah Quote Baru</a>
+				@endif
 			</div>
 			@if ($errors->has())
 			@foreach ($errors->all() as $error)
@@ -31,17 +33,26 @@
 					@foreach($quotes as $quote)
 					<tr class="{{($quote->status)?'':'new-quote'}}">
 						<td>{{\App\Helpers::dateFromMySqlSystem($quote->tglquote)}}</td>
-						<td><b>{{$quote->id}}</b></td>
+						<td>{{$quote->id}}</td>
 						<td>{{($quote->pengirim->nama!='-')&&$quote->pengirim->nama?$quote->pengirim->nama:$quote->pengirim->cp}}</td>
 						<td>{{($quote->penerima->nama!='-')&&$quote->penerima->nama?$quote->penerima->nama:$quote->penerima->cp}}</td>
-						<td>{{$quote->kota}}</td>
+						<td>{{$quote->kota->nmkota}}</td>
 						<td>{{$quote->tipe=='Borongan'?'Borongan':'Regular'}}</td>
 						<td>{{(!$quote->status)?'Menunggu':'Sedang Proses'}}</td>
 						<td>
+							@if(\Auth::user()->level=='KONSUMEN')
 	                        {!! Form::open(['url' =>'/order/'.$quote->id,'method'=>'DELETE']) !!}
 							<a href="/order/{{$quote->id}}" class="btn btn-success">Lihat</a>
+							@if($quote->status=='0')
 	                        {!! Form::submit('Delete',['class'=>'btn btn-danger'])!!}
+	                        @endif
 	                        {!! Form::close() !!}
+	                        @else
+	                        {!! Form::open(['url' =>'/quotation/'.$quote->id,'method'=>'DELETE']) !!}
+							<a href="/quotation/{{$quote->id}}" class="btn btn-success">Lihat</a>
+	                        {!! Form::submit('Delete',['class'=>'btn btn-danger',($quote->status=='0'?'':'disabled')])!!}
+	                        {!! Form::close() !!}
+	                        @endif
 						</td>
 					</tr>
 					@endforeach
@@ -73,7 +84,11 @@
 		ajax : {
 			dataType : 'html',
 		},
+		@if(\Auth::user()->level=='KONSUMEN')
 		afterClose : function(){ window.location.replace('/order') },
+		@else
+		afterClose : function(){ window.location.replace('/quotation') },
+		@endif
 	});
 	$('#tambah').fancybox({
 		type : 'iframe',
@@ -92,7 +107,11 @@
 				closeClick: false,
 			},
 		},
-		afterClose : function(){ window.location.replace('/order') },		
+		@if(\Auth::user()->level=='KONSUMEN')
+		afterClose : function(){ window.location.replace('/order') },
+		@else
+		afterClose : function(){ window.location.replace('/quotation') },
+		@endif
 	});
 	function afterSubmit() {
     	parent.$.fancybox.close();

@@ -29,8 +29,8 @@ class quote extends Model {
 	{
 		return $this->belongsTo('\App\konsumen','idpenerima');
 	}
-	public function ktasal()
+	public function kota()
 	{
-		return $this->belongsTo('\App\kota','ktasal');
+		return $this->belongsTo('\App\kota','ktasal','idkota');
 	}
 }
