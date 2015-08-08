@@ -16,21 +16,21 @@ class TrackingController extends Controller {
 	public function index()
 	{
 		$error = '';
-		$track = resi::select('r.noresi','k.nama AS konsumen',
+		$track = resi::select('resi.noresi','k.nama AS konsumen',
 					'ca.nama AS asal','ct.nama AS tujuan',
 					'b.tglberangkat',//'b.jamberangkat',
 					'b.tgltiba',
 					'b.nopolisi','ps.nama AS sopir','pk.nama AS kenek',
 					'u.name AS user',
-					'r.status')
-					->leftJoin('konsumen as k','k.idkonsumen','=','r.idkonsumen')
-					->leftJoin('berangkat as b','b.idberangkat','=','r.idberangkat')
+					'resi.status')
+					->leftJoin('konsumen as k','k.idkonsumen','=','resi.idkonsumen')
+					->leftJoin('berangkat as b','b.idberangkat','=','resi.idberangkat')
 					->leftJoin('cabang as ca','ca.idcabang','=','b.idasal')
 					->leftJoin('cabang as ct','ct.idcabang','=','b.idtujuan')
 					->leftJoin('pegawai as ps','ps.idpegawai','=','b.idsopir')
 					->leftJoin('pegawai as pk','pk.idpegawai','=','b.idkenek')
-					->leftJoin('users as u','u.id','=','r.user')
-					->where('noresi','=',Request::get('id'))->get();
+					->leftJoin('users as u','u.id','=','resi.user')
+					->where('resi.noresi','=',Request::get('id'))->get();
 					//
 
 		if($track->count()){
