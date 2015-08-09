@@ -305,17 +305,21 @@
             dataType: 'json',
         	success: function(data){
         		if(data.error){
-        			BootstrapDialog.alert({
+        			var info = BootstrapDialog.alert({
         				type: BootstrapDialog.TYPE_DANGER,
         				title: 'Ada kesalahan !',
         				message: data.message,
+        				callback: function(){
+        					this.close();
+        				}
         			});
         		}else{
-					BootstrapDialog.alert({
+					var info = BootstrapDialog.alert({
 						title: 'Informasi',
 						message:'Penyimpanan sukses',
 						callback:function(r){
         					if(r){
+        						this.close();
         						parent.$.fancybox.close();
 							}
 						}

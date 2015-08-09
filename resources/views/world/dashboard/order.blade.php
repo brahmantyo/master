@@ -95,7 +95,7 @@
 		href : this.value,
 		
 		width: 1000,
-		height: 800,
+		height: 700,
 		openSpeed: 1,
 		closeSpeed: 1,
 		ajax : {
@@ -113,9 +113,7 @@
 		afterClose : function(){ window.location.replace('/quotation') },
 		@endif
 	});
-	function afterSubmit() {
-    	parent.$.fancybox.close();
-	}
+
 	$('#quotes').dataTable({
 		"order" : [1,"desc"],
 		"iDisplayLength": 5,

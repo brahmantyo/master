@@ -7,6 +7,7 @@ use App\dquote;
 use App\resi;
 use App\User;
 use App\konsumen;
+use App\pengirim_penerima;
 
 use Request;
 use Validator;
@@ -53,12 +54,13 @@ class OrderKonsumenController extends Controller {
 		if($user)
 		{
 			$pengirim = $user->konsumen->idkonsumen;
-			$pelanggan = quote::select('idpenerima')->where('idkonsumen','=',$pengirim)->get();
+			//$pelanggan = quote::select('idpenerima')->where('idkonsumen','=',$pengirim)->get();
+			$pelanggan = pengirim_penerima::select('penerima AS idpenerima')->where('pengirim','=',$pengirim)->get();
 			$penerima = new Collection;
-			$arr = [0=>'-- Data Penerima Belum Tercatat --'];
+			$arr = [0=>'-- Kosongkan pilihan ini untuk penerima baru / belum tercatat --'];
 			foreach ($pelanggan as $p) {
 				$x = konsumen::select('idkonsumen','nama','cp')->find($p->idpenerima);
-				$arr[$x->idkonsumen] = ($x->nama=='-')||($x->nama=='')?'Contact Person: '.ucfirst($x->cp):'Perusahaan: '.strtoupper($x->nama).' (Contact Person: '.ucfirst($x->cp).')';
+				$arr[$x->idkonsumen] = ($x->nama=='-')||($x->nama=='')?'Perusahaan / Contact Person: '.ucfirst($x->cp):'Perusahaan: '.strtoupper($x->nama).' (Contact Person: '.ucfirst($x->cp).')';
 			}
 			$penerima->push($arr);
 
@@ -129,6 +131,7 @@ class OrderKonsumenController extends Controller {
 				$penerima->cp = Request::get('cppenerima');
 				$penerima->tgldaftar = Date('Y-m-d');
 				$penerima->save();
+
 			}else{
 				$penerima = konsumen::find(Request::get('penerima'));
 				$penerima->nama = Request::get('nppenerima')?Request::get('nppenerima'):'-';
@@ -159,7 +162,17 @@ class OrderKonsumenController extends Controller {
 			$quote->tagihan = Request::get('tagihan');
 			$quote->save();
 
+			//simpan data pengirim dan penerima di table pengirim_penerima
+			$tbl_pp = pengirim_penerima::where('pengirim','=',$pengirim->idkonsumen)->where('penerima','=',$penerima->idkonsumen)->get();
 
+			if($tbl_pp->isEmpty()){
+				$tbl_pp = new pengirim_penerima;
+				$tbl_pp->pengirim = $pengirim->idkonsumen;
+				$tbl_pp->penerima = $penerima->idkonsumen;
+				$tbl_pp->save();
+			}
+
+			//simpan rincian item yang diorder
 			foreach ($sat as $k => $v) {
 				$dquote = new dquote;
 				$dquote->idquote = $idquote;
@@ -222,9 +235,12 @@ class OrderKonsumenController extends Controller {
 	{
 		$quote = quote::find($id);
 
-		if(!$quote->status)
+		if(!$quote->status) //jika status 0 boleh di hapus
 		{
-			//$quote->detail->delete();
+			//cek apakah detail sudah terhapus
+			$dquote = dquote::where('idquote','=',$quote->id)->delete();
+
+			//hapus quote
 			$quote->delete();
 			$errors = 'Nota Quote No.'.$id.' sudah dihapus';
 		}
