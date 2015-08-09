@@ -22,12 +22,13 @@ class OrderKonsumenController extends Controller {
 	 */
 	public function index()
 	{
+		$iduser = \Auth::user()->id;
 		//$quotes = quote::where('iduser','=',\Auth::user()->id)->where('status','=',0)->get();
-		$quotes = quote::select('quote.*','k.*','p.*','pk.nmkota AS kota')
+/*		$quotes = quote::select('quote.*','k.*','p.*','pk.nmkota AS kota')
 			->leftJoin('konsumen AS k','k.idkonsumen','=','quote.idkonsumen')
 			->leftJoin('konsumen AS p','p.idkonsumen','=','quote.idpenerima')
 			->leftJoin('kota AS pk','pk.idkota','=','p.kota')
-			->where('quote.iduser','=',\Auth::user()->id)->get();
+			->where('quote.iduser','=',\Auth::user()->id)->get();*/
 		//$quotes->first()->penerima;
 		//$quotes1 = quote::select('konsumen.nama')->leftJoin('konsumen','quote.idpenerima','=','konsumen.idkonsumen')->first();
 		/*$quotes = quote::all();
@@ -35,6 +36,8 @@ class OrderKonsumenController extends Controller {
 			$quote->penerima->nama;
 		}*/
 		//exit();
+		$quotes = quote::where('iduser','=',$iduser)->get();
+
 		return view('world.dashboard.order')->with('quotes',$quotes);
 	}
 
