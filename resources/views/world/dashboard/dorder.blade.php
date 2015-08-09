@@ -35,7 +35,7 @@
                         <td>{{$i}}</td>
                         <td>{{$dquote->barang}}</td>
                         <td>{{\App\Helpers::number_parser($dquote->qty,'en_US')}}</td>
-                        <td>{{$dquote->satuan}}</td>
+                        <td>{{$dquote->sat->namasatuan}}</td>
                     </tr><?php $i++;?>
                     @endforeach
                 </tbody>
