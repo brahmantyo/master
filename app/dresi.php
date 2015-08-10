@@ -9,4 +9,8 @@ class dresi extends Model {
 	protected $primaryKey = 'id,idresi';
 	public $timestamps = false;
 
+	public function sat()
+	{
+		return $this->hasOne('\App\satuan','idsatuan','satuan');
+	}
 }

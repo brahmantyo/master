@@ -90,6 +90,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="treeview"><a href="/order" id=""><i class="fa "></i><span>Permintaan Kirim</span></a></li>
+                    <li class="treeview"><a href="/resi" id=""><i class="fa "></i><span>Daftar Resi Pengiriman</span></a></li>
                 </ul>
             </li>
             @endif

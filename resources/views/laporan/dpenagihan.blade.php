@@ -13,7 +13,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h1><i class='fa fa-truck'></i>Resi No. {{$header->noresi}} </h1>
+                <h1><i class='fa fa-truck'></i>No.Resi : {{$header->noresi}} </h1>
                 <hr>
             </div>
             <div class="box-body" width="50%">
@@ -32,7 +32,7 @@
 
                 <tr><th>Pengirim</th>
                     <td class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-info">{{$header->ppengirim?$header->ppengirim:$header->cppengirim}}</a>
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-info">{{($header->ppengirim)&&($header->ppengirim!='-')?$header->ppengirim:$header->cppengirim}}</a>
                         <ul class="dropdown-menu">
                             <table class="table table-responsive table-bordered table-striped table-hover">
                                 <tr><td>Contact Person</td><td>{{$header->cppengirim}}</td></tr>
@@ -45,7 +45,7 @@
                 </tr>
                 <tr><th>Penerima</th>
                     <td class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-info">{{$header->ppenerima?$header->ppenerima:$header->cppenerima}}</a>
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-info">{{($header->ppenerima)&&($header->ppenerima!='-')?$header->ppenerima:$header->cppenerima}}</a>
                         <ul class="dropdown-menu">
                             <table class="table table-responsive table-bordered table-striped table-hover ">
                                 <tr><td>Contact Person</td><td>{{$header->cppenerima}}</td></tr>

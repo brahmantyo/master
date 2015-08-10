@@ -97,8 +97,8 @@
 					<tr class="{{($tagihan->status)?'':'new'}}" align="right">
 						<td align="left">{{$tagihan->noresi}}</td>
 						<td>{{\App\Helpers::dateFromMySqlSystem($tagihan->tglresi)}}</td>
-						<td align="left">{{$tagihan->ppengirim?$tagihan->ppengirim:$tagihan->cpengirim}}</td>
-						<td align="left">{{$tagihan->ppenerima?$tagihan->ppenerima:$tagihan->cpenerima}}</td>
+						<td align="left">{{($tagihan->ppengirim)&&($tagihan->ppengirim!='-')?$tagihan->ppengirim:$tagihan->cppengirim}}</td>
+						<td align="left">{{($tagihan->ppenerima)&&($tagihan->ppenerima!='-')?$tagihan->ppenerima:$tagihan->cppenerima}}</td>
 						<td>{{\App\Helpers::currency($tagihan->totalbiaya)}}</td>
 						<td>{{\App\Helpers::currency($tagihan->dp)}}</td>
 						<td>{{\App\Helpers::currency($tagihan->sisa)}}</td>

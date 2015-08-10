@@ -9,4 +9,17 @@ class resi extends Model {
 
 	public $timestamps = false;
 
+	public function pengirim()
+	{
+		return $this->hasOne('\App\konsumen','idkonsumen','idkonsumen');
+	}
+	public function penerima()
+	{
+		return $this->hasOne('\App\konsumen','idkonsumen','idpenerima');
+	}
+	public function detail()
+	{
+		return $this->hasMany('\App\dresi','idresi','noresi');
+	}
+
 }

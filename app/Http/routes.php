@@ -12,6 +12,21 @@ use App\Helpers as Helpers;
 |
 */
 
+Route::group(['middleware'=>'konsumen'],function()
+{
+	//-- Routing untuk daftar resi pengiriman ---//
+	Route::resource('resi','ResiController');		
+	//-- Routing untuk cek keberangkatan ---//
+	Route::resource('keberangkatan','KeberangkatanController');	
+});
+
+Route::group(['middleware'=>'admin','prefix'=>'admin','namespace'=>'Admin'],function()
+{
+	//-- Routing untuk cek keberangkatan ---//
+	Route::resource('keberangkatan','KeberangkatanController');	
+});
+
+
 Route::group(['middleware' => 'konsumen'], function()
 {
 
@@ -39,6 +54,9 @@ Route::group(['middleware' => 'konsumen'], function()
 	//-- Routing untuk order dari dalam konsumen panel --//
 	Route::resource('order','OrderKonsumenController'); // CRUD untuk order konsumen
 	Route::get('getkon/{id}','OrderKonsumenController@getKonsumen'); // Load daftar konsumen penerima (AJAX Get)
+
+	//-- Routing untuk cek keberangkatan ---//
+	//Route::resource('keberangkatan','KeberangkatanKonsumenController');
 });
 
 Route::group(['middleware' => 'admin'], function()
