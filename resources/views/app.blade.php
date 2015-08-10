@@ -24,6 +24,8 @@
     <link href="{{ asset('/plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet" type="text/css" />
     <!-- Date Picker -->
     <link href="{{ asset('/plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css" />
+    <!-- Date Range Picker -->
+    <link href="{{ asset('/plugins/daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Fancy Box -->
     {!! Html::style('/bootstrap/css/bootstrap.min.css') !!}
@@ -54,6 +56,8 @@
    <!-- datepicker -->
     <script src="{{ asset('/plugins/datepicker/bootstrap-datepicker.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/plugins/datepicker/locales/bootstrap-datepicker.id.js') }}" charset="UTF-8"></script>    
+    <!-- daterangepicker -->
+    <script src="{{ asset('/plugins/daterangepicker/daterangepicker.js') }}" charset="UTF-8"></script>    
     <!-- Bootstrap WYSIHTML5 -->
     <script src="{{ asset('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}" type="text/javascript"></script>
     <!-- iCheck -->

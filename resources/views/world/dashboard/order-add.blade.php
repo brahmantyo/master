@@ -153,14 +153,14 @@
 					<div class="form-group {{ $errors->has('tgljemput') ? 'has-error' : '' }}">
 						{!! Form::label('tgljemput','Tanggal Penjemputan (Pick Up)',['class'=>'control-label col-md-2']) !!}
 						<div class="col-md-10">
-							{!! Form::date('tgljemput',old('tgljemput'),['class'=>'date form-control','placeholder'=>'dd-mm-yyyy']) !!}
+							{!! Form::input('date','tgljemput',old('tgljemput'),['class'=>'date form-control','placeholder'=>'dd-mm-yyyy']) !!}
 							{!! $errors->first('tgljemput', '<p class="help-block">:message</p>') !!}
 						</div>
 					</div>
 					<div class="form-group {{ $errors->has('tglterima') ? 'has-error' : '' }}">
 						{!! Form::label('tglkirim','Tanggal Pengiriman',['class'=>'control-label col-md-2']) !!}
 						<div class="col-md-10">
-							{!! Form::date('tglkirim',old('tglkirim'),['class'=>'date form-control','placeholder'=>'dd-mm-yyyy']) !!}
+							{!! Form::input('date','tglkirim',old('tglkirim'),['class'=>'date form-control','placeholder'=>'dd-mm-yyyy']) !!}
 							{!! $errors->first('tglkirim', '<p class="help-block">:message</p>') !!}
 						</div>
 					</div>
@@ -265,15 +265,6 @@
 		$(obj).closest('tr').remove();
 		$('button:contains("Tambah")').focus();
 	}
-	$('input[type="date"]').datepicker({
-        format: "dd-mm-yyyy",
-        todayBtn: "linked",
-        clearBtn: true,
-        language: "id",
-        orientation: "auto left",
-        autoclose: true,
-        todayHighlight: true
-	});
 	$('textarea[name="alamatasal"]').prop('disabled',true);
 	$('select[name="kotaasal"]').prop('disabled',true);
 	$('input[name="asalsama"]:checkbox')
@@ -328,7 +319,17 @@
         	},
         });
     });
-
+	$(document).on('ready',function(){
+		$('input[type="date"]').datepicker({
+	        format: "dd-mm-yyyy",
+	        todayBtn: "linked",
+	        clearBtn: true,
+	        language: "id",
+	        orientation: "auto left",
+	        autoclose: true,
+	        todayHighlight: true
+		});
+	});
 </script>
 @endsection
 

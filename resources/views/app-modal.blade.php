@@ -23,7 +23,9 @@
   <!-- Bootstrap 3.3.2 JS -->
   <script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>    
   <script src="{{ asset('/bootstrap/js/bootstrap.dialog.min.js') }}" type="text/javascript"></script>  
-   	
+
+  <!-- datepicker -->
+  <script src="{{ asset('/plugins/datepicker/bootstrap-datepicker.js') }}" type="text/javascript"></script>  
 @yield('script')
 
 </head>
