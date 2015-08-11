@@ -150,19 +150,21 @@
 							{!! $errors->first('tipe', '<p class="help-block">:message</p>') !!}
 						</div>
 					</div>
-					<div class="form-group {{ $errors->has('tgljemput') ? 'has-error' : '' }}">
+					<div class="form-group {{ $errors->has('tgljemput') ? 'has-error' : '' }} col-md-12">
 						{!! Form::label('tgljemput','Tanggal Penjemputan (Pick Up)',['class'=>'control-label col-md-2']) !!}
-						<div class="col-md-10">
-							{!! Form::input('date','tgljemput',old('tgljemput'),['class'=>'date form-control','placeholder'=>'dd-mm-yyyy']) !!}
-							{!! $errors->first('tgljemput', '<p class="help-block">:message</p>') !!}
+						<div class="col-md-8 input-group date">
+							{!! Form::text('tgljemput',old('tgljemput'),['class'=>'form-control','placeholder'=>'dd-mm-yyyy']) !!}
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 						</div>
+						{!! $errors->first('tgljemput', '<p class="help-block">:message</p>') !!}
 					</div>
-					<div class="form-group {{ $errors->has('tglterima') ? 'has-error' : '' }}">
+					<div class="form-group {{ $errors->has('tglterima') ? 'has-error' : '' }} col-md-12">
 						{!! Form::label('tglkirim','Tanggal Pengiriman',['class'=>'control-label col-md-2']) !!}
-						<div class="col-md-10">
-							{!! Form::input('date','tglkirim',old('tglkirim'),['class'=>'date form-control','placeholder'=>'dd-mm-yyyy']) !!}
-							{!! $errors->first('tglkirim', '<p class="help-block">:message</p>') !!}
+						<div class="col-md-8 input-group date">
+							{!! Form::text('tglkirim',old('tglkirim'),['class'=>'form-control','placeholder'=>'dd-mm-yyyy']) !!}
+							<span class="input-group-addon"><i class="fa fa-calendar"></i></span>							
 						</div>
+						{!! $errors->first('tglkirim', '<p class="help-block">:message</p>') !!}
 					</div>
 					<div class="form-group">
 						<div class="col-md-2"></div>
@@ -320,7 +322,7 @@
         });
     });
 	$(document).on('ready',function(){
-		$('input[type="date"]').datepicker({
+		$('.date').datepicker({
 	        format: "dd-mm-yyyy",
 	        todayBtn: "linked",
 	        clearBtn: true,

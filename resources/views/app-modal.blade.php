@@ -14,7 +14,7 @@
 
   <link href="{{ asset('/plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ asset('/bootstrap/css/bootstrap.dialog.min.css') }}" rel="stylesheet" type="text/css" />
-
+    <link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
 @yield('style')
   <!-- jQuery 2.1.3 -->
   <script src="{{ asset('/plugins/jQuery/jQuery-2.1.3.min.js') }}"></script>
