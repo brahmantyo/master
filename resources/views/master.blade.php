@@ -94,7 +94,7 @@
         <div class="panel-heading">
           <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#home" >Home</a></li>
-            <li><a data-toggle="tab" href="#order">Order</a></li>
+            <li><a data-toggle="tab" href="#info">Informasi</a></li>
             <li><a data-toggle="tab" href="#tracking">Tracking</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tentang Kami<span class="caret"></span></a>
@@ -158,11 +158,17 @@
               @endforeach
               @endif
           </div>
-          <div id="order" class="tab-pane fade">
+          <div id="info" class="tab-pane fade">
             <div class="panel panel-primary">
-              <div class="panel-heading">Halaman Order</div>
+              <div class="panel-heading">Halaman Informasi</div>
               <div class="panel-body">
-                  @include('world.order')
+                <ol>
+                  @foreach($memo as $m)
+                  <li>
+                    <a href="/info/{{ $m->id }}/?detail=1" target="_blank">{{ strtoupper($m->title) }}</a>
+                  </li>
+                  @endforeach
+                </ol>
                </div>
             </div>
           </div>          

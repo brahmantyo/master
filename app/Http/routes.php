@@ -179,6 +179,14 @@ Route::get('news/{id}', function($id){
 	return view('master')->with('dnews',$dnews);
 });
 /// End World section
+// Info //
+Route::get('info/{id}',function($id){
+	$dinfo = \App\article::find($id);
+	return view('world.info')->with('dinfo',$dinfo);
+});
+
+//// End Info Selection //////
+
 ////////////////////////////////////////
 
 Route::controllers([
