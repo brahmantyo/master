@@ -2,10 +2,10 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\berangkat;
+use App\resi;
 use Illuminate\Http\Request;
 
-class KeberangkatanController extends Controller {
+class ResiController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -14,9 +14,8 @@ class KeberangkatanController extends Controller {
 	 */
 	public function index()
 	{
-		$berangkat = berangkat::all();
-		return view('laporan.keberangkatan')->with('berangkat',$berangkat);
-	}
+		$resis = resi::all();
+		return view('laporan.resipengiriman')->with('resis',$resis);	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -46,7 +45,7 @@ class KeberangkatanController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		return 'detail resi '.$id;
 	}
 
 	/**

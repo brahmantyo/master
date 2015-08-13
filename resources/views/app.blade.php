@@ -105,9 +105,6 @@
     </div><!-- ./wrapper -->
 
     <script type="text/javascript">
-        //Date range picker
-        $('.date').daterangepicker();
-
         $('.modalbox').fancybox({
                 autoSize: false,
                 openSpeed: 100,
@@ -135,7 +132,7 @@
                     "this"          : this
                 },
                 {
-                    "keys"          : "ctrl p",
+                    "keys"          : "meta p",
                     "is_exclusive"  : true,
                     "on_keyup"      : function(event) {
                         $('#user-profile').eq(0).click();    

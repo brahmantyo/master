@@ -22,7 +22,7 @@
 
 @section('content-header')
 <ol class="breadcrumb">
-    <li><a href="/"><i class="fa fa-dashboard"></i>Home</a></li>
+    <li><a href="/admin"><i class="fa fa-dashboard"></i>Home</a></li>
     <!-- put another before link if exist here -->
     <li class="active">Laporan Tagihan</li>
 </ol>
@@ -130,6 +130,9 @@
 </div>
 
 <script type="text/javascript">
+    //Date range picker
+    $('.date').daterangepicker();
+
 	$('a:contains("View")').fancybox({
 		type : 'iframe',
 		href : this.value,

@@ -51,13 +51,26 @@
 	</div>
 		<div>
 		<table class="table table-condensed table-striped">
-		<thead>
-			<tr>
-			<th>No.</th>
-			<th>Tanggal</th>
-			<th>Control</th>
-			</tr>
-		</thead>
+			<tbody>
+				<?php $i=1; ?>
+				@foreach($resis as $resi)
+				<tr>
+					<td>{{$i}}</td>
+					<td>{{$resi->tglresi}}</td>
+					<td>
+						<a href="/admin/resi/{{$resi->noresi}}" class="btn btn-success">Lihat</a>
+					</td>
+				</tr>
+				<?php $i++; ?>
+				@endforeach
+			</tbody>
+			<thead>
+				<tr>
+				<th>No.</th>
+				<th>Tanggal</th>
+				<th>Control</th>
+				</tr>
+			</thead>
 		</table>
 		</div>
 	</div>

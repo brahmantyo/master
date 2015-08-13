@@ -15,13 +15,16 @@ use App\Helpers as Helpers;
 Route::group(['middleware'=>'konsumen'],function()
 {
 	//-- Routing untuk daftar resi pengiriman ---//
-	Route::resource('resi','ResiController');		
+	Route::resource('resi','ResiController');
 	//-- Routing untuk cek keberangkatan ---//
 	Route::resource('keberangkatan','KeberangkatanController');	
 });
 
 Route::group(['middleware'=>'admin','prefix'=>'admin','namespace'=>'Admin'],function()
 {
+	//-- Routing untuk resi pengiriman --//
+	Route::resource('resi','ResiController');
+
 	//-- Routing untuk cek keberangkatan ---//
 	Route::resource('keberangkatan','KeberangkatanController');	
 });
