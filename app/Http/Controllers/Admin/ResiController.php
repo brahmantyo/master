@@ -15,7 +15,7 @@ class ResiController extends Controller {
 	public function index()
 	{
 		$resis = resi::all();
-		return view('laporan.resipengiriman')->with('resis',$resis);
+		return view('admin.transaction.resi')->with('resis',$resis);
 	}
 
 	/**
@@ -46,8 +46,12 @@ class ResiController extends Controller {
 	 */
 	public function show($id)
 	{
+		$back=false;
+		if(\Request::get('back')){
+			$back=true;
+		}
 		$resi = resi::find($id);
-		return view('laporan.dresi')->with('resi',$resi);
+		return view('admin.transaction.resi-detail')->with('resi',$resi)->with('back',$back);
 	}
 
 	/**

@@ -79,6 +79,9 @@
                         <td>{{$resi->cabang->nama}}</td>
                         <td>{{$resi->pengirim->cp}}</td>
                         <td>{{$resi->penerima->cp}}</td>
+                        <td>
+                            <a href="/admin/resi/{{$resi->noresi}}/?back=true">View Resi</a>
+                        </td>
                     </tr>
                     @endforeach 
                 </tbody>
@@ -89,6 +92,7 @@
                         <th>Cab.Pengirim</th>
                         <th>Pengirim</th>
                         <th>Penerima</th>
+                        <th></th>
                     </tr>
                 </thead>
             </table>

@@ -85,7 +85,9 @@
                     </tr>
                 </thead>
             </table>
-            
+            @if($back)
+            <button class="" onclick="window.back()">Kembali</a>
+            @endif
             </div>
         </div>
     </div>
