@@ -71,13 +71,13 @@ class Helpers {
         $result = date_create_from_format("d-m-Y",$date);
         //return $result->format("Y-m-d");
         return date_create($result, "Y-m-d");*/
-        return \Carbon\Carbon::parse($date)->format('Y-m-d');
+        return !$date?'-':\Carbon\Carbon::parse($date)->format('Y-m-d');
     }
     
     public static function dateFromMySqlSystem($date){
         /*$result = date_create_from_format("Y-m-d",$date);
         //return $result->format("d-m-Y");
         return date_format($result,"d-m-Y");*/
-        return \Carbon\Carbon::parse($date)->format('d-m-Y');
+        return !$date?'-':\Carbon\Carbon::parse($date)->format('d-m-Y');
     }
 }

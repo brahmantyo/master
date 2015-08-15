@@ -15,7 +15,8 @@ class ResiController extends Controller {
 	public function index()
 	{
 		$resis = resi::all();
-		return view('laporan.resipengiriman')->with('resis',$resis);	}
+		return view('laporan.resipengiriman')->with('resis',$resis);
+	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -45,7 +46,8 @@ class ResiController extends Controller {
 	 */
 	public function show($id)
 	{
-		return 'detail resi '.$id;
+		$resi = resi::find($id);
+		return view('laporan.dresi')->with('resi',$resi);
 	}
 
 	/**

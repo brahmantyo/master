@@ -9,6 +9,9 @@ class resi extends Model {
 
 	public $timestamps = false;
 
+	public function cabang() {
+		return $this->hasOne('\App\cabang','idcabang','idcab');
+	}
 	public function pengirim()
 	{
 		return $this->hasOne('\App\konsumen','idkonsumen','idkonsumen');

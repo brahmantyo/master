@@ -24,7 +24,7 @@
 <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-dashboard"></i>Home</a></li>
     <!-- put another before link if exist here -->
-    <li class="active">Laporan Keberangkatan</li>
+    <li class="active">Daftar Order Trucking</li>
 </ol>
 @endsection
 
@@ -64,10 +64,10 @@
 						<td>{{\App\Helpers::dateFromMySqlSystem($b->tglberangkat)}}</td>
 						<td>{{\App\Helpers::dateFromMySqlSystem($b->tgltiba)}}</td>
 						<td>{{$b->totresi}}</td>
-						<td>{{$b->totongkos}}</td>
-						<td>{{$b->ujln}}</td>
-						<td>{{$b->biayaopr}}</td>
-						<td>{{$b->sisabb}}</td>
+						<td>{{\App\Helpers::currency($b->totongkos)}}</td>
+						<td>{{\App\Helpers::currency($b->ujln)}}</td>
+						<td>{{\App\Helpers::currency($b->biayaopr)}}</td>
+						<td>{{\App\Helpers::currency($b->sisabb)}}</td>
 					</tr>
 					@endforeach
 				</tbody>
@@ -104,6 +104,7 @@
 		type : 'iframe',
 		href : this.value,
 		autoSize: false,
+		width: 1024,
 		height: 800,
 		openSpeed: 1,
 		closeSpeed: 1,

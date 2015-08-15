@@ -50,6 +50,7 @@ class ResiController extends Controller {
 	public function show($id)
 	{
 		$resi = resi::find($id);
+		dd($resi->pengirim->nama);
 		$dresi = $resi->detail;
 		return view('world.dashboard.dresi')->with('resi',$resi);
 	}

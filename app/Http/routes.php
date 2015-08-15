@@ -11,20 +11,42 @@ use App\Helpers as Helpers;
 | and give it the controller to call when that URI is requested.
 |
 */
+/*
+Route::get('/','HomeController@index'); //Landing page
+*/
+Route::group(['middleware'=>'admin','prefix'=>'admin','namespace'=>'Admin'],function()
+{
+	//-- Base --//
+	/*
+	Route::resource('unit','UnitController');
+	Route::resource('user','UserController');
+	*/
 
+	//-- Master --//
+	/*
+	Route::resource('cabang','CabangController');
+	Route::resource('kota','KotaController');
+	Route::resource('jabatan','JabatanController');
+	Route::resource('pegawai','PegawaiController');
+	Route::resource('konsumen','KonsumenController');
+	Route::resource('armada','ArmadaController');
+	*/
+	//-- Transactions --//
+	Route::resource('resi','ResiController'); // Routing untuk resi pengiriman
+	Route::resource('keberangkatan','KeberangkatanController');	// Routing untuk cek keberangkatan
+
+	//-- Reports --//
+
+	//-- Utility --//
+	/*
+	Route::resource('article','ArticleController');
+	*/
+
+});
 Route::group(['middleware'=>'konsumen'],function()
 {
 	//-- Routing untuk daftar resi pengiriman ---//
 	Route::resource('resi','ResiController');
-	//-- Routing untuk cek keberangkatan ---//
-	Route::resource('keberangkatan','KeberangkatanController');	
-});
-
-Route::group(['middleware'=>'admin','prefix'=>'admin','namespace'=>'Admin'],function()
-{
-	//-- Routing untuk resi pengiriman --//
-	Route::resource('resi','ResiController');
-
 	//-- Routing untuk cek keberangkatan ---//
 	Route::resource('keberangkatan','KeberangkatanController');	
 });
@@ -197,8 +219,15 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('test',function(){
-	return 'testing';
-	return view('world.order');
+Route::group(['prefix'=>'test'],function(){
+	$i = ['cabang','kota','konsumen'];
+	$c = ['cabang'=>'CabangController','konsumen'=>'KonsumenController','kota'=>'KotaController'];
+	$user = \App\User::first();
+
+	foreach ($i as $v) {
+		Route::get($v,function() use ($c,$v,$user){
+			return ucfirst($user->name)." say : Ini routing ".$v.' dihandle oleh Controller '.$c[$v];
+		});
+	}
 });
 

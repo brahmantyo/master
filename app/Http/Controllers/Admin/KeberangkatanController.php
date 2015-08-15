@@ -15,7 +15,7 @@ class KeberangkatanController extends Controller {
 	public function index()
 	{
 		$berangkat = berangkat::all();
-		return view('laporan.keberangkatan')->with('berangkat',$berangkat);
+		return view('admin.transaction.keberangkatan')->with('berangkat',$berangkat);
 	}
 
 	/**
@@ -46,7 +46,8 @@ class KeberangkatanController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$berangkat = berangkat::find($id);
+		return view('admin.transaction.keberangkatan-detail')->with('berangkat',$berangkat);
 	}
 
 	/**

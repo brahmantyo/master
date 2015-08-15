@@ -143,11 +143,7 @@
 		ajax : {
 			dataType : 'html',
 		},
-		@if(\Auth::user()->level=='KONSUMEN')
 		afterClose : function(){ window.location.replace('/penagihan') },
-		@else
-		afterClose : function(){ window.location.replace('/penagihan') },
-		@endif
 	});
 	$('#tbtagihan').dataTable({
 		"order" : [1,"asc"],
