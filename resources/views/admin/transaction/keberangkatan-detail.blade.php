@@ -61,10 +61,10 @@
                     </td>
                     <td>
                         <table class="table table-condensed table-bordered table-striped table-hover no-margin">
-                        <tr><th>Total Ongkos</th><td>{{\App\Helpers::currency($berangkat->totongkos)}}</td></tr>
-                        <tr><th>Uang Jalan</th><td>{{\App\Helpers::currency($berangkat->ujln)}}</td></tr>
-                        <tr><th>Biaya Operasional</th><td>{{\App\Helpers::currency($berangkat->biayaopr)}}</td></tr>
-                        <tr><th>Sisa Biaya Berangkat</th><td>{{\App\Helpers::currency($berangkat->sisabb)}}</td></tr>
+                        <tr><th>Total Ongkos</th><td align="right">{{\App\Helpers::currency($berangkat->totongkos)}}</td></tr>
+                        <tr><th>Uang Jalan</th><td align="right">{{\App\Helpers::currency($berangkat->ujln)}}</td></tr>
+                        <tr><th>Biaya Operasional</th><td align="right">{{\App\Helpers::currency($berangkat->biayaopr)}}</td></tr>
+                        <tr><th>Sisa Biaya Berangkat</th><td align="right">{{\App\Helpers::currency($berangkat->sisabb)}}</td></tr>
                         </table>
                     </td>
                 </tr>
@@ -73,7 +73,7 @@
             <table id="tbresi" class="display responsive no-wrap" width="100%">
                 <tbody>
                     @foreach($berangkat->resi as $resi)
-                    <tr align="right">
+                    <tr>
                         <td>{{$resi->noresi}}</td>
                         <td>{{$resi->tglresi}}</td>
                         <td>{{$resi->cabang->nama}}</td>
