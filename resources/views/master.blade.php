@@ -176,12 +176,8 @@
             <div class="panel panel-primary">
               <div class="panel-heading">Informasi Status Pengiriman</div>
               <div class="panel-body">
-              @if(isset($errorstracking))
-                @include('world.tracking',['errorstracking'=>$errorstracking])
-              @else
                 @include('world.tracking')
-              @endif
-               </div>
+              </div>
             </div>
           </div>
           @foreach($abouts as $about)
@@ -345,7 +341,7 @@
     </fieldset>
   {!! Form::close() !!}
 </div>
-@if(isset($trackingreport))
+@if(isset($track))
 <script type="text/javascript">
     $('*').removeClass('in').removeClass('active');
     $('a:contains("Tracking")').parent().addClass('active');

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\resi;
+use App\berangkat;
 use Illuminate\Support\Facades\DB;
 use Request;
 use Illuminate\Support\MessageBag;
@@ -16,7 +17,7 @@ class TrackingController extends Controller {
 	public function index()
 	{
 		$error = '';
-		$track = resi::select('resi.noresi','k.nama AS konsumen',
+/*		$track = resi::select('resi.noresi','k.nama AS konsumen',
 					'ca.nama AS asal','ct.nama AS tujuan',
 					'b.tglberangkat',//'b.jamberangkat',
 					'b.tgltiba',
@@ -31,19 +32,17 @@ class TrackingController extends Controller {
 					->leftJoin('pegawai as pk','pk.idpegawai','=','b.idkenek')
 					->leftJoin('users as u','u.id','=','resi.user')
 					->where('resi.noresi','=',Request::get('id'))->get();
-					//
-
-		if($track->count()){
-			foreach($track as $t){
-				$trackingreport = $t;
-			}
-		} else {
-			$trackingreport = $track;
-
+					//*/
+		$resi = resi::find(Request::get('id'));
+		if(!$resi){
 			$error = new MessageBag;
-			$error->add('notfound','Maaf data tidak ditemukan');
-
+			$error->add('notfound','Maaf resi dengan nomer '.Request::get('id').' tidak ditemukan');
+			return view('master')->with('track',true)->withErrors($error);
+		}else{
+			$berangkat = berangkat::find($resi->idberangkat);
+			return view('master')->with('track',true)->with('resi',$resi)->with('keberangkatan',$berangkat);
 		}
-		return view('master')->with('trackingreport',$trackingreport)->withErrors($error);//('errorstracking',$error);
+
+		//('errorstracking',$error);
 	}
 }
