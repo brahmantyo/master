@@ -71,10 +71,8 @@
                     @endif
                 </a>
                 <ul class="treeview-menu">
-                @if($user->level != 'STAFF')
                     <li><a href="/admin/resi" id="menu-resi"><i class="fa fa-print"></i>Resi Pengiriman</a></li>
                     <li><a href="/admin/keberangkatan" id="menu-keberangkatan"><i class="fa fa-print"></i>Daftar Order Trucking</a></li>
-                @endif
                     <li><a href="/quotation" id="menu-orders"><i class="fa fa-calculator"></i>Permintaan Kirim</a></li>
                 </ul>
             </li>
