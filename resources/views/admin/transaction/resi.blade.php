@@ -35,6 +35,7 @@
 				<tr>
 					<td>{{$i}}</td>
 					<td>{{$resi->tglresi}}</td>
+					<td>{{$resi->noresi}}</td>
 					<td>
 						<a href="/admin/resi/{{$resi->noresi}}" class="btn btn-success">View</a>
 					</td>
@@ -46,7 +47,8 @@
 				<tr>
 				<th>No.</th>
 				<th>Tanggal</th>
-				<th>Control</th>
+				<th>No.Resi</th>
+				<th></th>
 				</tr>
 			</thead>
 		</table>

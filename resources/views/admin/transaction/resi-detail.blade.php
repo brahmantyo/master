@@ -86,7 +86,7 @@
                 </thead>
             </table>
             @if($back)
-            <button class="" onclick="window.back()">Kembali</a>
+            <button class="btn btn-success" onclick="window.history.back()">Kembali</a>
             @endif
             </div>
         </div>

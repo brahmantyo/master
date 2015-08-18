@@ -55,9 +55,8 @@
                     <li><a href="/penagihan" id="menu-penagihan"><i class="fa fa-credit-card"></i>Penagihan</a></li>
 <!--                     <li><a href="/mutasi" id="menu-mutasi"><i class="fa fa-calculator"></i>Mutasi</a></li> -->
 <!--                     <li><a href="/pendapatan" id="menu-pendapatan"><i class="fa fa-money"></i>Pendapatan</a></li> -->
-                    <li><a href="/admin/resi" id="menu-resi"><i class="fa fa-print"></i>Resi Pengiriman</a></li>
+
 <!--                     <li><a href="/sjt" id="menu-stj"><i class="fa fa-file-text-o"></i>Surat Jalan Truck</a></li> -->
-                    <li><a href="/admin/keberangkatan" id="menu-keberangkatan"><i class="fa fa-print"></i>Daftar Order Trucking</a></li>
 
                 </ul>
             </li>
@@ -72,6 +71,10 @@
                     @endif
                 </a>
                 <ul class="treeview-menu">
+                @if($user->level != 'STAFF')
+                    <li><a href="/admin/resi" id="menu-resi"><i class="fa fa-print"></i>Resi Pengiriman</a></li>
+                    <li><a href="/admin/keberangkatan" id="menu-keberangkatan"><i class="fa fa-print"></i>Daftar Order Trucking</a></li>
+                @endif
                     <li><a href="/quotation" id="menu-orders"><i class="fa fa-calculator"></i>Permintaan Kirim</a></li>
                 </ul>
             </li>

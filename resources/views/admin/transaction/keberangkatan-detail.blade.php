@@ -80,7 +80,7 @@
                         <td>{{$resi->pengirim->cp}}</td>
                         <td>{{$resi->penerima->cp}}</td>
                         <td>
-                            <a href="/admin/resi/{{$resi->noresi}}/?back=true">View Resi</a>
+                            <a class="btn btn-sm btn-primary" href="/admin/resi/{{$resi->noresi}}/?back=true">View Resi</a>
                         </td>
                     </tr>
                     @endforeach 
