@@ -38,7 +38,7 @@
                                 <tr><td>Contact Person</td><td>{{$resi->pengirim->cp}}</td></tr>
                                 <tr><td>No.Telp</td><td>{{$resi->pengirim->notelp}}</td></tr>
                                 <tr><td>Alamat</td><td>{{$resi->pengirim->alamat}}</td></tr>
-                                <tr><td>Kota</td><td>{{$resi->pengirim->kota}}</td></tr>
+                                <tr><td>Kota</td><td>{{$resi->pengirim->dtkota->nmkota}}</td></tr>
                             </table>
                         </ul>
                     </td>
@@ -51,7 +51,7 @@
                                 <tr><td>Contact Person</td><td>{{$resi->penerima->cp}}</td></tr>
                                 <tr><td>No.Telp</td><td>{{$resi->penerima->notelp}}</td></tr>
                                 <tr><td>Alamat</td><td>{{$resi->penerima->alamat}}</td></tr>
-                                <tr><td>Kota</td><td>{{$resi->penerima->kota}}</td></tr>
+                                <tr><td>Kota</td><td>{{$resi->penerima->dtkota->nmkota}}</td></tr>
                             </table>
                         </ul>
                         

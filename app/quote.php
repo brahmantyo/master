@@ -23,11 +23,11 @@ class quote extends Model {
 	
 	public function pengirim()
 	{
-		return $this->belongsTo('\App\konsumen','idkonsumen');
+		return $this->hasOne('\App\konsumen','idkonsumen','idkonsumen');
 	}
 	public function penerima()
 	{
-		return $this->belongsTo('\App\konsumen','idpenerima');
+		return $this->hasOne('\App\konsumen','idkonsumen','idpenerima');
 	}
 	public function kota()
 	{

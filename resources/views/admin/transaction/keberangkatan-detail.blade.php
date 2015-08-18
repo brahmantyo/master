@@ -75,7 +75,7 @@
                     @foreach($berangkat->resi as $resi)
                     <tr>
                         <td>{{$resi->noresi}}</td>
-                        <td>{{$resi->tglresi}}</td>
+                        <td>{{\App\Helpers::dateFromMySqlSystem($resi->tglresi)}}</td>
                         <td>{{$resi->cabang->nama}}</td>
                         <td>{{$resi->pengirim->cp}}</td>
                         <td>{{$resi->penerima->cp}}</td>
