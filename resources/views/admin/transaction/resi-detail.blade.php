@@ -25,7 +25,7 @@
             <table class="table table-responsive table-condensed table-bordered table-striped table-hover no-margin">
                 <tr><th width="20%">SJT</th><td style="font-weight: bold">{{$resi->idberangkat}}</td></tr>
                 <tr><th>Status Transaksi</th><td style="font-weight: bold">{{\App\Helpers::getResiStatus($resi->status)}}</td></tr>
-                <tr><th>User</th><td>{{$resi->pegawai}}</td></tr>
+                <tr><th>User</th><td>{{$resi->pegawai->nama}}</td></tr>
                 <tr><th>Tanggal</th><td>{{\App\Helpers::dateFromMySqlSystem($resi->tglresi)}}</td></tr>
                 <tr><th>Penagihan Kepada</th><td>{{$resi->tagihan}}</td></tr>
                 <tr><th>Keterangan</th><td>{{$resi->ket}}</td></tr>

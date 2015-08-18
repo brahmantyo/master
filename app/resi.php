@@ -12,6 +12,9 @@ class resi extends Model {
 	public function cabang() {
 		return $this->hasOne('\App\cabang','idcabang','idcab');
 	}
+	public function pegawai() {
+		return $this->hasOne('\App\pegawai','idpegawai','user');
+	}
 	public function pengirim()
 	{
 		return $this->hasOne('\App\konsumen','idkonsumen','idkonsumen');
