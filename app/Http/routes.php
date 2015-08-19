@@ -36,6 +36,8 @@ Route::group(['middleware'=>'admin','prefix'=>'admin','namespace'=>'Admin'],func
 	Route::resource('keberangkatan','KeberangkatanController');	// Routing untuk cek keberangkatan
 
 	//-- Reports --//
+	Route::controller('penagihan','PenagihanController');
+	
 
 	//-- Utility --//
 	/*
@@ -69,6 +71,7 @@ Route::group(['middleware' => 'konsumen'], function()
 	//-- Routing orderan dari web non user --//
 	Route::get('quote','OrderController@index');
 	Route::get('quote/{id}','OrderController@detail');
+	Route::delete('quote/{id}','OrderController@delete');
 	//--------------------------------------//
 
 	//Route::post('konsumenpanel/save', 'OrderController@addToDraft');
@@ -170,6 +173,7 @@ Route::group(['middleware' => 'admin'], function()
 	//Transaksi/////////////////////////////////////////////////////////
 	Route::get('quotation', 'OrderController@index');
 	Route::get('quotation/{id}','OrderController@detail');
+	Route::delete('quotation/{id}','OrderController@delete');
 
 });
 

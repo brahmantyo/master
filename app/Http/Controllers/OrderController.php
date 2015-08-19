@@ -46,5 +46,22 @@ class OrderController extends Controller {
 		$dquotes = $quote->detail;
 		return view('world.dashboard.dorder')->with('quote',$quote)->with('dquotes',$dquotes);
 	}
+	public function delete($id)
+	{
+		$quote = quote::find($id);
+
+		if(!$quote->status) //jika status 0 boleh di hapus
+		{
+			//cek apakah detail sudah terhapus
+			$dquote = dquote::where('idquote','=',$quote->id)->delete();
+
+			//hapus quote
+			$quote->delete();
+			$errors = 'Nota Quote No.'.$id.' sudah dihapus';
+		}
+		
+		$quotes = quote::where('status','=','0')->get();
+		return view('world.dashboard.order')->with('quotes',$quotes)->withErrors($errors);
+	}
 
 }

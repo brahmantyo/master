@@ -1,11 +1,26 @@
 @extends('app')
 
-@section('style')
 
+@section('style')
+<link href="{{ asset('/plugins/datatables/jquery.dataTables.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/plugins/datatables/dataTables.responsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/plugins/daterangepicker2/daterangepicker.css') }}" rel="stylesheet" type="text/css" /> 
+<style type="text/css">
+.new {
+ 		background-color: #F5A9A9 !important;
+ 	}
+</style>
 @endsection
 
 @section('script')
+<script src="{{ asset('/plugins/datatables/jquery.dataTables-1.10.6.min.js') }}"></script>
+<script src="{{ asset('/plugins/datatables/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('/plugins/datatables/dataTables.bootstrap.js') }}"></script>
+<script src="{{ asset('/plugins/daterangepicker2/moment.js') }}"></script>
+<script src="{{ asset('/plugins/daterangepicker2/daterangepicker.js') }}"></script>
 @endsection
+
 
 @section('content-header')
 <ol class="breadcrumb">
@@ -34,7 +49,7 @@
 				@foreach($resis as $resi)
 				<tr>
 					<td>{{$i}}</td>
-					<td>{{$resi->tglresi}}</td>
+					<td>{{\App\Helpers::dateFromMySqlSystem($resi->tglresi)}}</td>
 					<td>{{$resi->noresi}}</td>
 					<td>
 						<a href="/admin/resi/{{$resi->noresi}}" class="btn btn-success">View</a>

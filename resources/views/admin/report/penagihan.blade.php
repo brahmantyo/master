@@ -1,0 +1,118 @@
+@extends('app')
+
+@section('style')
+<link href="{{ asset('/plugins/datatables/jquery.dataTables.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/plugins/datatables/dataTables.responsive.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('/plugins/daterangepicker2/daterangepicker.css') }}" rel="stylesheet" type="text/css" /> 
+<style type="text/css">
+.new {
+ 		background-color: #F5A9A9 !important;
+ 	}
+</style>
+@endsection
+
+@section('script')
+<script src="{{ asset('/plugins/datatables/jquery.dataTables-1.10.6.min.js') }}"></script>
+<script src="{{ asset('/plugins/datatables/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('/plugins/datatables/dataTables.bootstrap.js') }}"></script>
+<script src="{{ asset('/plugins/daterangepicker2/moment.js') }}"></script>
+<script src="{{ asset('/plugins/daterangepicker2/daterangepicker.js') }}"></script>
+@endsection
+
+@section('content-header')
+<ol class="breadcrumb">
+    <li><a href="/admin"><i class="fa fa-dashboard"></i>Home</a></li>
+    <!-- put another before link if exist here -->
+    <li class="active">Laporan Tagihan</li>
+</ol>
+@endsection
+
+@section('content')
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+
+            </div>
+            <div class="box-body">
+            @if ($errors->has())
+                @foreach ($errors->all() as $error)
+                <div class='bg-danger alert'>{!! $error !!}</div>
+                @endforeach
+            @endif
+			<div class="box-body">
+				<table id="tbtagihan" class="display responsive no-wrap" width="100%">
+				<tbody>
+					@foreach($tagihans as $tagihan)
+					<tr class="{{($tagihan->status)?'':'new'}}" align="right">
+						<td align="left">{{$tagihan->noresi}}</td>
+						<td>{{\App\Helpers::dateFromMySqlSystem($tagihan->tglresi)}}</td>
+						<td align="left">{{($tagihan->ppengirim)&&($tagihan->ppengirim!='-')?$tagihan->ppengirim:$tagihan->cppengirim}}</td>
+						<td align="left">{{($tagihan->ppenerima)&&($tagihan->ppenerima!='-')?$tagihan->ppenerima:$tagihan->cppenerima}}</td>
+						<td>{{\App\Helpers::currency($tagihan->totalbiaya)}}</td>
+						<td>{{\App\Helpers::currency($tagihan->dp)}}</td>
+						<td>{{\App\Helpers::currency($tagihan->sisa)}}</td>
+						<td>{{$tagihan->tagihan}}</td>
+						<td>
+							<a href="/penagihan/{{$tagihan->noresi}}" class="btn btn-warning">View</a>
+						</td>
+					</tr>
+					@endforeach
+				</tbody>
+				<thead>
+					<tr>
+						<th>No.Resi</th>
+						<th>Tanggal</th>
+						<th>Pengirim</th>
+						<th>Penerima</th>
+						<th>Biaya</th>
+						<th>DP</th>
+						<th>Sisa Tagihan</th>
+						<th>Penagihan Kepada</th>
+						<th></th>
+					</tr>
+				</thead>
+				</table>
+			</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //Date range picker
+    $('.date').daterangepicker();
+
+	$('a:contains("View")').fancybox({
+		type : 'iframe',
+		href : this.value,
+		autoSize: false,
+		height: 800,
+		openSpeed: 1,
+		closeSpeed: 1,
+		ajax : {
+			dataType : 'html',
+		},
+		afterClose : function(){ window.location.replace('/penagihan') },
+	});
+	$('#tbtagihan').dataTable({
+		"order" : [1,"asc"],
+		"iDisplayLength": 5,
+		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+		"responsive":true
+	});
+</script>
+@endsection
+
+@section('help')
+<p><b>Shortcut For Laporan Tagihan</b></p>
+<hr>
+<p>Tekan tombol ... untuk melakukan ...</p>
+@yield('coba')
+@endsection
+
+
+@section('coba')
+ini percobaan
+@endsection
