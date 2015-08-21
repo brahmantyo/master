@@ -25,12 +25,19 @@
             <table class="table table-responsive table-condensed table-bordered table-striped table-hover no-margin">
                 <tr><th width="20%">SJT</th><td style="font-weight: bold">{{$resi->idberangkat}}</td></tr>
                 <tr><th>Status Transaksi</th><td style="font-weight: bold">{{\App\Helpers::getResiStatus($resi->status)}}</td></tr>
-                <tr><th>User</th><td>{{$resi->pegawai->nama}}</td></tr>
+                <tr><th>User</th>
+                    @if($resi->pegawai)
+                    <td>{{$resi->pegawai->nama}}</td>
+                    @else
+                    <td class="text-danger">User {{$resi->user}} tidak terdaftar!</td>
+                    @endif
+                </tr>
                 <tr><th>Tanggal</th><td>{{\App\Helpers::dateFromMySqlSystem($resi->tglresi)}}</td></tr>
                 <tr><th>Penagihan Kepada</th><td>{{$resi->tagihan}}</td></tr>
                 <tr><th>Keterangan</th><td>{{$resi->ket}}</td></tr>
 
                 <tr><th>Pengirim</th>
+                    @if($resi->pengirim)
                     <td class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-info">{{($resi->pengirim->nama)&&($resi->pengirim->nama!='-')?$resi->pengirim->nama:$resi->pengirim->cp}}</a>
                         <ul class="dropdown-menu">
@@ -42,8 +49,12 @@
                             </table>
                         </ul>
                     </td>
+                    @else
+                    <td class="text-danger">Data konsumen dengan id {{$resi->idkonsumen}} tidak ada (harap hubungi programmer)!</td>
+                    @endif
                 </tr>
                 <tr><th>Penerima</th>
+                    @if($resi->penerima)
                     <td class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-info">{{($resi->penerima->nama)&&($resi->penerima->nama!='-')?$resi->penerima->nama:$resi->penerima->cp}}</a>
                         <ul class="dropdown-menu">
@@ -56,8 +67,12 @@
                         </ul>
                         
                     </td>
+                    @else
+                    <td class="text-danger">Data konsumen dengan id {{$resi->idpenerima}} tidak ada (harap hubungi programmer)!</td>
+                    @endif
                 </tr>
             </table>
+            @if($resi->detail)
             <table class="table table-bordered table-condensed table-striped table-hover">
                 <tbody><?php $i=1;?>
                     @foreach($resi->detail as $dresi)
@@ -85,6 +100,9 @@
                     </tr>
                 </thead>
             </table>
+            @else
+            <div class="alert alert-danger text-danger">Data barang tidak ditemukan, resi tidak valid (harap hubungi programmer)!</div>
+            @endif
             @if($back)
             <button class="btn btn-success" onclick="window.history.back()">Kembali</a>
             @endif
