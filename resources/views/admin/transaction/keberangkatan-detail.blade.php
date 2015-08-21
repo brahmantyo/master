@@ -53,8 +53,19 @@
                     </td>
                     <td>
                     <table class="table table-condensed table-bordered table-striped table-hover no-margin">
-                        <tr><th>Cabang Asal</th><td>{{$berangkat->asal->nama}}</td></tr>
-                        <tr><th>Cabang Tujuan</th><td>{{$berangkat->tujuan->nama}}</td></tr>
+                        <tr><th>Cabang Asal</th>
+                            @if($berangkat->asal)
+                            <td>{{$berangkat->asal->nama}}</td>
+                            @else
+                            <td class="text-danger">Cabang {{$berangkat->idasal}} tidak ditemukan</td>
+                            @endif
+                        </tr>
+                        <tr><th>Cabang Tujuan</th>
+                            @if($berangkat->tujuan)
+                            <td>{{$berangkat->tujuan->nama}}</td></tr>
+                            @else
+                            <td class="text-danger">Cabang {{$berangkat->idtujuan}} tidak ditemukan</td>
+                            @endif
                         <tr><th>Tgl.Berangkat</th><td>{{\App\Helpers::dateFromMySqlSystem($berangkat->tglberangkat)}}</td></tr>
                         <tr><th>Tgl.Tiba</th><td>{!! $berangkat->tgltiba?(\App\Helpers::dateFromMySqlSystem($berangkat->tgltiba)):'<i class="text-danger">-- belum tiba --</i>' !!}</td></tr>                    
                     </table>
@@ -69,16 +80,34 @@
                     </td>
                 </tr>
             </table>
-
+            @if($berangkat->resi)
             <table id="tbresi" class="display responsive no-wrap" width="100%">
                 <tbody>
                     @foreach($berangkat->resi as $resi)
                     <tr>
                         <td>{{$resi->noresi}}</td>
                         <td>{{\App\Helpers::dateFromMySqlSystem($resi->tglresi)}}</td>
-                        <td>{{$resi->cabang->nama}}</td>
-                        <td>{{$resi->pengirim->cp}}</td>
-                        <td>{{$resi->penerima->cp}}</td>
+                        <td>
+                            @if($resi->cabang)
+                            {{$resi->cabang->nama}}
+                            @else
+                            <span class="text-danger">cabang {{$resi->idcab}} blm terdaftar</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if($resi->pengirim)
+                            {{$resi->pengirim->cp}}
+                            @else
+                            <span class="text-danger">konsumen pengirim {{$resi->idkonsumen}} blm terdaftar</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if($resi->penerima)
+                            {{$resi->penerima->cp}}
+                            @else
+                            <span class="text-danger">konsumen penerima {{$resi->idpenerima}} blm terdaftar</span>
+                            @endif
+                        </td>
                         <td>
                             <a class="btn btn-sm btn-primary" href="/admin/resi/{{$resi->noresi}}/?back=true">View Resi</a>
                         </td>
@@ -96,7 +125,9 @@
                     </tr>
                 </thead>
             </table>
-            
+            @else
+            <div class="alert alert-danger">Daftar resi kosong. Silahkan hubungi programer!</div>
+            @endif
             </div>
         </div>
     </div>
