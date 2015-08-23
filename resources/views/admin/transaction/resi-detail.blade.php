@@ -25,13 +25,13 @@
             <table class="table table-responsive table-condensed table-bordered table-striped table-hover no-margin">
                 <tr><th width="20%">SJT</th><td style="font-weight: bold">{{$resi->idberangkat}}</td></tr>
                 <tr><th>Status Transaksi</th><td style="font-weight: bold">{{\App\Helpers::getResiStatus($resi->status)}}</td></tr>
-                <tr><th>User</th>
-                    @if($resi->pegawai)
-                    <td>{{$resi->pegawai->nama}}</td>
-                    @else
-                    <td class="text-danger">User {{$resi->user}} tidak terdaftar!</td>
-                    @endif
-                </tr>
+{{-- <tr><th>User</th> --}}
+{{--    @if($resi->pegawai) --}}
+{{--    <td>{{$resi->pegawai->nama}}</td> --}}
+{{--    @else --}}
+{{--    <td class="text-danger">User {{$resi->user}} tidak terdaftar!</td> --}}
+{{--    @endif --}}
+{{-- </tr> --}}
                 <tr><th>Tanggal</th><td>{{\App\Helpers::dateFromMySqlSystem($resi->tglresi)}}</td></tr>
                 <tr><th>Penagihan Kepada</th><td>{{$resi->tagihan}}</td></tr>
                 <tr><th>Keterangan</th><td>{{$resi->ket}}</td></tr>
@@ -45,7 +45,7 @@
                                 <tr><td>Contact Person</td><td>{{$resi->pengirim->cp}}</td></tr>
                                 <tr><td>No.Telp</td><td>{{$resi->pengirim->notelp}}</td></tr>
                                 <tr><td>Alamat</td><td>{{$resi->pengirim->alamat}}</td></tr>
-                                <tr><td>Kota</td><td>{{$resi->pengirim->dtkota->nmkota}}</td></tr>
+                                <tr><td>Kota</td><td>{{$resi->pengirim->dtkota?$resi->pengirim->dtkota->nmkota:'-'}}</td></tr>
                             </table>
                         </ul>
                     </td>
@@ -62,7 +62,7 @@
                                 <tr><td>Contact Person</td><td>{{$resi->penerima->cp}}</td></tr>
                                 <tr><td>No.Telp</td><td>{{$resi->penerima->notelp}}</td></tr>
                                 <tr><td>Alamat</td><td>{{$resi->penerima->alamat}}</td></tr>
-                                <tr><td>Kota</td><td>{{$resi->penerima->dtkota->nmkota}}</td></tr>
+                                <tr><td>Kota</td><td>{{$resi->penerima->dtkota?$resi->penerima->dtkota->nmkota:'-'}}</td></tr>
                             </table>
                         </ul>
                         
