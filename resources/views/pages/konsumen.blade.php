@@ -38,7 +38,7 @@
 						<tr>
 							<td>{{ $list->nama }}</td>
 							<td>{{ $list->alamat }}</td>
-							<td>{{ $kota[$list->kota] }}</td>
+							<td>{{ $list->kota?$kota[$list->kota]:'-' }}</td>
 							<td>{{ $list->notelp }}</td>
 							<td>{{ $list->cp }}</td>
 							<td>{{ $list->email }}</td>
