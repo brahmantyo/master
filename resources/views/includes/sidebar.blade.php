@@ -52,7 +52,7 @@
             <li class="treeview">
                 <a><i class="fa fa-plus-square-o"></i><span>Laporan</span></a>
                 <ul class="treeview-menu">
-                    <li><a href="/penagihan" id="menu-penagihan"><i class="fa fa-credit-card"></i>Penagihan</a></li>
+                    <li><a href="/admin/penagihan" id="menu-penagihan"><i class="fa fa-credit-card"></i>Penagihan</a></li>
 <!--                     <li><a href="/mutasi" id="menu-mutasi"><i class="fa fa-calculator"></i>Mutasi</a></li> -->
 <!--                     <li><a href="/pendapatan" id="menu-pendapatan"><i class="fa fa-money"></i>Pendapatan</a></li> -->
 
