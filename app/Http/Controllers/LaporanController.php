@@ -28,7 +28,7 @@ class LaporanController extends Controller {
 		$tagihan->leftJoin('konsumen AS k','k.idkonsumen','=','resi.idkonsumen');
 		$tagihan->leftJoin('konsumen AS t','t.idkonsumen','=','resi.idpenerima');
 		$cab = 0;
-		if($arrdata){
+/*		if($arrdata){
 			$title .= "<div class='form-inline'>";
 			$subtitle = [];
 			if(Request::get('cabang')){
@@ -58,9 +58,9 @@ class LaporanController extends Controller {
 				if($i<$count){$title .= ' ';}				
 			}while($i<$count);
 			$title .= '</div>';
-		}
+		}*/
 
-
+		$tagihan->where('crbyr','Non Tunai');
 		$dtcabang = \App\cabang::all();
 		foreach ($dtcabang as $c) {
 			$cabang[$c->idcabang] = $c->nama;

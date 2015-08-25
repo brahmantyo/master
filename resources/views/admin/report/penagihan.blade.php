@@ -5,6 +5,10 @@
 <link href="{{ asset('/plugins/datatables/dataTables.responsive.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('/plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('/plugins/daterangepicker2/daterangepicker.css') }}" rel="stylesheet" type="text/css" /> 
+
+<link href="{{ asset('/plugins/jqwidgets/styles/jqx.base.css') }}" rel="stylesheet" type="text/css" /> 
+<link href="{{ asset('/plugins/jqwidgets/styles/jqx.bootstrap.css') }}" rel="stylesheet" type="text/css" /> 
+
 <style type="text/css">
 .new {
  		background-color: #F5A9A9 !important;
@@ -16,8 +20,17 @@
 <script src="{{ asset('/plugins/datatables/jquery.dataTables-1.10.6.min.js') }}"></script>
 <script src="{{ asset('/plugins/datatables/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('/plugins/datatables/dataTables.bootstrap.js') }}"></script>
+<script src="{{ asset('/plugins/datatables/jquery.dataTables.rowGrouping.js') }}"></script>
 <script src="{{ asset('/plugins/daterangepicker2/moment.js') }}"></script>
 <script src="{{ asset('/plugins/daterangepicker2/daterangepicker.js') }}"></script>
+
+<script src="{{ asset('/plugins/jqwidgets/jqxcore.js') }}"></script>
+<script src="{{ asset('/plugins/jqwidgets/jqxdata.js') }}"></script>
+<script src="{{ asset('/plugins/jqwidgets/jqxbuttons.js') }}"></script>
+<script src="{{ asset('/plugins/jqwidgets/jqxscrollbar.js') }}"></script>
+<script src="{{ asset('/plugins/jqwidgets/jqxlistbox.js') }}"></script>
+<script src="{{ asset('/plugins/jqwidgets/jqxdropdownlist.js') }}"></script>
+<script src="{{ asset('/plugins/jqwidgets/jqxdatatable.js') }}"></script>
 @endsection
 
 @section('content-header')
@@ -42,38 +55,43 @@
                 @endforeach
             @endif
 			<div class="box-body">
-				<table id="tbtagihan" class="display responsive no-wrap" width="100%">
+				<div>
+					{!! Form::open(['url'=>'/admin/penagihan/tagihan-cabang','method'=>'GET']) !!}
+					{!! Form::select('cabang',$cabang) !!}
+					{!! Form::submit('Tagihan Cabang') !!}
+					{!! Form::close() !!}
+				</div>
+				<!-- -->
+				@if(isset($list))
+				<table id="data" class="dttable display responsive no-wrap" width="100%">
 				<tbody>
-					@foreach($tagihans as $tagihan)
-					<tr class="{{($tagihan->status)?'':'new'}}" align="right">
-						<td align="left">{{$tagihan->noresi}}</td>
-						<td>{{\App\Helpers::dateFromMySqlSystem($tagihan->tglresi)}}</td>
-						<td align="left">{{($tagihan->ppengirim)&&($tagihan->ppengirim!='-')?$tagihan->ppengirim:$tagihan->cppengirim}}</td>
-						<td align="left">{{($tagihan->ppenerima)&&($tagihan->ppenerima!='-')?$tagihan->ppenerima:$tagihan->cppenerima}}</td>
-						<td>{{\App\Helpers::currency($tagihan->totalbiaya)}}</td>
-						<td>{{\App\Helpers::currency($tagihan->dp)}}</td>
-						<td>{{\App\Helpers::currency($tagihan->sisa)}}</td>
-						<td>{{$tagihan->tagihan}}</td>
-						<td>
-							<a href="/penagihan/{{$tagihan->noresi}}" class="btn btn-warning">View</a>
-						</td>
-					</tr>
-					@endforeach
+				@foreach($list as $i=>$l)
+				<tr>
+					<td></td>
+					<td>{{$l['konsumen']}}</td>
+					<td>{{$l['jmlresi']}}</td>
+					<td>{{$l['totalbiaya']}}</td>
+					<td>{{$l['dp']}}</td>
+					<td>{{$l['sisa']}}</td>
+					<td>
+						<a href="/admin/penagihan/tagihan-cabang/?k={{$i}}">Detail</a>
+					</td>
+				</tr>
+				@endforeach
 				</tbody>
 				<thead>
-					<tr>
-						<th>No.Resi</th>
-						<th>Tanggal</th>
-						<th>Pengirim</th>
-						<th>Penerima</th>
-						<th>Biaya</th>
-						<th>DP</th>
-						<th>Sisa Tagihan</th>
-						<th>Penagihan Kepada</th>
-						<th></th>
-					</tr>
+				<tr>
+					<th>No.</th>
+					<th>Konsumen</th>
+					<th>Jumlah Resi</th>
+					<th>Total Biaya</th>
+					<th>DP</th>
+					<th>Sisa</th>
+					<th></th>
+				</tr>
 				</thead>
 				</table>
+				@endif
 			</div>
             </div>
         </div>
@@ -84,7 +102,7 @@
     //Date range picker
     $('.date').daterangepicker();
 
-	$('a:contains("View")').fancybox({
+	$('a:contains("Detail")').fancybox({
 		type : 'iframe',
 		href : this.value,
 		autoSize: false,
@@ -94,13 +112,33 @@
 		ajax : {
 			dataType : 'html',
 		},
-		afterClose : function(){ window.location.replace('/penagihan') },
 	});
-	$('#tbtagihan').dataTable({
+	$('.dttable').dataTable({
 		"order" : [1,"asc"],
 		"iDisplayLength": 5,
 		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 		"responsive":true
+	});
+	$(document).ready(function(){
+	$('-#data').jqxDataTable(
+            {
+            	width: '100%',
+                theme: 'bootstrap',
+                pageable: true,
+                pagerButtonsCount: 5,
+                sortable: true,
+                columnsResize: true,
+                rowDetails: true,
+                columns: [
+                  { text: 'No.', dataField: 'No.' },
+                  { text: 'Konsumen', dataField: 'Konsumen' },
+                  { text: 'Jumlah Resi', dataField: 'Jumlah Resi' },
+                  { text: 'Total Biaya', dataField: 'Total Biaya'},
+                  { text: 'DP', dataField: 'DP' },
+                  { text: 'Sisa', dataField: 'Sisa' }
+                ]
+            });
+
 	});
 </script>
 @endsection

@@ -43,6 +43,10 @@ class AppServiceProvider extends ServiceProvider {
 		foreach ($satuan as $v) {
 			$dsatuan[$v->idsatuan]= $v->namasatuan;
 		}
+		$cabang = \App\cabang::all();
+		foreach ($cabang as $v) {
+			$dcabang[$v->idcabang]= $v->nama;
+		}
 
 		$quotes = \App\quote::where('status','=','0')->get();
 
@@ -52,6 +56,7 @@ class AppServiceProvider extends ServiceProvider {
 			'memo'=>$memo,
 			'kota'=>$dkota,
 			'satuan'=>$dsatuan,
+			'cabang'=>$dcabang,
 			'nquotes'=>$quotes->count(),
 		);
 		return View::share($data);
