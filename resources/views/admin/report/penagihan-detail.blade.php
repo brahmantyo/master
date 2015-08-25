@@ -55,43 +55,43 @@
                 @endforeach
             @endif
 			<div class="box-body">
-
-<table class="dttable display responsive no-wrap" width="100%">
-	<tbody>
-		<?php
-		$tb=0;$dp=0;$ss=0;
-		?>
-		@foreach($resi as $r)
-		<tr>
-			<td>{{$r->noresi}}</td>
-			<td>{{$r->totalbiaya}}</td>
-			<td>{{$r->dp}}</td>
-			<td>{{$r->sisa}}</td>
-		</tr>
-		<?php
-			$tb += $r->totalbiaya;
-			$dp += $r->dp;
-			$ss += $r->sisa;
-		?>
-		@endforeach
-	</tbody>
-	<thead>
-		<tr>
-			<th>No.Resi</th>
-			<th>Total Biaya</th>
-			<th>DP</th>
-			<th>Sisa</th>
-		</tr>
-	</thead>
-	<tfoot>
-		<tr>
-			<th></th>
-			<th>{{$tb}}</th>
-			<th>{{$dp}}</th>
-			<th>{{$ss}}</th>
-		</tr>
-	</tfoot>
-</table>
+			<center><h3>Tagihan Konsumen {{$resi[0]->tagihan=="Pengirim"?$resi[0]->pengirim->nama:$resi[0]->penerima->nama}}</h3></center>
+			<table class="dttable display responsive no-wrap" width="100%">
+				<tbody>
+					<?php
+					$tb=0;$dp=0;$ss=0;
+					?>
+					@foreach($resi as $r)
+					<tr>
+						<td>{{$r->noresi}}</td>
+						<td align="right">{{\App\Helpers::currency($r->totalbiaya)}}</td>
+						<td align="right">{{\App\Helpers::currency($r->dp)}}</td>
+						<td align="right">{{\App\Helpers::currency($r->sisa)}}</td>
+					</tr>
+					<?php
+						$tb += $r->totalbiaya;
+						$dp += $r->dp;
+						$ss += $r->sisa;
+					?>
+					@endforeach
+				</tbody>
+				<thead>
+					<tr>
+						<th>No.Resi</th>
+						<th>Total Biaya</th>
+						<th>DP</th>
+						<th>Sisa</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td></td>
+						<td align="right">{{\App\Helpers::currency($tb)}}</td>
+						<td align="right">{{\App\Helpers::currency($dp)}}</td>
+						<td align="right">{{\App\Helpers::currency($ss)}}</td>
+					</tr>
+				</tfoot>
+			</table>
 
 			</div>
             </div>
@@ -123,10 +123,10 @@
                 columns: [
                   { text: 'No.', dataField: 'No.' },
                   { text: 'Konsumen', dataField: 'Konsumen' },
-                  { text: 'Jumlah Resi', dataField: 'Jumlah Resi' },
-                  { text: 'Total Biaya', dataField: 'Total Biaya'},
-                  { text: 'DP', dataField: 'DP' },
-                  { text: 'Sisa', dataField: 'Sisa' }
+                  { text: 'Jumlah Resi', dataField: 'Jumlah Resi', align: 'right' },
+                  { text: 'Total Biaya', dataField: 'Total Biaya', align: 'right'},
+                  { text: 'DP', dataField: 'DP', align: 'right' },
+                  { text: 'Sisa', dataField: 'Sisa', align: 'right' }
                 ]
             });
 

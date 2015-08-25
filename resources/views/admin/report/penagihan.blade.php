@@ -57,31 +57,30 @@
 			<div class="box-body">
 				<div>
 					{!! Form::open(['url'=>'/admin/penagihan/tagihan-cabang','method'=>'GET']) !!}
-					{!! Form::select('cabang',$cabang) !!}
+					{!! Form::select('cabang',$cabang,$cab) !!}
 					{!! Form::submit('Tagihan Cabang') !!}
 					{!! Form::close() !!}
 				</div>
 				<!-- -->
+				<center><h3>{{isset($title)?$title:''}}</h3></center>
 				@if(isset($list))
 				<table id="data" class="dttable display responsive no-wrap" width="100%">
 				<tbody>
 				@foreach($list as $i=>$l)
-				<tr>
-					<td></td>
-					<td>{{$l['konsumen']}}</td>
-					<td>{{$l['jmlresi']}}</td>
-					<td>{{$l['totalbiaya']}}</td>
-					<td>{{$l['dp']}}</td>
-					<td>{{$l['sisa']}}</td>
-					<td>
-						<a href="/admin/penagihan/tagihan-cabang/?k={{$i}}">Detail</a>
+				<tr align="right">
+					<td align="left">{{$l['konsumen']}}</td>
+					<td width="10">{{$l['jmlresi']}}</td>
+					<td width="30">{{\App\Helpers::currency($l['totalbiaya'])}}</td>
+					<td width="30">{{\App\Helpers::currency($l['dp'])}}</td>
+					<td width="30">{{\App\Helpers::currency($l['sisa'])}}</td>
+					<td width="10" align="left">
+						<a href="/admin/penagihan/tagihan-cabang/?k={{$i}}" class="btn btn-success">Detail</a>
 					</td>
 				</tr>
 				@endforeach
 				</tbody>
 				<thead>
 				<tr>
-					<th>No.</th>
 					<th>Konsumen</th>
 					<th>Jumlah Resi</th>
 					<th>Total Biaya</th>
@@ -114,7 +113,7 @@
 		},
 	});
 	$('.dttable').dataTable({
-		"order" : [1,"asc"],
+		"order" : [0,"asc"],
 		"iDisplayLength": 5,
 		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 		"responsive":true

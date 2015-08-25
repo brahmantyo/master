@@ -44,6 +44,9 @@ class PenagihanController extends Controller {
 
 
 		if($cab){
+			$cabang = \App\cabang::where('idcabang','=',$cab)->first();
+			$title = 'Tagihan '.$cabang->nama;
+
 			$tagihan->where('b.idasal',$cab)->where('resi.tagihan','Pengirim');
 			$tagihan->orWhere('b.idtujuan',$cab)->where('resi.tagihan','Penerima');
 			
@@ -66,7 +69,7 @@ class PenagihanController extends Controller {
 				}
 			}
 			$list = Collection::make($arr);
-			return view('admin.report.penagihan')->with('tagihans',$tagihan)->with('list',$list);
+			return view('admin.report.penagihan')->with('cab',$cab)->with('tagihans',$tagihan)->with('list',$list)->with('title',$title);
 		}
 		if($kon){
 			$tagihan->where('idkonsumen','=',$kon)->orWhere('idpenerima','=',$kon);
