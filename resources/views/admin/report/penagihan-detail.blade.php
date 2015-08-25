@@ -88,6 +88,7 @@
 				<tfoot>
 					<tr>
 						<td></td>
+						<td></td>
 						<td align="right">{{\App\Helpers::currency($tb)}}</td>
 						<td align="right">{{\App\Helpers::currency($dp)}}</td>
 						<td align="right">{{\App\Helpers::currency($ss)}}</td>
