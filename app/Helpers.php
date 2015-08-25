@@ -7,6 +7,7 @@ class Helpers {
 			case 0 : return 'Pending';break;
 			case 1 : return 'Muat';break;
             case 2 : return 'Berangkat';break;
+            case 3 : return 'Sudah Tiba';break;
 			default: return 'Status tidak diketahui';
 		}
 	}

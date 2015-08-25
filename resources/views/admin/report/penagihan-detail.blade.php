@@ -64,6 +64,7 @@
 					@foreach($resi as $r)
 					<tr>
 						<td>{{$r->noresi}}</td>
+						<td>{{\App\Helpers::getResiStatus($r->status)}}</td>
 						<td align="right">{{\App\Helpers::currency($r->totalbiaya)}}</td>
 						<td align="right">{{\App\Helpers::currency($r->dp)}}</td>
 						<td align="right">{{\App\Helpers::currency($r->sisa)}}</td>
@@ -78,6 +79,7 @@
 				<thead>
 					<tr>
 						<th>No.Resi</th>
+						<th>Status Pengiriman</th>
 						<th>Total Biaya</th>
 						<th>DP</th>
 						<th>Sisa</th>

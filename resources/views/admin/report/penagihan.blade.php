@@ -58,7 +58,7 @@
 				<div>
 					{!! Form::open(['url'=>'/admin/penagihan/tagihan-cabang','method'=>'GET']) !!}
 					{!! Form::select('cabang',$cabang,$cab) !!}
-					{!! Form::submit('Tagihan Cabang') !!}
+					{!! Form::submit('Cabang') !!}
 					{!! Form::close() !!}
 				</div>
 				<!-- -->

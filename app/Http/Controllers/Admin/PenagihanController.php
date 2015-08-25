@@ -18,7 +18,7 @@ class PenagihanController extends Controller {
 		$tagihan = resi::where('crbyr','Non Tunai')
 					->where('status','>',1)
 					->get();
-		return view('admin.report.penagihan')->with('tagihans',$tagihan);
+		return view('admin.report.penagihan')->with('tagihans',$tagihan)->with('cab',0);
 	}
 	public function postCari(){
 		return 'pencarian';
