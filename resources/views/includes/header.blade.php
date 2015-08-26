@@ -9,12 +9,12 @@
         $home = '/konsumenpanel';
     }
     ?>
+    <a href="{{ $home }}" class="logo hidden-xs">LANOGAN</a>
 
-    <a href="{{ $home }}" class="logo">LANOGAN</a>
-    <span style="top:33px;left:44px;position:inherit;display:block;z-index: 100;">Intgreted Back Office</span>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
         <!-- Sidebar toggle button-->
+        <a href="{{$home}}" class="hidden-sm hidden-md hidden-lg col-xs-12 badge">LANOGAN SUMATRA EXPRESS</a>
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
         </a>
@@ -23,7 +23,6 @@
                 <li><a href="/"><i class="fa fa-home"></i> Halaman Depan</a></li>
             </ul>
             <ul class="nav navbar-nav">
-
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" id="user-profile" class="dropdown-toggle" data-toggle="dropdown">
