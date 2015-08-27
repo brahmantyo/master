@@ -16,7 +16,7 @@ class OperasionalController extends Controller {
 
 	public function getIndex()
 	{
-		$this->title = $this->title.' - Semua';
+		$this->title = $this->title.' - Semua Cabang';
 		$operasional = byoperasional::all();
 		return view('admin.report.operasional')->with('list',$operasional)->with('title',$this->title);
 	}

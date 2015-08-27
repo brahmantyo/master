@@ -1,5 +1,5 @@
 <?php namespace App;
-
+use App\Money;
 class Helpers {
 
 	public static function getResiStatus($status){
@@ -29,11 +29,11 @@ class Helpers {
 	}
     public static function currency($value,$decimal=0,$country=NULL,$vat=FALSE){
         switch($country){
-            case "id" : $money = new Money("Rp ",0.1,",","."); break;
-            case "us" : $money = new Money("$ ",0.2,".",","); break;
+            case "id" : $money = new Money("Rp ",$decimal,0.1,",","."); break;
+            case "us" : $money = new Money("$ ",$decimal,0.2,".",","); break;
             default : $money = new Money("");
         }
-        $money->setDecimal(0);
+        if(!$decimal){$money->setDecimal(0);}else{$money->setDecimal($decimal);}
         if(strip_tags(!isset($_POST['export']))){
             return $money->display($value);
         } else {

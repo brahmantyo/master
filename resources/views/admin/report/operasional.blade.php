@@ -73,22 +73,32 @@
 					<center><h3>{{isset($title)?$title:''}}</h3></center>
 					<table id="dataTable" class="display responsive no-wrap" width="100%">
 						<tbody>
+							<?php $jml=0; ?>
 							@foreach($list as $l)
 							<tr>
+								<td>{{ $l->cabang->nama }}</td>
 								<td>{{ \App\Helpers::dateFromMySqlSystem($l->tanggal) }}</td>
 								<td>{{ $l->keterangan }}</td>
-								<td>{{ $l->cabang->nama }}</td>
+								<td align="right">{{ \App\Helpers::currency($l->nilai,2,'id') }}</td>
 							</tr>
+							<?php $jml += $l->nilai; ?>
 							@endforeach
 						</tbody>
 						<thead>
 							<tr>
+								<th>Cabang</th>
 								<th>Tanggal</th>
 								<th>Keterangan</th>
-								<th>Cabang</th>
+								<th>Nilai</th>
 							</tr>
 						</thead>
 						<tfoot>
+							<tr align="right">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>{{\App\Helpers::currency($jml,2,'id')}}</td>
+							</tr>
 						</tfoot>
 					</table>
 				</div>
@@ -117,6 +127,7 @@
 		});
 
 		$('#dataTable').dataTable({
+			
 		});
 
 
