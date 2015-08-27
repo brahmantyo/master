@@ -111,7 +111,7 @@
         });
         $(document).ready(function(){
             //Shortkey dictionary
-            var frontkeys = [
+/*            var frontkeys = [
                 {
                     "keys"          : "f1",
                     "is_exclusive"  : true,
@@ -217,7 +217,7 @@
                  .bind("focus", function() { listener.stop_listening(keylist); })
                  .bind("blur", function() { listener.listen(keylist); });
 
-            $('input[type=text]:first').focus();
+            $('input[type=text]:first').focus();*/
         });
         
     </script>

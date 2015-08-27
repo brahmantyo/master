@@ -56,9 +56,15 @@
             @endif
 			<div class="box-body">
 				<div>
-					{!! Form::open(['url'=>'/admin/penagihan/tagihan-cabang','method'=>'GET']) !!}
-					{!! Form::select('cabang',$cabang,$cab) !!}
-					{!! Form::submit('Cabang') !!}
+					{!! Form::open(['url'=>'/admin/penagihan/tagihan-cabang','method'=>'GET','class'=>'form-inline']) !!}
+					<div class="form-group">
+					{!! Form::label('cabang','Daftar cabang',['class'=>'sr-only']) !!}
+					<div class="input-group" style="background-color:@brand-info">
+					<div class="input-group-addon">Daftar Cabang</div>
+					{!! Form::select('cabang',$cabang,$cab,['class'=>'form-control']) !!}
+					</div>
+					</div>
+					{!! Form::submit('Tampilkan',['class'=>'btn btn-success']) !!}
 					{!! Form::close() !!}
 				</div>
 				<!-- -->
@@ -116,29 +122,28 @@
 		"order" : [0,"asc"],
 		"iDisplayLength": 5,
 		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-		"responsive":true
+		"responsive":true,
+		"language": {
+		    "sProcessing":   "Sedang memproses...",
+		    "sLengthMenu":   "Tampilkan _MENU_ entri",
+		    "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+		    "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+		    "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+		    "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+		    "sInfoPostFix":  "",
+		    "sSearch":       "Cari:",
+		    "sUrl":          "",
+		    "oPaginate": {
+		        "sFirst":    "Pertama",
+		        "sPrevious": "Sebelumnya",
+		        "sNext":     "Selanjutnya",
+		        "sLast":     "Terakhir"
+		    
+			}
+        }
 	});
-	$(document).ready(function(){
-	$('-#data').jqxDataTable(
-            {
-            	width: '100%',
-                theme: 'bootstrap',
-                pageable: true,
-                pagerButtonsCount: 5,
-                sortable: true,
-                columnsResize: true,
-                rowDetails: true,
-                columns: [
-                  { text: 'No.', dataField: 'No.' },
-                  { text: 'Konsumen', dataField: 'Konsumen' },
-                  { text: 'Jumlah Resi', dataField: 'Jumlah Resi' },
-                  { text: 'Total Biaya', dataField: 'Total Biaya'},
-                  { text: 'DP', dataField: 'DP' },
-                  { text: 'Sisa', dataField: 'Sisa' }
-                ]
-            });
 
-	});
+
 </script>
 @endsection
 
@@ -146,10 +151,6 @@
 <p><b>Shortcut For Laporan Tagihan</b></p>
 <hr>
 <p>Tekan tombol ... untuk melakukan ...</p>
-@yield('coba')
-@endsection
 
 
-@section('coba')
-ini percobaan
 @endsection
