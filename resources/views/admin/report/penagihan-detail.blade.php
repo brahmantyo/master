@@ -63,6 +63,7 @@
 					?>
 					@foreach($resi as $r)
 					<tr>
+						<td>{{\App\Helpers::dateFromMySqlSystem($r->tglresi)}}</td>
 						<td>{{$r->noresi}}</td>
 						<td>{{\App\Helpers::getResiStatus($r->status)}}</td>
 						<td align="right">{{\App\Helpers::currency($r->totalbiaya)}}</td>
@@ -78,6 +79,7 @@
 				</tbody>
 				<thead>
 					<tr>
+						<th>Tanggal</th>
 						<th>No.Resi</th>
 						<th>Status Pengiriman</th>
 						<th>Total Biaya</th>
@@ -87,6 +89,7 @@
 				</thead>
 				<tfoot>
 					<tr>
+						<td></td>
 						<td></td>
 						<td></td>
 						<td align="right">{{\App\Helpers::currency($tb)}}</td>
@@ -108,7 +111,7 @@
 
 
 	$('.dttable').dataTable({
-		"order" : [1,"asc"],
+		"order" : [0,"asc"],
 		"iDisplayLength": 5,
 		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 		"responsive":true

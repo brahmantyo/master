@@ -14,7 +14,7 @@
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
         <!-- Sidebar toggle button-->
-        <a href="{{$home}}" class="hidden-sm hidden-md hidden-lg col-xs-12 badge">LANOGAN SUMATRA EXPRESS</a>
+        <a href="{{$home}}" class="hidden-sm hidden-md hidden-lg col-xs-12 label label-warning">LANOGAN SUMATRA EXPRESS</a>
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
         </a>

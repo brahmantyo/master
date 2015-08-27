@@ -67,7 +67,7 @@
                     <i class="fa fa-pencil-square-o"></i>
                     <span>Transaksi</span>
                     @if($nquotes)
-                    <span class="label label-danger">{{$nquotes}}</span>
+                    <span class="badge">{{$nquotes}}</span>
                     @endif
                 </a>
                 <ul class="treeview-menu">
