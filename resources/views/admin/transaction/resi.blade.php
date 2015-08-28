@@ -51,6 +51,8 @@
 					<td>{{$i}}</td>
 					<td>{{\App\Helpers::dateFromMySqlSystem($resi->tglresi)}}</td>
 					<td>{{$resi->noresi}}</td>
+					<td>{{$resi->pengirim->nama}}</td>
+					<td>{{$resi->penerima->nama}}</td>
 					<td>
 						<a href="/admin/resi/{{$resi->noresi}}" class="btn btn-success">View</a>
 					</td>
@@ -60,10 +62,12 @@
 			</tbody>
 			<thead>
 				<tr>
-				<th>No.</th>
-				<th>Tanggal</th>
-				<th>No.Resi</th>
-				<th></th>
+					<th>No.</th>
+					<th>Tanggal</th>
+					<th>No.Resi</th>
+					<th>Pengirim</th>
+					<th>Penerima</th>
+					<th></th>
 				</tr>
 			</thead>
 		</table>
@@ -84,7 +88,7 @@
 		afterClose : function(){ window.location.replace('/admin/resi') },
 	});
 	$('#tbresi').dataTable({
-		"order" : [1,"asc"],
+		"order" : [1,"desc"],
 		"iDisplayLength": 5,
 		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 		"responsive":true,
