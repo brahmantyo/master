@@ -32,8 +32,8 @@ class Helpers {
     public static function getOperasionalStatus($status){
         switch($status){
             case 0 : return 'Entry';break;
-            case 1 : return 'Inspected';break;
-            case 2 : return 'Valid';break;
+            case 1 : return 'Valid';break;
+            case 2 : return 'Approved';break;
             default: return 'Status tidak diketahui';
         }
     }
