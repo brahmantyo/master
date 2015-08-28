@@ -94,20 +94,40 @@
                             <span class="text-danger">cabang {{$resi->idcab}} blm terdaftar</span>
                             @endif
                         </td>
+                        @if($resi->pengirim)
+                        <td class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-info">{{($resi->pengirim->nama)&&($resi->pengirim->nama!='-')?$resi->pengirim->nama:$resi->pengirim->cp}}</a>
+                            <ul class="dropdown-menu">
+                                <table class="table table-responsive table-bordered table-striped table-hover">
+                                    <tr><td>Contact Person</td><td>{{$resi->pengirim->cp}}</td></tr>
+                                    <tr><td>No.Telp</td><td>{{$resi->pengirim->notelp}}</td></tr>
+                                    <tr><td>Alamat</td><td>{{$resi->pengirim->alamat}}</td></tr>
+                                    <tr><td>Kota</td><td>{{$resi->pengirim->dtkota?$resi->pengirim->dtkota->nmkota:'-'}}</td></tr>
+                                </table>
+                            </ul>
+                        </td>
+                        @else
                         <td>
-                            @if($resi->pengirim)
-                            {{$resi->pengirim->cp}}
-                            @else
                             <span class="text-danger">konsumen pengirim {{$resi->idkonsumen}} blm terdaftar</span>
-                            @endif
                         </td>
+                        @endif
+                        @if($resi->penerima)
+                        <td class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle btn btn-info">{{($resi->penerima->nama)&&($resi->penerima->nama!='-')?$resi->penerima->nama:$resi->penerima->cp}}</a>
+                            <ul class="dropdown-menu">
+                                <table class="table table-responsive table-bordered table-striped table-hover ">
+                                    <tr><td>Contact Person</td><td>{{$resi->penerima->cp}}</td></tr>
+                                    <tr><td>No.Telp</td><td>{{$resi->penerima->notelp}}</td></tr>
+                                    <tr><td>Alamat</td><td>{{$resi->penerima->alamat}}</td></tr>
+                                    <tr><td>Kota</td><td>{{$resi->penerima->dtkota?$resi->penerima->dtkota->nmkota:'-'}}</td></tr>
+                                </table>
+                            </ul>
+                        </td>
+                        @else
                         <td>
-                            @if($resi->penerima)
-                            {{$resi->penerima->cp}}
-                            @else
-                            <span class="text-danger">konsumen penerima {{$resi->idpenerima}} blm terdaftar</span>
-                            @endif
+                            <span class="text-danger">konsumen penerima {{$resi->idpenerima}} blm terdaftar</span>    
                         </td>
+                        @endif
                         <td>
                             <a class="btn btn-sm btn-primary" href="/admin/resi/{{$resi->noresi}}/?back=true">View Resi</a>
                         </td>
@@ -136,7 +156,25 @@
     $('#tbresi').dataTable({
         "iDisplayLength": 5,
         "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "responsive":true
+        "responsive":true,
+        "language": {
+            "sProcessing":   "Sedang memproses...",
+            "sLengthMenu":   "Tampilkan _MENU_ entri",
+            "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+            "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+            "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+            "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+            "sInfoPostFix":  "",
+            "sSearch":       "Cari:",
+            "sUrl":          "",
+            "oPaginate": {
+                "sFirst":    "Pertama",
+                "sPrevious": "Sebelumnya",
+                "sNext":     "Selanjutnya",
+                "sLast":     "Terakhir"
+            
+            }
+        }
     });
 </script>
 @endsection

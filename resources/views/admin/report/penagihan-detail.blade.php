@@ -56,6 +56,24 @@
             @endif
 			<div class="box-body">
 			<center><h3>Tagihan Konsumen {{$resi[0]->tagihan=="Pengirim"?$resi[0]->pengirim->nama:$resi[0]->penerima->nama}}</h3></center>
+            <table class="table table-responsive table-condensed table-striped table-hover no-margin">
+				<tr>
+					<th width="20%">Nama Perusahaan</th><td width="30%">: {{$k->nama}}</td>
+					<th width="20%">Contact Person</th><td width="30%">: {{$k->cp}}</td>
+				</tr>
+				<tr>
+					<th>Alamat</th><td>: {{$k->alamat}}</td>
+					<th>Email</th><td>: {{$k->email}}</td>
+				</tr>
+				<tr>
+					<th>Kota</th><td>: {{$k->dtkota?$k->dtkota->nmkota:'-'}}</td>
+					<th></th><td></td>
+				</tr>
+				<tr>
+					<th>Telp</th><td>: {{$k->telp}}</td>
+					<th></th><td></td>
+				</tr>
+			</table>
 			<table class="dttable display responsive no-wrap" width="100%">
 				<tbody>
 					<?php

@@ -42,7 +42,6 @@ class PenagihanController extends Controller {
 			->where('resi.sisa','>',0)
 			->where('b.status','>',1);
 
-
 		if($cab){
 			$cabang = \App\cabang::where('idcabang','=',$cab)->first();
 			if($cabang)
@@ -76,8 +75,8 @@ class PenagihanController extends Controller {
 		}
 		if($kon){
 			$tagihan->where('idkonsumen','=',$kon)->orWhere('idpenerima','=',$kon);
-			
-			return view('admin.report.penagihan-detail')->with('resi',$tagihan->get());
+			$konsumen = \App\konsumen::find($kon);
+			return view('admin.report.penagihan-detail')->with('resi',$tagihan->get())->with('k',$konsumen);
 		}
 		return $this->getIndex();
 	}

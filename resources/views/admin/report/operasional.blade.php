@@ -133,7 +133,28 @@
 		});
 
 		$('#dataTable').dataTable({
-			
+			"order" : [1,"asc"],
+			"iDisplayLength": 5,
+			"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+			"responsive":true,
+			"language": {
+			    "sProcessing":   "Sedang memproses...",
+			    "sLengthMenu":   "Tampilkan _MENU_ entri",
+			    "sZeroRecords":  "Tidak ditemukan data yang sesuai",
+			    "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+			    "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
+			    "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
+			    "sInfoPostFix":  "",
+			    "sSearch":       "Cari:",
+			    "sUrl":          "",
+			    "oPaginate": {
+			        "sFirst":    "Pertama",
+			        "sPrevious": "Sebelumnya",
+			        "sNext":     "Selanjutnya",
+			        "sLast":     "Terakhir"
+			    
+				}
+	        }			
 		});
 
 
