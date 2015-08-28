@@ -36,6 +36,7 @@ class OperasionalController extends Controller {
 	public function postOperasionalCabang()
 	{
 		$search = Request::get('cab');
+		if($search==0){return $this->getIndex();}
 		$cabang = \App\cabang::find($search);
 		$this->title = $this->title.' - '.$cabang->nama;
 		$operasional = byoperasional::where('idcab',$search)->get();
