@@ -47,6 +47,7 @@ class AppServiceProvider extends ServiceProvider {
 		foreach ($cabang as $v) {
 			$dcabang[$v->idcabang]= $v->nama;
 		}
+		$dcabang = \App\Helpers::assoc_merge([0=>'--Daftar Cabang--'],$dcabang);
 
 		$quotes = \App\quote::where('status','=','0')->get();
 

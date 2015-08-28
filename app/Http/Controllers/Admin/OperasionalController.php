@@ -52,4 +52,9 @@ class OperasionalController extends Controller {
 		$operasional = byoperasional::where('tanggal','>=',$tgl1)->where('tanggal','<=',$tgl2)->get();
 		return view('admin.report.operasional')->withInput(Request::all())->with('list',$operasional)->with('title',$this->title);
 	}
+	
+	public function postAddBiaya()
+	{
+		
+	}
 }

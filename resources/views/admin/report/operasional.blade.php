@@ -51,7 +51,7 @@
 						{!! Form::label('cab','Daftar cabang',['class'=>'sr-only']) !!}
 						<div class="input-group">
 						
-						{!! Form::select('cab',array_merge([0=>'--Pilihan Cabang--'],$cabang),Input::get('cab'),['class'=>'form-control']) !!}
+						{!! Form::select('cab',$cabang,Input::get('cab'),['class'=>'form-control']) !!}
 						</div>
 						</div>
 						{!! Form::submit('Tampilkan',['class'=>'btn btn-success']) !!}
@@ -80,6 +80,8 @@
 								<td>{{ \App\Helpers::dateFromMySqlSystem($l->tanggal) }}</td>
 								<td>{{ $l->keterangan }}</td>
 								<td align="right">{{ \App\Helpers::currency($l->nilai,2,'id') }}</td>
+								<td>{{ \App\Helpers::getOperasionalStatus($l->status)}}</td>
+								<td>{{ $l->users }}</td>
 							</tr>
 							<?php $jml += $l->nilai; ?>
 							@endforeach
@@ -90,6 +92,8 @@
 								<th>Tanggal</th>
 								<th>Keterangan</th>
 								<th>Nilai</th>
+								<th>Status</th>
+								<th>User</th>
 							</tr>
 						</thead>
 						<tfoot>
@@ -98,6 +102,8 @@
 								<td></td>
 								<td></td>
 								<td>{{\App\Helpers::currency($jml,2,'id')}}</td>
+								<td></td>
+								<td></td>
 							</tr>
 						</tfoot>
 					</table>

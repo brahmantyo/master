@@ -2,6 +2,24 @@
 use App\Money;
 class Helpers {
 
+    public static function assoc_merge(array $a, array $b)
+    {
+        $r = array();
+
+        foreach ($a as $key => $val) {
+            if (array_key_exists($key, $b) && is_array($val) == is_array($b[$key])) {
+                if (is_array($val)) {
+                    $r[$key] = assoc_merge($a[$key], $b[$key]); // merge array
+                } else {
+                    $r[$key] = array($val, $b[$key]); // merge entry
+                }
+            } else {
+                $r[$key] = $val; // just copy
+            }
+        }
+        return $r + $b; // add whatever we missed
+    }
+
 	public static function getResiStatus($status){
 		switch($status){
 			case 0 : return 'Pending';break;
@@ -11,7 +29,14 @@ class Helpers {
 			default: return 'Status tidak diketahui';
 		}
 	}
-
+    public static function getOperasionalStatus($status){
+        switch($status){
+            case 0 : return 'Entry';break;
+            case 1 : return 'Inspected';break;
+            case 2 : return 'Valid';break;
+            default: return 'Status tidak diketahui';
+        }
+    }
 	public static function getQuoteStatus($status){
 		switch($status){
 			case 0 : return 'Pending';break;
