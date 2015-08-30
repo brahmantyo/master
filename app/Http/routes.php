@@ -236,3 +236,18 @@ Route::group(['prefix'=>'test'],function(){
 	}
 });
 
+Route::get('test',function(){
+	$data = \DB::select(\DB::raw("select r.sjt,r.id,km.nama kotamuat,kb.nama kotabongkar,r.tglbrkt,r.tgltiba,resi.noresi,resi.tglresi,resi.idkonsumen pengirim,resi.idpenerima penerima,resi.totalbiaya,resi.dp,resi.sisa,resi.tipe from resi left join rute r on (r.sjt=resi.idberangkat and r.id=resi.idrute) left join cabang km on(km.idcabang=r.kotamuat) left join cabang kb on (kb.idcabang=r.kotabongkar) where r.sjt='SJT.1.9.150824.01'"));
+	return '{"data":'.json_encode($data).'}';
+});
+Route::get('loadrute',function(){
+	$rute = \App\rute::all();
+	return '{"data":['.$rute->toJson().'[}';
+});
+Route::get('loadresi',function(){
+	$resi = \App\resi::all();
+	return $resi->toJson();
+});
+Route::get('go',function(){
+	return view('test.test1');
+});
