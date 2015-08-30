@@ -45,27 +45,60 @@
 		<div>
 		<table id="tbresi" class="table table-condensed table-striped">
 			<tbody>
-				<?php $i=1; ?>
+				<?php
+					$i=1;
+					$total=0;
+					$dp=0;
+					$sisa=0;
+				?>
 				@foreach($resis as $resi)
-				<tr>
+				<tr {{$resi->sisa==0?'style=background:lightgreen':''}}>
 					<td>{{$i}}</td>
 					<td>{{\App\Helpers::dateFromMySqlSystem($resi->tglresi)}}</td>
 					<td>{{$resi->noresi}}</td>
+					<td>{{$resi->pengirim->nama}}</td>
+					<td>{{$resi->penerima->nama}}</td>
+					<td align="right">{{\App\Helpers::currency($resi->totalbiaya)}}</td>
+					<td align="right">{{\App\Helpers::currency($resi->dp)}}</td>
+					<td align="right">{{\App\Helpers::currency($resi->sisa)}}</td>
 					<td>
 						<a href="/admin/resi/{{$resi->noresi}}" class="btn btn-success">View</a>
 					</td>
 				</tr>
-				<?php $i++; ?>
+				<?php
+					$i++;
+					$total += $resi->totalbiaya;
+					$dp += $resi->dp;
+					$sisa += $resi->sisa;
+				?>
 				@endforeach
 			</tbody>
 			<thead>
 				<tr>
-				<th>No.</th>
-				<th>Tanggal</th>
-				<th>No.Resi</th>
-				<th></th>
+					<th>No.</th>
+					<th>Tanggal</th>
+					<th>No.Resi</th>
+					<th>Pengirim</th>
+					<th>Penerima</th>
+					<th>Total Biaya</th>
+					<th>DP</th>
+					<th>Sisa Biaya</th>
+					<th></th>
 				</tr>
 			</thead>
+			<tfoot>
+				<tr>
+					<td>Total</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td align="right">{{\App\Helpers::currency($total)}}</td>
+					<td align="right">{{\App\Helpers::currency($dp)}}</td>
+					<td align="right">{{\App\Helpers::currency($sisa)}}</td>
+					<td></td>					
+				</tr>
+			</tfoot>
 		</table>
 		</div>
 	</div>
@@ -84,7 +117,7 @@
 		afterClose : function(){ window.location.replace('/admin/resi') },
 	});
 	$('#tbresi').dataTable({
-		"order" : [1,"asc"],
+		"order" : [1,"desc"],
 		"iDisplayLength": 5,
 		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 		"responsive":true,
