@@ -17,6 +17,7 @@
 <script src="{{ asset('/plugins/datatables/jquery.dataTables-1.10.6.min.js') }}"></script>
 <script src="{{ asset('/plugins/datatables/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('/plugins/datatables/dataTables.bootstrap.js') }}"></script>
+<script src="{{ asset('/plugins/datatables/language/bahasa-indonesia.js') }}"></script>
 <script src="{{ asset('/plugins/daterangepicker2/moment.js') }}"></script>
 <script src="{{ asset('/plugins/daterangepicker2/daterangepicker.js') }}"></script>
 @endsection
@@ -139,24 +140,7 @@
         "fnStateLoad": function (oSettings) {
             return JSON.parse( localStorage.getItem('DataTables') );
         },
-		"language": {
-		    "sProcessing":   "Sedang memproses...",
-		    "sLengthMenu":   "Tampilkan _MENU_ entri",
-		    "sZeroRecords":  "Tidak ditemukan data yang sesuai",
-		    "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-		    "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
-		    "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
-		    "sInfoPostFix":  "",
-		    "sSearch":       "Cari:",
-		    "sUrl":          "",
-		    "oPaginate": {
-		        "sFirst":    "|<",
-		        "sPrevious": "<",
-		        "sNext":     ">",
-		        "sLast":     ">|"
-		    
-			}
-        }
+		"language": language
 	});
 </script>
 @endsection

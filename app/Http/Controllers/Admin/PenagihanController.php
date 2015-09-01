@@ -38,9 +38,13 @@ class PenagihanController extends Controller {
 		$cab = Request::get('cabang');
 		$kon = Request::get('k');
 		$tagihan = resi::select('resi.*')
-			->rightJoin('berangkat AS b','b.idberangkat','=','resi.idberangkat')
-			->where('resi.sisa','>',0)
-			->where('b.status','>',1);
+			->rightJoin('rute AS rt',function($join){
+				$join->on('rt.sjt','=','resi.idberangkat');
+				$join->on('rt.id','=','resi.idrute');
+			})
+			//->rightJoin('berangkat AS b','b.idberangkat','=','resi.idberangkat')
+			->where('resi.sisa','>',0);
+			//->where('rt.status','>',1);
 
 		if($cab){
 			$cabang = \App\cabang::where('idcabang','=',$cab)->first();
@@ -48,8 +52,8 @@ class PenagihanController extends Controller {
 			{
 				$title = 'Tagihan '.$cabang->nama;
 
-				$tagihan->where('b.idasal',$cab)->where('resi.tagihan','Pengirim');
-				$tagihan->orWhere('b.idtujuan',$cab)->where('resi.tagihan','Penerima');
+				$tagihan->where('rt.kotamuat',$cab)->where('resi.tagihan','Pengirim');
+				$tagihan->orWhere('rt.kotabongkar',$cab)->where('resi.tagihan','Penerima');
 				
 				foreach ($tagihan->get() as $d) {
 					if($d->tagihan=='Penerima'){

@@ -6,9 +6,6 @@
 <link href="{{ asset('/plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('/plugins/daterangepicker2/daterangepicker.css') }}" rel="stylesheet" type="text/css" /> 
 
-<link href="{{ asset('/plugins/jqwidgets/styles/jqx.base.css') }}" rel="stylesheet" type="text/css" /> 
-<link href="{{ asset('/plugins/jqwidgets/styles/jqx.bootstrap.css') }}" rel="stylesheet" type="text/css" /> 
-
 <style type="text/css">
 .new {
  		background-color: #F5A9A9 !important;
@@ -21,16 +18,10 @@
 <script src="{{ asset('/plugins/datatables/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('/plugins/datatables/dataTables.bootstrap.js') }}"></script>
 <script src="{{ asset('/plugins/datatables/jquery.dataTables.rowGrouping.js') }}"></script>
+<script src="{{ asset('/plugins/datatables/language/bahasa-indonesia.js') }}"></script>
 <script src="{{ asset('/plugins/daterangepicker2/moment.js') }}"></script>
 <script src="{{ asset('/plugins/daterangepicker2/daterangepicker.js') }}"></script>
 
-<script src="{{ asset('/plugins/jqwidgets/jqxcore.js') }}"></script>
-<script src="{{ asset('/plugins/jqwidgets/jqxdata.js') }}"></script>
-<script src="{{ asset('/plugins/jqwidgets/jqxbuttons.js') }}"></script>
-<script src="{{ asset('/plugins/jqwidgets/jqxscrollbar.js') }}"></script>
-<script src="{{ asset('/plugins/jqwidgets/jqxlistbox.js') }}"></script>
-<script src="{{ asset('/plugins/jqwidgets/jqxdropdownlist.js') }}"></script>
-<script src="{{ asset('/plugins/jqwidgets/jqxdatatable.js') }}"></script>
 @endsection
 
 @section('content-header')
@@ -132,28 +123,9 @@
 		"order" : [0,"asc"],
 		"iDisplayLength": 5,
 		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-		"responsive":true
-	});
-	$(document).ready(function(){
-	$('-#data').jqxDataTable(
-            {
-            	width: '100%',
-                theme: 'bootstrap',
-                pageable: true,
-                pagerButtonsCount: 5,
-                sortable: true,
-                columnsResize: true,
-                rowDetails: true,
-                columns: [
-                  { text: 'No.', dataField: 'No.' },
-                  { text: 'Konsumen', dataField: 'Konsumen' },
-                  { text: 'Jumlah Resi', dataField: 'Jumlah Resi', align: 'right' },
-                  { text: 'Total Biaya', dataField: 'Total Biaya', align: 'right'},
-                  { text: 'DP', dataField: 'DP', align: 'right' },
-                  { text: 'Sisa', dataField: 'Sisa', align: 'right' }
-                ]
-            });
-
+		"responsive":true,
+		"pagingType": "full",
+		"language": language
 	});
 </script>
 @endsection

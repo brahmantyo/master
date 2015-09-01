@@ -10,6 +10,7 @@
     <script src="{{ asset('/plugins/datatables/jquery.dataTables-1.10.6.min.js') }}"></script>
     <script src="{{ asset('/plugins/datatables/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('/plugins/datatables/dataTables.bootstrap.js') }}"></script>
+    <script src="{{ asset('/plugins/datatables/language/bahasa-indonesia.js') }}"></script>
 
 @endsection
 
@@ -54,12 +55,7 @@
                                 </ul>
                             </td>
                         </tr>
-                        <tr><th>Keterangan</th><td>{{$berangkat->ket}} Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </td></tr>
+                        <tr><th>Keterangan</th><td>{{$berangkat->ket}}</td></tr>
                     </table>
                     </td>
                     <td>
@@ -155,23 +151,7 @@ $(document).ready(function(){
 		"displayLength":5,
 		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 		"pagingType":"full",
-		"language": {
-		    "sProcessing":   "Sedang memproses...",
-		    "sLengthMenu":   "Tampilkan _MENU_ entri",
-		    "sZeroRecords":  "Tidak ditemukan data yang sesuai",
-		    "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-		    "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
-		    "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
-		    "sInfoPostFix":  "",
-		    "sSearch":       "Cari:",
-		    "sUrl":          "",
-		    "oPaginate": {
-		        "sFirst":    "|<",
-		        "sPrevious": "<",
-		        "sNext":     ">",
-		        "sLast":     ">|"
-			}
-        }
+		"language": language
 	});
     $("#cari").keyup( function () {
       // Filter on the column (the index) of this element

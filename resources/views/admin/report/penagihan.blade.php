@@ -21,16 +21,10 @@
 <script src="{{ asset('/plugins/datatables/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('/plugins/datatables/dataTables.bootstrap.js') }}"></script>
 <script src="{{ asset('/plugins/datatables/jquery.dataTables.rowGrouping.js') }}"></script>
+<script src="{{ asset('/plugins/datatables/language/bahasa-indonesia.js') }}"></script>
 <script src="{{ asset('/plugins/daterangepicker2/moment.js') }}"></script>
 <script src="{{ asset('/plugins/daterangepicker2/daterangepicker.js') }}"></script>
 
-<script src="{{ asset('/plugins/jqwidgets/jqxcore.js') }}"></script>
-<script src="{{ asset('/plugins/jqwidgets/jqxdata.js') }}"></script>
-<script src="{{ asset('/plugins/jqwidgets/jqxbuttons.js') }}"></script>
-<script src="{{ asset('/plugins/jqwidgets/jqxscrollbar.js') }}"></script>
-<script src="{{ asset('/plugins/jqwidgets/jqxlistbox.js') }}"></script>
-<script src="{{ asset('/plugins/jqwidgets/jqxdropdownlist.js') }}"></script>
-<script src="{{ asset('/plugins/jqwidgets/jqxdatatable.js') }}"></script>
 @endsection
 
 @section('content-header')
@@ -72,6 +66,7 @@
 				@if(isset($list))
 				<table id="data" class="dttable display responsive no-wrap" width="100%">
 				<tbody>
+				<?php $totresi=0;$totbiaya=0;$totdp=0;$totsisa=0; ?>
 				@foreach($list as $i=>$l)
 				<tr align="right">
 					<td align="left">{{$l['konsumen']}}</td>
@@ -83,19 +78,42 @@
 						<a href="/admin/penagihan/tagihan-cabang/?k={{$i}}" class="btn btn-success">Detail</a>
 					</td>
 				</tr>
+				<?php
+					$totresi += $l['jmlresi'];
+					$totbiaya += $l['totalbiaya'];
+					$totdp += $l['dp'];
+					$totsisa += $l['sisa'];
+
+				?>
 				@endforeach
 				</tbody>
 				<thead>
 				<tr>
 					<th>Konsumen</th>
 					<th>Jumlah Resi</th>
-					<th>Total Biaya</th>
+					<th>Biaya</th>
 					<th>DP</th>
 					<th>Sisa</th>
 					<th></th>
 				</tr>
 				</thead>
+				<tfoot class="hidden-sm hidden-xs">
+					<th>Total</th>
+					<th>{{$totresi}}</th>
+					<th>{{$totbiaya}}</th>
+					<th>{{$totdp}}</th>
+					<th>{{$totsisa}}</th>
+					<th></th>
+				</tfoot>
 				</table>
+				<div class="panel panel-danger hidden-md hidden-lg">
+					<div class="panel-body">
+						<div><b>Total Resi:</b> {{$totresi}} resi</div>
+						<div><b>Total Biaya:</b> {{\App\Helpers::currency($totbiaya,2,'id')}}</div>
+						<div><b>Total DP :</b> {{\App\Helpers::currency($totdp,2,'id')}}</div>
+						<div><b>Total Sisa Tagihan:</b> {{\App\Helpers::currency($totsisa,2,'id')}}</div>
+					</div>
+				</div>
 				@endif
 			</div>
             </div>
@@ -123,24 +141,8 @@
 		"iDisplayLength": 5,
 		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 		"responsive":true,
-		"language": {
-		    "sProcessing":   "Sedang memproses...",
-		    "sLengthMenu":   "Tampilkan _MENU_ entri",
-		    "sZeroRecords":  "Tidak ditemukan data yang sesuai",
-		    "sInfo":         "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-		    "sInfoEmpty":    "Menampilkan 0 sampai 0 dari 0 entri",
-		    "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
-		    "sInfoPostFix":  "",
-		    "sSearch":       "Cari:",
-		    "sUrl":          "",
-		    "oPaginate": {
-		        "sFirst":    "Pertama",
-		        "sPrevious": "Sebelumnya",
-		        "sNext":     "Selanjutnya",
-		        "sLast":     "Terakhir"
-		    
-			}
-        }
+		"pagingType": "full",
+		"language": language
 	});
 
 
