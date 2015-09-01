@@ -18,4 +18,14 @@ class rute extends Model {
 	{
 		return $this->hasOne('\App\cabang','idcabang','kotabongkar');
 	}
+
+	public function getIsiMuatan($idberangkat,$idrute)
+	{
+		$resi = \App\resi::where('idberangkat',$idberangkat)->where('idrute',$idrute)->get();
+		return $resi->count();	
+	}
+	public function getNilaiMuatan($idberangkat,$idrute)
+	{
+		return \App\resi::where('idberangkat',$idberangkat)->where('idrute',$idrute)->sum('totalbiaya');
+	}
 }

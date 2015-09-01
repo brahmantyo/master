@@ -65,7 +65,7 @@
 <!-- 						<td>{{\App\Helpers::dateFromMySqlSystem($b->tglberangkat)}}</td>
 						<td>{{\App\Helpers::dateFromMySqlSystem($b->tgltiba)}}</td> -->
 						<td>{{$b->totresi}}</td>
-						<td>{{\App\Helpers::currency($b->totongkos)}}</td>
+						<td>{{\App\Helpers::currency($b->getTotalOngkos($b->idberangkat))}}</td>
 						<td>{{\App\Helpers::currency($b->ujln)}}</td>
 						<td>{{\App\Helpers::currency($b->biayaopr)}}</td>
 						<td>{{\App\Helpers::currency($b->sisabb)}}</td>

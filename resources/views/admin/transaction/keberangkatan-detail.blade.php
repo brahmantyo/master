@@ -60,7 +60,7 @@
                     </td>
                     <td>
                         <table class="table table-condensed table-bordered table-striped table-hover no-margin">
-                        <tr><th>Total Ongkos</th><td align="right">{{\App\Helpers::currency($berangkat->totongkos,2,'id')}}</td></tr>
+                        <tr><th>Total Ongkos</th><td align="right">{{\App\Helpers::currency($berangkat->getTotalOngkos($berangkat->idberangkat),2,'id')}}</td></tr>
                         <tr><th>Uang Jalan</th><td align="right">{{\App\Helpers::currency($berangkat->ujln,2,'id')}}</td></tr>
                         <tr><th>Biaya Operasional</th><td align="right">{{\App\Helpers::currency($berangkat->biayaopr,2,'id')}}</td></tr>
                         <tr><th>Sisa Biaya Berangkat</th><td align="right">{{\App\Helpers::currency($berangkat->sisabb,2,'id')}}</td></tr>
@@ -68,7 +68,9 @@
                     </td>
                 </tr>
             </table>			
-			<div class="input-group">
+
+			<div class="text text-info"><h6><i>* Ketikan semua hal yang ingin dicari</i></h6></div>
+			<div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="input-group-btn">
 					<button class="btn btn-info">Pencarian <i class="fa fa-search"></i></button>
 				</div>
@@ -77,6 +79,7 @@
 					<button class="btn btn-info"><i class="fa fa-calendar"></i></button>
 				</div>
 			</div>&nbsp;
+			<div class="text text-info pull-right"><h6><i>* Klik untuk melihat rincian</i></h6></div>
 			<div class="panel-group" id="rute" role="tablist">
 				@foreach($data as $i=>$d)
 				<div class="panel panel-{{$d['rute']->status<3?'danger':'success'}}">
@@ -86,9 +89,10 @@
 								<b>Asal :</b> {{$d['rute']->cabasal->nama}}
 								<i class="fa fa-caret-right"></i>
 								<b>Tujuan :</b> {{$d['rute']->cabtujuan->nama}}
-								( <b>Isi :</b> {{$d['rute']->totresi}} resi 
-								  <b>Nilai Muatan:</b> {{\App\Helpers::currency($d['rute']->nilaimuatan,2,'id')}})
+								( <b>Isi :</b> {{$d['rute']->getIsiMuatan($d['rute']->sjt,$d['rute']->id)}} resi 
+								  <b>Nilai Muatan:</b> {{\App\Helpers::currency($d['rute']->getNilaiMuatan($d['rute']->sjt,$d['rute']->id),2,'id')}})
 							</a>
+							
 						</div>
 					</div>
 					<div id="tab{{$i}}" role="tabpanel" class="panel-collapse collapse">
