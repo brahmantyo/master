@@ -9,4 +9,13 @@ class rute extends Model {
 
 	public $timestamps = false;
 
+	public function cabasal()
+	{
+		return $this->hasOne('\App\cabang','idcabang','kotamuat');
+	}
+
+	public function cabtujuan()
+	{
+		return $this->hasOne('\App\cabang','idcabang','kotabongkar');
+	}
 }

@@ -59,10 +59,10 @@
 						<td>{{$b->nopolisi}}</td>
 						<td>{{$b->supir1}}({{$b->telpsup1}})</td>
 						<td>{{$b->supir2}}({{$b->telpsup2}})</td>
-						<td>{{$b->asal->nama}}</td>
-						<td>{{$b->tujuan->nama}}</td>
-						<td>{{\App\Helpers::dateFromMySqlSystem($b->tglberangkat)}}</td>
-						<td>{{\App\Helpers::dateFromMySqlSystem($b->tgltiba)}}</td>
+<!-- 						<td>{{$b->asal->nama}}</td>
+						<td>{{$b->tujuan->nama}}</td> -->
+<!-- 						<td>{{\App\Helpers::dateFromMySqlSystem($b->tglberangkat)}}</td>
+						<td>{{\App\Helpers::dateFromMySqlSystem($b->tgltiba)}}</td> -->
 						<td>{{$b->totresi}}</td>
 						<td>{{\App\Helpers::currency($b->totongkos)}}</td>
 						<td>{{\App\Helpers::currency($b->ujln)}}</td>
@@ -78,10 +78,10 @@
 						<th>No.Polisi</th>
 						<th>Sopir</th>
 						<th>Kenek</th>
-						<th>Asal</th>
+<!-- 						<th>Asal</th>
 						<th>Tujuan</th>
 						<th>Tgl.Berangkat</th>
-						<th>Tgl.Tiba</th>
+						<th>Tgl.Tiba</th> -->
 						<th>Jumlah Resi</th>
 						<th>Total Ongkos</th><!-- Total Sewa dari truck -->
 						<th>Uang Jalan</th><!-- Uang Jalan (DP dari Sewa) -->
@@ -136,10 +136,10 @@
 		    "sSearch":       "Cari:",
 		    "sUrl":          "",
 		    "oPaginate": {
-		        "sFirst":    "Pertama",
-		        "sPrevious": "Sebelumnya",
-		        "sNext":     "Selanjutnya",
-		        "sLast":     "Terakhir"
+		        "sFirst":    "|<",
+		        "sPrevious": "<",
+		        "sNext":     ">",
+		        "sLast":     ">|"
 		    
 			}
         }

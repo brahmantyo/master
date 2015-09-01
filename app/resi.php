@@ -27,5 +27,8 @@ class resi extends Model {
 	{
 		return $this->hasMany('\App\dresi','idresi','noresi');
 	}
-
+	public static function getJmlKoli($id)
+	{
+		return Resi::select('dresi.*')->rightJoin('dresi','idresi','=','noresi')->where('dresi.idresi','=',$id)->count();
+	}
 }

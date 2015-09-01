@@ -43,7 +43,7 @@
 	<div class="box-body">
 
 		<div>
-		<table id="tbresi" class="table table-condensed table-striped">
+		<table id="tbresi" class="table table-condensed table-striped table-responsive" width="100%">
 			<tbody>
 				<?php
 					$i=1;
@@ -53,6 +53,9 @@
 				?>
 				@foreach($resis as $resi)
 				<tr {{$resi->sisa==0?'style=background:lightgreen':''}}>
+					<td>
+						<a href="/admin/resi/{{$resi->noresi}}" class="btn btn-success">View</a>
+					</td>					
 					<td>{{$i}}</td>
 					<td>{{\App\Helpers::dateFromMySqlSystem($resi->tglresi)}}</td>
 					<td>{{$resi->noresi}}</td>
@@ -61,9 +64,6 @@
 					<td align="right">{{\App\Helpers::currency($resi->totalbiaya)}}</td>
 					<td align="right">{{\App\Helpers::currency($resi->dp)}}</td>
 					<td align="right">{{\App\Helpers::currency($resi->sisa)}}</td>
-					<td>
-						<a href="/admin/resi/{{$resi->noresi}}" class="btn btn-success">View</a>
-					</td>
 				</tr>
 				<?php
 					$i++;
@@ -75,20 +75,21 @@
 			</tbody>
 			<thead>
 				<tr>
+					<th width="50"></th>
 					<th>No.</th>
 					<th>Tanggal</th>
 					<th>No.Resi</th>
 					<th>Pengirim</th>
 					<th>Penerima</th>
-					<th>Total Biaya</th>
+					<th>Biaya</th>
 					<th>DP</th>
 					<th>Sisa Biaya</th>
-					<th></th>
 				</tr>
 			</thead>
 			<tfoot>
 				<tr>
-					<td>Total</td>
+					<td></td>					
+					<td><b>Total</b></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -96,10 +97,16 @@
 					<td align="right">{{\App\Helpers::currency($total)}}</td>
 					<td align="right">{{\App\Helpers::currency($dp)}}</td>
 					<td align="right">{{\App\Helpers::currency($sisa)}}</td>
-					<td></td>					
 				</tr>
 			</tfoot>
 		</table>
+		<div class="panel panel-danger hidden-md hidden-lg">
+			<div class="panel-body">
+			<div><b>Total Biaya:</b> {{\App\Helpers::currency($total,2,'id')}}</div>
+			<div><b>Total DP :</b> {{\App\Helpers::currency($dp,2,'id')}}</div>
+			<div><b>Total Sisa Tagihan:</b> {{\App\Helpers::currency($sisa,2,'id')}}</div>
+			</div>
+		</div>
 		</div>
 	</div>
 </div>
@@ -121,7 +128,11 @@
 		"iDisplayLength": 5,
 		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 		"responsive":true,
+		"pagingType": "full",
         "bStateSave": true,
+        "columnDefs":[
+        	{"targets":0,"orderable":false}
+        ],
         "fnStateSave": function (oSettings, oData) {
             localStorage.setItem( 'DataTables', JSON.stringify(oData) );
         },
@@ -139,10 +150,10 @@
 		    "sSearch":       "Cari:",
 		    "sUrl":          "",
 		    "oPaginate": {
-		        "sFirst":    "Pertama",
-		        "sPrevious": "Sebelumnya",
-		        "sNext":     "Selanjutnya",
-		        "sLast":     "Terakhir"
+		        "sFirst":    "|<",
+		        "sPrevious": "<",
+		        "sNext":     ">",
+		        "sLast":     ">|"
 		    
 			}
         }

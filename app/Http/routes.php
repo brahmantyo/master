@@ -240,14 +240,51 @@ Route::get('test',function(){
 	$data = \DB::select(\DB::raw("select r.sjt,r.id,km.nama kotamuat,kb.nama kotabongkar,r.tglbrkt,r.tgltiba,resi.noresi,resi.tglresi,resi.idkonsumen pengirim,resi.idpenerima penerima,resi.totalbiaya,resi.dp,resi.sisa,resi.tipe from resi left join rute r on (r.sjt=resi.idberangkat and r.id=resi.idrute) left join cabang km on(km.idcabang=r.kotamuat) left join cabang kb on (kb.idcabang=r.kotabongkar) where r.sjt='SJT.1.9.150824.01'"));
 	return '{"data":'.json_encode($data).'}';
 });
-Route::get('loadrute',function(){
-	$rute = \App\rute::all();
-	return '{"data":['.$rute->toJson().'[}';
+Route::get('loadrute/{id}',function($id){
+	$rute = \App\rute::select('rute.*','ca.nama as cabasal','ct.nama as cabtujuan')
+			->leftJoin('cabang as ca','ca.idcabang','=','rute.kotamuat')
+			->leftJoin('cabang as ct','ct.idcabang','=','rute.kotabongkar')
+			->where('rute.sjt',$id)
+			->get();
+	return '{"data":'.$rute->toJson().'}';
 });
-Route::get('loadresi',function(){
-	$resi = \App\resi::all();
-	return $resi->toJson();
+Route::post('loadresi',function(){
+	$sjt = \Request::get('sjt');
+	$idrute = \Request::get('idrute');
+	$resi = \App\resi::where('idberangkat',$sjt)->where('idrute',$idrute)->get();
+	$table = '<table width="100%" class="display detail" border=1>';
+	$table .= '<thead><tr><th>Tgl.Resi</th><th>No.Resi</th><th>JmlBarang</th><th>Pengirim</th><th>Penerima</th><th>Total Biaya</th><th>DP</th><th>SisaTagihan</th></tr></thead>';
+	$table .= '<tbody>';
+	foreach($resi as $r){
+		$table .= '<tr><td>'.$r->tglresi.'</td>';
+		$table .= '<td>'.$r->noresi.'</td>';
+		$table .= '<td>'.$r->totqty.'</td>';
+		$table .= '<td>'.$r->idkonsumen.'</td>';
+		$table .= '<td>'.$r->idpenerima.'</td>';
+		$table .= '<td>'.$r->totalbiaya.'</td>';
+		$table .= '<td>'.$r->dp.'</td>';
+		$table .= '<td>'.$r->sisa.'</td></tr>';		
+	}
+	$table .= '</tbody>';
+	$table .= '</table>';
+	return $table;
 });
 Route::get('go',function(){
 	return view('test.test1');
+});
+
+Route::get('go2/{id}',function($id){
+	$berangkat = \App\berangkat::find($id);
+
+	$data = [];
+	$rute = \App\rute::where('sjt','=',$id)->get();
+
+	$i=0;
+	foreach($rute as $rt){
+		$resi = \App\resi::where('idberangkat',$rt->sjt)->where('idrute',$rt->id)->get();
+		$data[$i]['rute']=$rt;
+		$data[$i]['resi']=$resi;
+		$i++;
+	}
+	return view('test.test2')->with('data',$data)->with('berangkat',$berangkat);
 });

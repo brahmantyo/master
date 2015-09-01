@@ -46,8 +46,19 @@ class KeberangkatanController extends Controller {
 	 */
 	public function show($id)
 	{
-		$berangkat = berangkat::find($id);
-		return view('admin.transaction.keberangkatan-detail')->with('berangkat',$berangkat);
+		$berangkat = \App\berangkat::find($id);
+
+		$data = [];
+		$rute = \App\rute::where('sjt','=',$id)->get();
+
+		$i=0;
+		foreach($rute as $rt){
+			$resi = \App\resi::where('idberangkat',$rt->sjt)->where('idrute',$rt->id)->get();
+			$data[$i]['rute']=$rt;
+			$data[$i]['resi']=$resi;
+			$i++;
+		}
+		return view('admin.transaction.keberangkatan-detail')->with('berangkat',$berangkat)->with('data',$data);
 	}
 
 	/**
