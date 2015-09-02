@@ -23,7 +23,7 @@ class berangkat extends Model {
 	public function resi() {
 		return $this->hasMany('\App\resi','idberangkat','idberangkat');
 	}
-	public function getTotalOngkos($sjt)
+	public function getNilaiMuatan($sjt)
 	{
 		return \App\resi::where('idberangkat',$sjt)->sum('totalbiaya');
 	}

@@ -55,15 +55,16 @@
                                 </ul>
                             </td>
                         </tr>
+                        <tr><th>Tot.Nilai Muatan</th><td align="right">{{\App\Helpers::currency($berangkat->getNilaiMuatan($berangkat->idberangkat),2,'id')}}</td></tr>
                         <tr><th>Keterangan</th><td>{{$berangkat->ket}}</td></tr>
                     </table>
                     </td>
                     <td>
                         <table class="table table-condensed table-bordered table-striped table-hover no-margin">
-                        <tr><th>Total Ongkos</th><td align="right">{{\App\Helpers::currency($berangkat->getTotalOngkos($berangkat->idberangkat),2,'id')}}</td></tr>
-                        <tr><th>Uang Jalan</th><td align="right">{{\App\Helpers::currency($berangkat->ujln,2,'id')}}</td></tr>
-                        <tr><th>Biaya Operasional</th><td align="right">{{\App\Helpers::currency($berangkat->biayaopr,2,'id')}}</td></tr>
-                        <tr><th>Sisa Biaya Berangkat</th><td align="right">{{\App\Helpers::currency($berangkat->sisabb,2,'id')}}</td></tr>
+                        	<tr><th>Biaya Sewa Truck</th><td align="right">{{\App\Helpers::currency($berangkat->totongkos)}}</td></tr>
+	                        <tr><th>Uang Jalan</th><td align="right">{{\App\Helpers::currency($berangkat->ujln,2,'id')}}</td></tr>
+	                        <tr><th>Biaya Operasional</th><td align="right">{{\App\Helpers::currency($berangkat->biayaopr,2,'id')}}</td></tr>
+	                        <tr><th>Sisa Biaya Berangkat</th><td align="right">{{\App\Helpers::currency($berangkat->sisabb,2,'id')}}</td></tr>
                         </table>
                     </td>
                 </tr>

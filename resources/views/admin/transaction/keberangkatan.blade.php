@@ -60,12 +60,11 @@
 						<td>{{$b->nopolisi}}</td>
 						<td>{{$b->supir1}}({{$b->telpsup1}})</td>
 						<td>{{$b->supir2}}({{$b->telpsup2}})</td>
-<!-- 						<td>{{$b->asal->nama}}</td>
-						<td>{{$b->tujuan->nama}}</td> -->
 <!-- 						<td>{{\App\Helpers::dateFromMySqlSystem($b->tglberangkat)}}</td>
 						<td>{{\App\Helpers::dateFromMySqlSystem($b->tgltiba)}}</td> -->
 						<td>{{$b->totresi}}</td>
-						<td>{{\App\Helpers::currency($b->getTotalOngkos($b->idberangkat))}}</td>
+						<td>{{\App\Helpers::currency($b->getNilaiMuatan($b->idberangkat))}}</td>
+						<td>{{\App\Helpers::currency($b->totongkos)}}</td>
 						<td>{{\App\Helpers::currency($b->ujln)}}</td>
 						<td>{{\App\Helpers::currency($b->biayaopr)}}</td>
 						<td>{{\App\Helpers::currency($b->sisabb)}}</td>
@@ -84,7 +83,8 @@
 						<th>Tgl.Berangkat</th>
 						<th>Tgl.Tiba</th> -->
 						<th>Jumlah Resi</th>
-						<th>Total Ongkos</th><!-- Total Sewa dari truck -->
+						<th>Nilai Muatan</th>
+						<th>Tot.Sewa Truck</th><!-- Total Sewa dari truck -->
 						<th>Uang Jalan</th><!-- Uang Jalan (DP dari Sewa) -->
 						<th>Biaya Operasional</th><!-- Pengeluaran tak terduga di perjalanan,di entry oleh penerima -->
 						<th>Sisa Biaya Berangkat</th><!-- Sisa Sewa yg hrs dibayar (sewa - Uang Jalan) -->
