@@ -55,6 +55,8 @@
                                 </ul>
                             </td>
                         </tr>
+                        <tr><th>Tot.Jml Resi</th><td align="right">{{$berangkat->getJmlResi($berangkat->idberangkat)}} resi</td></tr>
+						<tr><th>Tot.Jml Muatan</th><td align="right">{{$berangkat->getJmlKoli($berangkat->idberangkat)}} koli</td></tr>
                         <tr><th>Tot.Nilai Muatan</th><td align="right">{{\App\Helpers::currency($berangkat->getNilaiMuatan($berangkat->idberangkat),2,'id')}}</td></tr>
                         <tr><th>Keterangan</th><td>{{$berangkat->ket}}</td></tr>
                     </table>
@@ -90,7 +92,8 @@
 								<b>Asal :</b> {{$d['rute']->cabasal->nama}}
 								<i class="fa fa-caret-right"></i>
 								<b>Tujuan :</b> {{$d['rute']->cabtujuan->nama}}
-								( <b>Isi :</b> {{$d['rute']->getIsiMuatan($d['rute']->sjt,$d['rute']->id)}} resi 
+								( <b>Isi :</b> {{$d['rute']->getJmlResi($d['rute']->sjt,$d['rute']->id)}} resi / 
+										{{$d['rute']->getJmlKoli($d['rute']->sjt,$d['rute']->id)}} koli
 								  <b>Nilai Muatan:</b> {{\App\Helpers::currency($d['rute']->getNilaiMuatan($d['rute']->sjt,$d['rute']->id),2,'id')}})
 							</a>
 							
@@ -133,6 +136,11 @@
 				@endforeach
 			</div>
 			<!-- stop -->
+			<div class="well">
+				<b><h5>Legend:</h5></b>
+				<div class="label label-danger">Belum Tiba</div>
+				<div class="label label-success">Sudah Tiba</div>
+			</div>
             </div>
         </div>
     </div>

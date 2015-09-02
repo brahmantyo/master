@@ -27,4 +27,12 @@ class berangkat extends Model {
 	{
 		return \App\resi::where('idberangkat',$sjt)->sum('totalbiaya');
 	}
+	public function getJmlKoli($sjt)
+	{
+		return \App\dresi::rightJoin('resi','resi.noresi','=','dresi.idresi')->where('resi.idberangkat',$sjt)->count('*');
+	}
+	public function getJmlResi($sjt)
+	{
+		return \App\resi::where('idberangkat',$sjt)->count('noresi');
+	}
 }

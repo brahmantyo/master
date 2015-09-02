@@ -62,7 +62,8 @@
 						<td>{{$b->supir2}}({{$b->telpsup2}})</td>
 <!-- 						<td>{{\App\Helpers::dateFromMySqlSystem($b->tglberangkat)}}</td>
 						<td>{{\App\Helpers::dateFromMySqlSystem($b->tgltiba)}}</td> -->
-						<td>{{$b->totresi}}</td>
+						<td>{{$b->getJmlResi($b->idberangkat)}} resi</td>
+						<td>{{$b->getJmlKoli($b->idberangkat)}} koli</td>
 						<td>{{\App\Helpers::currency($b->getNilaiMuatan($b->idberangkat))}}</td>
 						<td>{{\App\Helpers::currency($b->totongkos)}}</td>
 						<td>{{\App\Helpers::currency($b->ujln)}}</td>
@@ -83,6 +84,7 @@
 						<th>Tgl.Berangkat</th>
 						<th>Tgl.Tiba</th> -->
 						<th>Jumlah Resi</th>
+						<th>Jumlah Muatan</th>
 						<th>Nilai Muatan</th>
 						<th>Tot.Sewa Truck</th><!-- Total Sewa dari truck -->
 						<th>Uang Jalan</th><!-- Uang Jalan (DP dari Sewa) -->
@@ -91,6 +93,12 @@
 					</tr>
 				</thead>
 				</table>
+				<div class="well">
+					<b><h5>Legend:</h5></b>
+					<div class="label label-danger">Belum Tiba</div>
+					<div class="label label-default">Tiba Sebagian</div>
+					<div class="label label-success">Sudah Tiba Semua</div>
+				</div>
 			</div>
             </div>
         </div>

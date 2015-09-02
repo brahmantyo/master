@@ -18,11 +18,13 @@ class rute extends Model {
 	{
 		return $this->hasOne('\App\cabang','idcabang','kotabongkar');
 	}
-
-	public function getIsiMuatan($idberangkat,$idrute)
+	public function getJmlResi($idberangkat,$idrute)
 	{
-		$resi = \App\resi::where('idberangkat',$idberangkat)->where('idrute',$idrute)->get();
-		return $resi->count();	
+		return \App\resi::where('idberangkat',$idberangkat)->where('idrute',$idrute)->count('noresi');
+	}
+	public function getJmlKoli($idberangkat,$idrute)
+	{
+		return \App\dresi::rightJoin('resi','resi.noresi','=','dresi.idresi')->where('idberangkat',$idberangkat)->where('idrute',$idrute)->count('*');
 	}
 	public function getNilaiMuatan($idberangkat,$idrute)
 	{
