@@ -138,10 +138,4 @@
 <p><b>Shortcut For Laporan berangkat</b></p>
 <hr>
 <p>Tekan tombol ... untuk melakukan ...</p>
-@yield('coba')
-@endsection
-
-
-@section('coba')
-ini percobaan
 @endsection

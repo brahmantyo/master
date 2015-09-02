@@ -7,10 +7,25 @@ use Illuminate\Support\Collection;
 //use Illuminate\Http\Request;
 
 use App\resi;
+use App\piutang;
+use App\konsumen;
+use App\rute;
 use App\berangkat;
+
 use Request;
 
 class PenagihanController extends Controller {
+
+	public function __construct()
+	{
+		$data = konsumen::all();
+		foreach ($data as $k) {
+			$konsumen[$k->idkonsumen] = ($k->nama==''||$k->nama=='-')?$k->cp:$k->nama;
+		}
+		$konsumen = \App\Helpers::assoc_merge([0=>'--Daftar Konsumen--'],$konsumen);
+
+		return \View::share('konsumen',$konsumen);
+	}
 
 	public function getIndex()
 	{
@@ -18,7 +33,7 @@ class PenagihanController extends Controller {
 		$tagihan = resi::where('crbyr','Non Tunai')
 					->where('status','>',1)
 					->get();
-		return view('admin.report.penagihan')->with('tagihans',$tagihan)->with('cab',0);
+		return view('admin.report.penagihan')->with('tagihans',$tagihan)->with('cab',0)->with('kon',0);
 	}
 	public function postCari(){
 		return 'pencarian';
@@ -31,21 +46,62 @@ class PenagihanController extends Controller {
 	{
 		return 'tagihan penerima';
 	}
+
+	public function getTagihanKonsumen()
+	{
+		$kon = Request::get('konsumen');
+		$tagihan = piutang::leftJoin('konsumen AS k','k.idkonsumen','=','piutang.idkons')
+					->where('idkons',$kon)->get();
+		return view('admin.report.penagihan')->with('kon',$kon)->with('tagihan',$tagihan)->with('cab',0);
+		//return $this->getIndex();
+	}
+
 	public function getTagihanCabang()
 	{
 		
 		$arr=[];
 		$cab = Request::get('cabang');
-		$kon = Request::get('k');
-		$tagihan = resi::select('resi.*')
-			->rightJoin('rute AS rt',function($join){
-				$join->on('rt.sjt','=','resi.idberangkat');
-				$join->on('rt.id','=','resi.idrute');
-			})
-			//->rightJoin('berangkat AS b','b.idberangkat','=','resi.idberangkat')
-			->where('resi.sisa','>',0);
-			//->where('rt.status','>',1);
+		$tagihanPengirim = piutang::select('piutang.*')
+					->join('resi',function($join){
+						$join->on('resi.noresi','=','piutang.noresi');
+						$join->on('resi.idkonsumen','=','piutang.idkons');
+					})
+					->join('rute',function($join){
+						$join->on('rute.sjt','=','resi.idberangkat');
+						$join->on('rute.id','=','resi.idrute');
+					})
+					->where('resi.tagihan','Pengirim')
+					->where('rute.kotamuat',$cab)->get();
 
+
+		$tagihanPenerima = piutang::select('piutang.*')
+					->join('resi',function($join){
+						$join->on('resi.noresi','=','piutang.noresi');
+						$join->on('resi.idpenerima','=','piutang.idkons');
+					})
+					->join('rute',function($join){
+						$join->on('rute.sjt','=','resi.idberangkat');
+						$join->on('rute.id','=','resi.idrute');
+					})
+					->where('resi.tagihan','Penerima')
+					->where('rute.kotabongkar',$cab)->get();
+		$tagihan = $tagihanPenerima->merge($tagihanPengirim);
+		
+
+		return view('admin.report.penagihan')->with('kon',0)->with('tagihan',$tagihan)->with('cab',$cab);
+		/*
+		$tagihan = resi::select('resi.*','piutang.status')
+			->rightJoin('rute AS rt',function($join){
+					$join->on('rt.sjt','=','resi.idberangkat');
+					$join->on('rt.id','=','resi.idrute');
+				})
+			->leftJoin('piutang','piutang.noresi','=','resi.noresi')
+			//->rightJoin('berangkat AS b','b.idberangkat','=','resi.idberangkat')
+			->where('resi.sisa','>',0)
+			->where('rt.status','>',1)->get();
+		return view('admin.report.penagihan')->with('kon',0)->with('tagihan',$tagihan)->with('cab',$cab);
+		//dd($tagihan);
+		
 		if($cab){
 			$cabang = \App\cabang::where('idcabang','=',$cab)->first();
 			if($cabang)
@@ -74,9 +130,12 @@ class PenagihanController extends Controller {
 					}
 				}
 				$list = Collection::make($arr);
+
+
 				return view('admin.report.penagihan')->with('cab',$cab)->with('tagihans',$tagihan)->with('list',$list)->with('title',$title);
 			}
 		}
+		*/
 		if($kon){
 			$tagihan->where('idkonsumen','=',$kon)->orWhere('idpenerima','=',$kon);
 			$konsumen = \App\konsumen::find($kon);

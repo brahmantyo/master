@@ -6,9 +6,6 @@
 <link href="{{ asset('/plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('/plugins/daterangepicker2/daterangepicker.css') }}" rel="stylesheet" type="text/css" /> 
 
-<link href="{{ asset('/plugins/jqwidgets/styles/jqx.base.css') }}" rel="stylesheet" type="text/css" /> 
-<link href="{{ asset('/plugins/jqwidgets/styles/jqx.bootstrap.css') }}" rel="stylesheet" type="text/css" /> 
-
 <style type="text/css">
 .new {
  		background-color: #F5A9A9 !important;
@@ -20,7 +17,6 @@
 <script src="{{ asset('/plugins/datatables/jquery.dataTables-1.10.6.min.js') }}"></script>
 <script src="{{ asset('/plugins/datatables/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('/plugins/datatables/dataTables.bootstrap.js') }}"></script>
-<script src="{{ asset('/plugins/datatables/jquery.dataTables.rowGrouping.js') }}"></script>
 <script src="{{ asset('/plugins/datatables/language/bahasa-indonesia.js') }}"></script>
 <script src="{{ asset('/plugins/daterangepicker2/moment.js') }}"></script>
 <script src="{{ asset('/plugins/daterangepicker2/daterangepicker.js') }}"></script>
@@ -36,6 +32,14 @@
 @endsection
 
 @section('content')
+<style type="text/css">
+	.lunas {
+		background-color: lightgreen;
+	}
+	.belum {
+		background-color: #9892;	
+	}
+</style>
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -61,48 +65,62 @@
 					{!! Form::submit('Tampilkan',['class'=>'btn btn-success']) !!}
 					{!! Form::close() !!}
 				</div>
+				<div>
+					{!! Form::open(['url'=>'/admin/penagihan/tagihan-konsumen','method'=>'GET','class'=>'form-inline']) !!}
+					<div class="form-group">
+					{!! Form::label('konsumen','Daftar Konsumen',['class'=>'sr-only']) !!}
+					<div class="input-group" style="background-color:@brand-info">
+					<div class="input-group-addon">Daftar Konsumen</div>
+					{!! Form::select('konsumen',$konsumen,$kon,['class'=>'form-control']) !!}
+					</div>
+					</div>
+					{!! Form::submit('Tampilkan',['class'=>'btn btn-success']) !!}
+					{!! Form::close() !!}
+				</div>
+
 				<!-- -->
 				<center><h3>{{isset($title)?$title:''}}</h3></center>
-				@if(isset($list))
+				@if(isset($tagihan)) 
 				<table id="data" class="dttable display responsive no-wrap" width="100%">
 				<tbody>
 				<?php $totresi=0;$totbiaya=0;$totdp=0;$totsisa=0; ?>
-				@foreach($list as $i=>$l)
-				<tr align="right">
-					<td align="left">{{$l['konsumen']}}</td>
-					<td width="10">{{$l['jmlresi']}}</td>
-					<td width="30">{{\App\Helpers::currency($l['totalbiaya'])}}</td>
-					<td width="30">{{\App\Helpers::currency($l['dp'])}}</td>
-					<td width="30">{{\App\Helpers::currency($l['sisa'])}}</td>
+				@foreach($tagihan as $i=>$l)
+				<tr align="right" class="lunas {{$l->status?'lunas':'belum'}}">
+					<td align="left" width="20">{{$l->noresi}}</td>
+					<td align="left">{{$l->konsumen->nama}}</td>
+					<td width="30">{{\App\Helpers::currency($l->valongkir)}}</td>
+					<td width="30">{{\App\Helpers::currency($l->valdp)}}</td>
+					<td width="30">{{\App\Helpers::currency($l->valsisa)}}</td>
+					<td width="10">{{$l->status?'Lunas':'Belum'}}</td>
 					<td width="10" align="left">
 						<a href="/admin/penagihan/tagihan-cabang/?k={{$i}}" class="btn btn-success">Detail</a>
 					</td>
 				</tr>
 				<?php
-					$totresi += $l['jmlresi'];
-					$totbiaya += $l['totalbiaya'];
-					$totdp += $l['dp'];
-					$totsisa += $l['sisa'];
-
+					$totbiaya += $l->valongkir;
+					$totdp += $l->valdp;
+					$totsisa += $l->valsisa;
 				?>
 				@endforeach
 				</tbody>
 				<thead>
 				<tr>
+					<th>No.Resi</th>
 					<th>Konsumen</th>
-					<th>Jumlah Resi</th>
 					<th>Biaya</th>
 					<th>DP</th>
 					<th>Sisa</th>
+					<th>Status</th>
 					<th></th>
 				</tr>
 				</thead>
 				<tfoot class="hidden-sm hidden-xs">
 					<th>Total</th>
-					<th>{{$totresi}}</th>
+					<th></th>
 					<th>{{$totbiaya}}</th>
 					<th>{{$totdp}}</th>
 					<th>{{$totsisa}}</th>
+					<th></th>
 					<th></th>
 				</tfoot>
 				</table>

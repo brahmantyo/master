@@ -9,10 +9,23 @@ use App\piutang;
 
 class PiutangController extends Controller {
 
-	public function getIndex()
+	public function __construct()
 	{
-		$piutang = piutang::leftJoin('konsumen','konsumen.idkonsumen','=','piutang.idkons')->get();
-		return view('admin.transaction.piutang')->with('piutang',$piutang);
+		$data = \App\konsumen::all();
+		foreach ($data as $k) {
+			$konsumen[$k->idkonsumen] = ($k->nama==''||$k->nama=='-')?$k->cp:$k->nama;
+		}
+		return \View::share('konsumen',$konsumen);
 	}
 
+	public function getIndex()
+	{
+		$piutang = piutang::all();
+		return view('admin.transaction.piutang')->with('piutang',$piutang);
+	}
+	public function getByKonsumen($id)
+	{
+		$piutang = piutang::where('idkon',$id)->get();
+		return view('admin.transaction.piutang')->with('piutang',$piutang);	
+	}
 }

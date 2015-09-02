@@ -49,10 +49,13 @@
                 @endforeach
             @endif
 			<div class="box-body">
+				{!! Form::open(['method'=>'POST'])!!}
+				{!! Form::select('konsumen',$konsumen) !!}
+				{!! Form::close() !!}
 				<table id="tbpiutang" class="display responsive no-wrap" width="100%">
 				<tbody>
 					@foreach($piutang as $p)
-					<tr class="{{$p->status==3?:'new'}}" align="right">
+					<tr style="{{$p->status==3?:'background:lightgreen'}}" align="right">
 						<td>{{$p->noresi}}</td>
 						<td>{{$p->valongkir}}</td>
 						<td>{{$p->valdp}}</td>
@@ -119,10 +122,4 @@
 <p><b>Shortcut For Laporan berangkat</b></p>
 <hr>
 <p>Tekan tombol ... untuk melakukan ...</p>
-@yield('coba')
 @endsection
-
-
-@section('coba')
-ini percobaan
-@endsectionpiu
