@@ -103,7 +103,7 @@
 						<div class="panel-body">
 							<table class="table table-responsive table-nowrap table-condensed table-bordered">
 								<tr><th width="100">Tgl Berangkat</th><td>{{\App\Helpers::dateFromMySqlSystem($d['rute']->tglbrkt)}}</td></tr>
-								<tr><th>Tgl Tiba</th><td>{{\App\Helpers::dateFromMySqlSystem($d['rute']->tgltiba)}}</td></tr>
+								<tr><th>Tgl Tiba</th><td>{{\App\Helpers::dateFromMySqlSystem($d['rute']->tgltiba=='0000-00-00'?'-':$d['rute']->tgltiba)}}</td></tr>
 								<tr><th>Status</th><td>{{$d['rute']->status<3?'Perjalanan':'Complete'}}</td></tr>
 							</table>
 							<table class="datatable display table-responsive">
