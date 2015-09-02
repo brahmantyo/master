@@ -25,7 +25,7 @@
 <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-dashboard"></i>Home</a></li>
     <!-- put another before link if exist here -->
-    <li class="active">Daftar Order Trucking</li>
+    <li class="active">Piutang</li>
 </ol>
 @endsection
 
@@ -39,7 +39,7 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h1><i class='fa fa-credit-card'></i>Daftar Order Trucking</h1>
+                <h1><i class='fa fa-credit-card'></i>Piutang</h1>
 
             </div>
             <div class="box-body">
@@ -49,49 +49,30 @@
                 @endforeach
             @endif
 			<div class="box-body">
-				<table id="tbberangkat" class="display responsive no-wrap" width="100%">
+				<table id="tbpiutang" class="display responsive no-wrap" width="100%">
 				<tbody>
-					@foreach($berangkat as $b)
-					<tr class="{{$b->status==3?:'new'}}" align="right">
-						<td>
-							<a href="/admin/keberangkatan/{{$b->idberangkat}}" class="btn btn-warning">View</a>
-						</td>					
-						<td>{{$b->idberangkat}}</td>
-						<td>{{$b->nopolisi}}</td>
-						<td>{{$b->supir1}}({{$b->telpsup1}})</td>
-						<td>{{$b->supir2}}({{$b->telpsup2}})</td>
-						<td>{{$b->getJmlResi($b->idberangkat)}} resi</td>
-						<td>{{$b->getJmlKoli($b->idberangkat)}} koli</td>
-						<td>{{\App\Helpers::currency($b->getNilaiMuatan($b->idberangkat))}}</td>
-						<td>{{\App\Helpers::currency($b->totongkos)}}</td>
-						<td>{{\App\Helpers::currency($b->ujln)}}</td>
-						<td>{{\App\Helpers::currency($b->biayaopr)}}</td>
-						<td>{{\App\Helpers::currency($b->sisabb)}}</td>
+					@foreach($piutang as $p)
+					<tr class="{{$p->status==3?:'new'}}" align="right">
+						<td>{{$p->noresi}}</td>
+						<td>{{$p->valongkir}}</td>
+						<td>{{$p->valdp}}</td>
+						<td>{{$p->valsisa}}</td>
 					</tr>
 					@endforeach
 				</tbody>
 				<thead>
 					<tr>
-						<th></th>
-						<th>No.SJT</th>
-						<th>No.Polisi</th>
-						<th>Sopir</th>
-						<th>Kenek</th>
-						<th>Jumlah Resi</th>
-						<th>Jumlah Muatan</th>
-						<th>Nilai Muatan</th>
-						<th>Tot.Sewa Truck</th><!-- Total Sewa dari truck -->
-						<th>Uang Jalan</th><!-- Uang Jalan (DP dari Sewa) -->
-						<th>Biaya Operasional</th><!-- Pengeluaran tak terduga di perjalanan,di entry oleh penerima -->
-						<th>Sisa Biaya Berangkat</th><!-- Sisa Sewa yg hrs dibayar (sewa - Uang Jalan) -->
+						<th>No.Resi</th>
+						<th>Biaya Kirim</th>
+						<th>DP</th>
+						<th>Sisa</th>
 					</tr>
 				</thead>
 				</table>
 				<div class="well">
 					<h5><b>Legend:</b></h5>
-					<div class="label label-danger">Belum Tiba</div>
-					<div class="label label-default">Tiba Sebagian</div>
-					<div class="label label-success">Sudah Tiba Semua</div>
+					<div class="label label-default">Belum Lunas</div>
+					<div class="label label-success">Sudah Lunas</div>
 				</div>
 			</div>
             </div>
@@ -116,7 +97,7 @@
 		},
 		afterClose : function(){ window.location.replace('/admin/keberangkatan') },
 	});
-	$('#tbberangkat').dataTable({
+	$('#tbpiutang').dataTable({
 		"order" : [1,"asc"],
 		"iDisplayLength": 5,
 		"aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
@@ -144,4 +125,4 @@
 
 @section('coba')
 ini percobaan
-@endsection
+@endsectionpiu

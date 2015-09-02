@@ -137,7 +137,7 @@
 			</div>
 			<!-- stop -->
 			<div class="well">
-				<b><h5>Legend:</h5></b>
+				<h5><b>Legend:</b></h5>
 				<div class="label label-danger">Belum Tiba</div>
 				<div class="label label-success">Sudah Tiba</div>
 			</div>

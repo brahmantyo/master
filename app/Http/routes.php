@@ -38,7 +38,7 @@ Route::group(['middleware'=>'admin','prefix'=>'admin','namespace'=>'Admin'],func
 	//-- Reports --//
 	Route::controller('penagihan','PenagihanController');
 	Route::controller('operasional','OperasionalController');
-
+	Route::controller('piutang','PiutangController');
 
 	//-- Utility --//
 	/*
