@@ -93,7 +93,7 @@
 					<td width="30">{{\App\Helpers::currency($l->valsisa)}}</td>
 					<td width="10">{{$l->status?'Lunas':'Belum'}}</td>
 					<td width="10" align="left">
-						<a href="/admin/penagihan/tagihan-cabang/?k={{$i}}" class="btn btn-success">Detail</a>
+						<a href="/admin/resi/{{$l->noresi}}" class="btn btn-success">Detail</a>
 					</td>
 				</tr>
 				<?php
@@ -117,9 +117,9 @@
 				<tfoot class="hidden-sm hidden-xs">
 					<th>Total</th>
 					<th></th>
-					<th>{{$totbiaya}}</th>
-					<th>{{$totdp}}</th>
-					<th>{{$totsisa}}</th>
+					<th align="right">{{\App\Helpers::currency($totbiaya)}}</th>
+					<th align="right">{{\App\Helpers::currency($totdp)}}</th>
+					<th align="right">{{\App\Helpers::currency($totsisa)}}</th>
 					<th></th>
 					<th></th>
 				</tfoot>

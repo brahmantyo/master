@@ -78,9 +78,9 @@
                     @endif
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/admin/resi" id="menu-resi"><i class="fa fa-print"></i>Resi Pengiriman</a></li>
-                    <li><a href="/admin/keberangkatan" id="menu-keberangkatan"><i class="fa fa-print"></i>Daftar Order Trucking</a></li>
-                    <li><a href="/quotation" id="menu-orders"><i class="fa fa-calculator"></i>Permintaan Kirim</a></li>
+                    <li><a href="/admin/resi" id="menu-resi"><i class="fa fa-print"></i>Pengiriman</a></li>
+                    <li><a href="/admin/keberangkatan" id="menu-keberangkatan"><i class="fa fa-print"></i>SJ. Trucking</a></li>
+                    <li><a href="/quotation" id="menu-orders"><i class="fa fa-calculator"></i>Pre-Order Web</a></li>
                 </ul>
             </li>
             @endif            
@@ -99,8 +99,8 @@
                     <span>Transaksi</span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="treeview"><a href="/order" id=""><i class="fa "></i><span>Permintaan Kirim</span></a></li>
-                    <li class="treeview"><a href="/resi" id=""><i class="fa "></i><span>Daftar Resi Pengiriman</span></a></li>
+                    <li class="treeview"><a href="/order" id=""><i class="fa "></i><span>Pre-Order/Permintaan Kirim</span></a></li>
+                    <li class="treeview"><a href="/resi" id=""><i class="fa "></i><span>Daftar Pengiriman</span></a></li>
                 </ul>
             </li>
             @endif

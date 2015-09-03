@@ -40,6 +40,15 @@ class TrackingController extends Controller {
 			return view('master')->with('track',true)->withErrors($error);
 		}else{
 			$berangkat = berangkat::find($resi->idberangkat);
+			$rute = resi::leftJoin('rute',function($join){
+						$join->on('rute.sjt','=','resi.idberangkat');
+						$join->on('rute.id','=','resi.idrute');
+					})
+					->leftJoin('berangkat','berangkat.idberangkat','=','rute.sjt')
+					->where('resi.noresi',Request::get('id'))->get();
+					dd($rute);
+
+
 			return view('master')->with('track',true)->with('resi',$resi)->with('keberangkatan',$berangkat);
 		}
 
