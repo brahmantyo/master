@@ -24,47 +24,40 @@
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">{{$notification['all']}}</span>
+                        <span class="label label-success">{{$notification['all']}}</span>
                     </a>
-                    <ul class="dropdown-menu" width="400">
-                        <li class="header">Anda mempunyai <b>{{$notification['all']}}</b> pemberitahuan</li>
+                    <ul class="dropdown-menu">
+                        <li class="header">Ada <b>{{$notification['all']}}</b> pemberitahuan</li>
                         <li>
-                            <ul class="menu" width="100%">
+                            <ul class="menu">
+                            @if($notification['quote']['count']>0)
                                 <li>
-                                    <i class="fa fa-shopping-cart text-aqua"></i>
-                                    Ada {{$notification['quote']['count']}} quote dari web menunggu konfirmasi
-                                    <ul>
-                                        @foreach($notification['quote']['all'] as $quote)
-                                        <li>
-                                            <a href="/admin/resi/{{$quote->noresi}}">
-                                            </a>
-                                        </li>
-                                        @endforeach
-                                        @if($notification['quote']['count']>0)
-                                        <a href="/admin/resi">Lihat seluruhnya</a>
-                                        @endif
-                                    </ul>
+                                    <span>Ada {{$notification['quote']['count']}} quote web baru <a href="/quotation" class="view-all">(tampilkan)</a></span>
                                 </li>
+                                @foreach($notification['quote']['all'] as $q)
                                 <li>
-                                    <i class="fa fa-truck text-aqua"></i>
-                                    Ada {{$notification['sjt']['count']}} keberangkatan baru
-                                    <ul>
-                                        @foreach($notification['sjt']['all'] as $sjt)
-                                        <li>
-                                            <a href="/admin/keberangkatan/{{$sjt->idberangkat}}">
-                                                {{$sjt->idberangkat}}<p>Supir:{{$sjt->supir1}}</p>
-                                            </a>
-                                        </li>
-                                        @endforeach
-                                        @if($notification['sjt']['count']>0)
-                                        <a href="/admin/keberangkatan">Lihat seluruhnya</a>
-                                        @endif    
-                                    </ul>
-                                    
+                                    <a href="/quotation/{{$q->id}}" class="notification-item">
+                                        <i class="fa fa-shopping-cart"></i> {{$q->id}}
+                                    </a>
                                 </li>
-                            </ul> 
+                                @endforeach
+                            @endif
+                            @if($notification['sjt']['count']>0)
+                                <li>
+                                    <span>Ada {{$notification['sjt']['count']}} keberangkatan baru <a href="/admin/keberangkatan" class="view-all">(tampilkan)</a></span>
+                                </li>
+                                @foreach($notification['sjt']['all'] as $sjt)
+                                <li>
+                                    <a href="/admin/keberangkatan/{{$sjt->idberangkat}}" class="notification-item">
+                                        <i class="fa fa-truck"></i> {{$sjt->idberangkat}}
+                                        <p>Supir:{{$sjt->supir1}}</p>
+                                    </a>
+                                </li>
+                                @endforeach
+                            @endif
+                            </ul>
                         </li>
-                        <!-- <li class="footer"><a href="#">Lihat semua pesan</a></li> -->
+<!--                       <li class="footer"><a href="#">See All Messages</a></li> -->
                     </ul>
                 </li>
                 <!-- User Account: style can be found in dropdown.less -->
@@ -109,3 +102,17 @@
         </div>
     </nav>
 </header>
+<script type="text/javascript">
+    $('.notification-item').fancybox({
+        type : 'iframe',
+        href : this.value,
+        autoSize: false,
+        width: 1024,
+        height: 800,
+        openSpeed: 1,
+        closeSpeed: 1,
+        ajax : {
+            dataType : 'html',
+        },
+    });
+</script>

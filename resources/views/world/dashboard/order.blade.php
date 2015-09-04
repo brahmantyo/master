@@ -75,6 +75,7 @@
 	</div>
 </div>
 <script type="text/javascript">
+$(document).ready(function(){
 	$('a:contains("Lihat")').fancybox({
 		type : 'iframe',
 		href : this.value,
@@ -121,6 +122,7 @@
 		"responsive": true,
 		"pagingType" : "full_numbers",
 	});
+});
 </script>
 @endsection
 
