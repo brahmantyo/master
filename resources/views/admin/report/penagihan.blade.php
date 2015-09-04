@@ -52,8 +52,8 @@
                 <div class='bg-danger alert'>{!! $error !!}</div>
                 @endforeach
             @endif
-			<div class="box-body">
-				<div>
+			
+<!-- 				<div>
 					{!! Form::open(['url'=>'/admin/penagihan/tagihan-cabang','method'=>'GET','class'=>'form-inline']) !!}
 					<div class="form-group">
 					{!! Form::label('cabang','Daftar cabang',['class'=>'sr-only']) !!}
@@ -64,7 +64,7 @@
 					</div>
 					{!! Form::submit('Tampilkan',['class'=>'btn btn-success']) !!}
 					{!! Form::close() !!}
-				</div>
+				</div> -->
 				<div>
 					{!! Form::open(['url'=>'/admin/penagihan/tagihan-konsumen','method'=>'GET','class'=>'form-inline']) !!}
 					<div class="form-group">
@@ -77,6 +77,7 @@
 					{!! Form::submit('Tampilkan',['class'=>'btn btn-success']) !!}
 					{!! Form::close() !!}
 				</div>
+
 
 				<!-- -->
 				<center><h3>{{isset($title)?$title:''}}</h3></center>
@@ -133,8 +134,17 @@
 					</div>
 				</div>
 				@endif
+
+			<table id="test">
+				<thead>
+					<tr>
+						<td></td>
+					</tr>
+				</thead>
+			</table>
+
 			</div>
-            </div>
+
         </div>
     </div>
 </div>
@@ -154,6 +164,28 @@
 			dataType : 'html',
 		},
 	});
+
+$(document).ready(function() {
+    var table = $('#tbkonsumen').DataTable();
+ 
+    $('#tbkonsumen tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            alert($(this).find('td:first').text());
+        }
+    });
+ 	
+    $('#button').click( function () {
+        table.row('.selected').remove().draw( false );
+    } );
+
+
+
+	
 	$('.dttable').dataTable({
 		"order" : [0,"asc"],
 		"iDisplayLength": 5,
@@ -162,6 +194,9 @@
 		"pagingType": "full",
 		"language": language
 	});
+
+
+} );
 
 
 </script>

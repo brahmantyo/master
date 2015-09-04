@@ -29,12 +29,12 @@ class PenagihanController extends Controller {
 
 	public function getIndex()
 	{
-		$konsumen = konsumen::all();
+		//$konsumen = konsumen::all();
 		//data untuk laporan penagihan diambil berdasarkan nilai keuangan resi
 		$tagihan = resi::where('crbyr','Non Tunai')
 					->where('status','>',1)
 					->get();
-		return view('admin.report.penagihan')->with('konsumen',$konsumen)->with('tagihans',$tagihan)->with('cab',0)->with('kon',0);
+		return view('admin.report.penagihan')->with('tagihans',$tagihan)->with('cab',0)->with('kon',0);
 	}
 	public function postCari(){
 		return 'pencarian';
