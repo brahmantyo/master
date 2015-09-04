@@ -49,7 +49,24 @@ class AppServiceProvider extends ServiceProvider {
 		}
 		$dcabang = \App\Helpers::assoc_merge([0=>'--Daftar Cabang--'],$dcabang);
 
-		$quotes = \App\quote::where('status','=','0')->get();
+		//Hitung total quote yang baru
+		$quotes = \App\quote::where('status','=','0');
+		$quotesData['all'] = $quotes->limit(3)->get();
+		$quotesData['count'] = $quotes->count();
+		//Hitung total SJT yang belum tiba
+		$sjt = \App\berangkat::where('status','<','3');
+		$sjtData['all'] = $sjt->limit(3)->get();
+		$sjtData['count'] = $sjt->count();
+		//Hitung total tagihan yang belum terbayar
+
+
+		$totNotification = $quotes->count() + $sjt->count();
+
+		$notification = [
+			'all'=>$totNotification,
+			'quote'=>$quotesData,
+			'sjt'=>$sjtData,
+		];
 
 		$data = array(
 			'abouts'=>$abouts,
@@ -58,7 +75,8 @@ class AppServiceProvider extends ServiceProvider {
 			'kota'=>$dkota,
 			'satuan'=>$dsatuan,
 			'cabang'=>$dcabang,
-			'nquotes'=>$quotes->count(),
+			'nquotes'=>$quotes,
+			'notification'=>$notification,
 		);
 		return View::share($data);
 	}
