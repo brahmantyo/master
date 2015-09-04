@@ -32,25 +32,27 @@
                             <ul class="menu">
                             @if($notification['quote']['count']>0)
                                 <li>
-                                    <span>Ada {{$notification['quote']['count']}} quote web baru <a href="/quotation" class="view-all">(tampilkan)</a></span>
+                                    <span class="text text-primary">Ada {{$notification['quote']['count']}} quote web baru <a href="/quotation" class="label label-success">SEMUA</a></span>
                                 </li>
                                 @foreach($notification['quote']['all'] as $q)
                                 <li>
                                     <a href="/quotation/{{$q->id}}" class="notification-item">
-                                        <i class="fa fa-shopping-cart"></i> {{$q->id}}
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <span class="text text-success">{{$q->id}}</span>
                                     </a>
                                 </li>
                                 @endforeach
                             @endif
                             @if($notification['sjt']['count']>0)
                                 <li>
-                                    <span>Ada {{$notification['sjt']['count']}} keberangkatan baru <a href="/admin/keberangkatan" class="view-all">(tampilkan)</a></span>
+                                    <span class="text text-primary">Ada {{$notification['sjt']['count']}} keberangkatan baru <a href="/admin/keberangkatan" class="label label-success">SEMUA</a></span>
                                 </li>
                                 @foreach($notification['sjt']['all'] as $sjt)
                                 <li>
                                     <a href="/admin/keberangkatan/{{$sjt->idberangkat}}" class="notification-item">
-                                        <i class="fa fa-truck"></i> {{$sjt->idberangkat}}
-                                        <p>Supir:{{$sjt->supir1}}</p>
+                                        <i class="fa fa-truck"></i>
+                                        <span class="text text-success">{{$sjt->idberangkat}}
+                                        <p>Supir:{{$sjt->supir1}}</p></span>
                                     </a>
                                 </li>
                                 @endforeach

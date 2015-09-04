@@ -1,7 +1,11 @@
 @extends('app')
 @section('content-header')
 <ol class="breadcrumb">
+	@if(\Auth::user()->level=='KONSUMEN')
     <li><a href="/konsumenpanel"><i class="fa fa-dashboard"></i>Home</a></li>
+    @else
+    <li><a href="/admin"><i class="fa fa-dashboard"></i>Home</a></li>
+    @endif
     <li class="active"><i class="fa fa-truck"></i>Daftar Permintaan Kirim (Quotation)</li>
 </ol>
 @endsection
