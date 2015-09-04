@@ -21,8 +21,52 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <li><a href="/"><i class="fa fa-home"></i> Halaman Depan</a></li>
-            </ul>
-            <ul class="nav navbar-nav">
+                <li class="dropdown messages-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bell-o"></i>
+                        <span class="label label-warning">{{$notification['all']}}</span>
+                    </a>
+                    <ul class="dropdown-menu" width="400">
+                        <li class="header">Anda mempunyai <b>{{$notification['all']}}</b> pemberitahuan</li>
+                        <li>
+                            <ul class="menu" width="100%">
+                                <li>
+                                    <i class="fa fa-shopping-cart text-aqua"></i>
+                                    Ada {{$notification['quote']['count']}} quote dari web menunggu konfirmasi
+                                    <ul>
+                                        @foreach($notification['quote']['all'] as $quote)
+                                        <li>
+                                            <a href="/admin/resi/{{$quote->noresi}}">
+                                            </a>
+                                        </li>
+                                        @endforeach
+                                        @if($notification['quote']['count']>0)
+                                        <a href="/admin/resi">Lihat seluruhnya</a>
+                                        @endif
+                                    </ul>
+                                </li>
+                                <li>
+                                    <i class="fa fa-truck text-aqua"></i>
+                                    Ada {{$notification['sjt']['count']}} keberangkatan baru
+                                    <ul>
+                                        @foreach($notification['sjt']['all'] as $sjt)
+                                        <li>
+                                            <a href="/admin/keberangkatan/{{$sjt->idberangkat}}">
+                                                {{$sjt->idberangkat}}<p>Supir:{{$sjt->supir1}}</p>
+                                            </a>
+                                        </li>
+                                        @endforeach
+                                        @if($notification['sjt']['count']>0)
+                                        <a href="/admin/keberangkatan">Lihat seluruhnya</a>
+                                        @endif    
+                                    </ul>
+                                    
+                                </li>
+                            </ul> 
+                        </li>
+                        <!-- <li class="footer"><a href="#">Lihat semua pesan</a></li> -->
+                    </ul>
+                </li>
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" id="user-profile" class="dropdown-toggle" data-toggle="dropdown">

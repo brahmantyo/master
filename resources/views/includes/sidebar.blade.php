@@ -56,11 +56,7 @@
             @if ((($user->level == 'SUPER')||($user->level == 'MANAGER')||($user->level == 'STAFF'))&&!(Auth::guest()))
             <li class="treeview">
                 <a>
-                    <i class="fa fa-plus-square-o"></i>
-                    <span>Transaksi</span>
-                    @if($nquotes)
-                    <span class="badge">{{$nquotes}}</span>
-                    @endif
+                    <i class="fa fa-plus-square-o"><span></i>Transaksi</span>
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="/admin/resi" id="menu-resi"><i class="fa fa-print"></i>Pengiriman</a></li>
