@@ -53,21 +53,6 @@
                 </ul>
             </li>
             @endif
-            @if ((($user->level == 'SUPER')||($user->level == 'MANAGER'))&&!(Auth::guest()))
-            <li class="treeview">
-                <a><i class="fa fa-plus-square-o"></i><span>Keuangan</span></a>
-                <ul class="treeview-menu">
-                    <li><a href="/admin/penagihan" id="menu-penagihan"><i class="fa fa-credit-card"></i>Penagihan/Piutang</a></li>
-                    <li><a href="/admin/operasional" id="menu-operasional"><i class="fa fa-money"></i>Biaya Operasional</a></li>
-<!--                    <li><a href="/admin/piutang" id="menu-operasional"><i class="fa fa-money"></i>Piutang</a></li>-->
-<!--                     <li><a href="/mutasi" id="menu-mutasi"><i class="fa fa-calculator"></i>Mutasi</a></li> -->
-<!--                     <li><a href="/pendapatan" id="menu-pendapatan"><i class="fa fa-money"></i>Pendapatan</a></li> -->
-
-<!--                     <li><a href="/sjt" id="menu-stj"><i class="fa fa-file-text-o"></i>Surat Jalan Truck</a></li> -->
-
-                </ul>
-            </li>
-            @endif
             @if ((($user->level == 'SUPER')||($user->level == 'MANAGER')||($user->level == 'STAFF'))&&!(Auth::guest()))
             <li class="treeview">
                 <a>
@@ -84,6 +69,21 @@
                 </ul>
             </li>
             @endif            
+            @if ((($user->level == 'SUPER')||($user->level == 'MANAGER'))&&!(Auth::guest()))
+            <li class="treeview">
+                <a><i class="fa fa-plus-square-o"></i><span>Keuangan</span></a>
+                <ul class="treeview-menu">
+                    <li><a href="/admin/penagihan" id="menu-penagihan"><i class="fa fa-credit-card"></i>Penagihan/Piutang</a></li>
+                    <li><a href="/admin/operasional" id="menu-operasional"><i class="fa fa-money"></i>Biaya Operasional</a></li>
+<!--                    <li><a href="/admin/piutang" id="menu-operasional"><i class="fa fa-money"></i>Piutang</a></li>-->
+<!--                     <li><a href="/mutasi" id="menu-mutasi"><i class="fa fa-calculator"></i>Mutasi</a></li> -->
+<!--                     <li><a href="/pendapatan" id="menu-pendapatan"><i class="fa fa-money"></i>Pendapatan</a></li> -->
+
+<!--                     <li><a href="/sjt" id="menu-stj"><i class="fa fa-file-text-o"></i>Surat Jalan Truck</a></li> -->
+
+                </ul>
+            </li>
+            @endif
             @if ((($user->level == 'SUPER')||($user->level == 'MANAGER')||($user->level == 'STAFF'))&&!(Auth::guest()))
             <li class="treeview">
                 <a href="/article" id="article">
