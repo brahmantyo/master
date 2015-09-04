@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\resi;
-use App\berangkat;
+use App\posisiarmada;
 use Illuminate\Support\Facades\DB;
 use Request;
 use Illuminate\Support\MessageBag;
@@ -39,17 +39,32 @@ class TrackingController extends Controller {
 			$error->add('notfound','Maaf resi dengan nomer '.Request::get('id').' tidak ditemukan');
 			return view('master')->with('track',true)->withErrors($error);
 		}else{
-			$berangkat = berangkat::find($resi->idberangkat);
-			$rute = resi::leftJoin('rute',function($join){
+			$data = resi::select('resi.idberangkat',
+								'resi.idrute',
+								'resi.noresi',
+								'tk.nama as prspengirim',
+								'tk.cp as cppengirim',
+								'rk.nama as prspenerima',
+								'rk.cp as cppenerima',
+								'tc.nama as cabangasal',
+								'rc.nama as cabangtujuan',
+								'berangkat.nopolisi',
+								'berangkat.supir1',
+								'berangkat.supir2',
+								'rute.tglbrkt',
+								'rute.tgltiba')
+					->leftJoin('konsumen AS tk','tk.idkonsumen','=','resi.idkonsumen')
+					->leftJoin('konsumen AS rk','rk.idkonsumen','=','resi.idpenerima')
+					->leftJoin('rute',function($join){
 						$join->on('rute.sjt','=','resi.idberangkat');
 						$join->on('rute.id','=','resi.idrute');
 					})
+					->leftJoin('cabang AS tc','tc.idcabang','=','rute.kotamuat')
+					->leftJoin('cabang AS rc','rc.idcabang','=','rute.kotabongkar')
 					->leftJoin('berangkat','berangkat.idberangkat','=','rute.sjt')
-					->where('resi.noresi',Request::get('id'))->get();
-					dd($rute);
-
-
-			return view('master')->with('track',true)->with('resi',$resi)->with('keberangkatan',$berangkat);
+					->where('resi.noresi',Request::get('id'))->first();
+			$posisi = posisiarmada::where('sjt',$data->idberangkat)->where('id',$data->idrute)->get();
+			return view('master')->with('track',true)->with('data',$data)->with('posisi',$posisi);
 		}
 
 		//('errorstracking',$error);
