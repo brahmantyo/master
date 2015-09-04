@@ -5,7 +5,7 @@
 
 
 
-
+@if(isset($data))
 <hr>
 <div class="table-responsive">
 <table class="table table-condensed table-bordered no-margin" style="font-weight: bold">
@@ -63,3 +63,5 @@
 	</thead>
 </table>
 </div>
+
+@endif
